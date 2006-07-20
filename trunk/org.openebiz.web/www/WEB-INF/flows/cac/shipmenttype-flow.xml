@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="shipment" target="flowScope.shipment" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ShipmentTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayShipment">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="shipment" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPriorityLevelCode" to="editPriorityLevelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHandlingCode" to="editHandlingCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHandlingInstructions" to="editHandlingInstructions">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInformation" to="editInformation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGrossWeightMeasure" to="editGrossWeightMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNetWeightMeasure" to="editNetWeightMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNetNetWeightMeasure" to="editNetNetWeightMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGrossVolumeMeasure" to="editGrossVolumeMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNetVolumeMeasure" to="editNetVolumeMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalGoodsItemQuantity" to="editTotalGoodsItemQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalTransportHandlingUnitQuantity" to="editTotalTransportHandlingUnitQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInsuranceValueAmount" to="editInsuranceValueAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeclaredCustomsValueAmount" to="editDeclaredCustomsValueAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeclaredForCarriageValueAmount" to="editDeclaredForCarriageValueAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeclaredStatisticsValueAmount" to="editDeclaredStatisticsValueAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFreeOnBoardValueAmount" to="editFreeOnBoardValueAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSpecialInstructionsList" to="editSpecialInstructionsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDeliveryInstructionsList" to="editDeliveryInstructionsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editConsignment" to="editConsignment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransportContract" to="editTransportContract">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGoodsItemList" to="editGoodsItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editShipmentStageList" to="editShipmentStageList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDelivery" to="editDelivery">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransportHandlingUnitList" to="editTransportHandlingUnitList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editOriginAddress" to="editOriginAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFirstArrivalPort" to="editFirstArrivalPort">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLastExitPort" to="editLastExitPort">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExportCountry" to="editExportCountry">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFreightAllowanceChargeList" to="editFreightAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- PriorityLevelCode element start-->	
+	<subflow-state id="editPriorityLevelCode" flow="prioritylevelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.priorityLevelCode"
+					target="priorityLevelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priorityLevelCode"
+					target="flowScope.priorityLevelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriorityLevelCode element end-->
+	
+<!-- HandlingCode element start-->	
+	<subflow-state id="editHandlingCode" flow="handlingcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.handlingCode"
+					target="handlingCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="handlingCode"
+					target="flowScope.handlingCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HandlingCode element end-->
+	
+<!-- HandlingInstructions element start-->	
+	<subflow-state id="editHandlingInstructions" flow="handlinginstructionstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.handlingInstructions"
+					target="handlingInstructions" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="handlingInstructions"
+					target="flowScope.handlingInstructions" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HandlingInstructions element end-->
+	
+<!-- Information element start-->	
+	<subflow-state id="editInformation" flow="informationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.information"
+					target="information" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="information"
+					target="flowScope.information" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Information element end-->
+	
+<!-- GrossWeightMeasure element start-->	
+	<subflow-state id="editGrossWeightMeasure" flow="grossweightmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.grossWeightMeasure"
+					target="grossWeightMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="grossWeightMeasure"
+					target="flowScope.grossWeightMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GrossWeightMeasure element end-->
+	
+<!-- NetWeightMeasure element start-->	
+	<subflow-state id="editNetWeightMeasure" flow="netweightmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.netWeightMeasure"
+					target="netWeightMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="netWeightMeasure"
+					target="flowScope.netWeightMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- NetWeightMeasure element end-->
+	
+<!-- NetNetWeightMeasure element start-->	
+	<subflow-state id="editNetNetWeightMeasure" flow="netnetweightmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.netNetWeightMeasure"
+					target="netNetWeightMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="netNetWeightMeasure"
+					target="flowScope.netNetWeightMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- NetNetWeightMeasure element end-->
+	
+<!-- GrossVolumeMeasure element start-->	
+	<subflow-state id="editGrossVolumeMeasure" flow="grossvolumemeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.grossVolumeMeasure"
+					target="grossVolumeMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="grossVolumeMeasure"
+					target="flowScope.grossVolumeMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GrossVolumeMeasure element end-->
+	
+<!-- NetVolumeMeasure element start-->	
+	<subflow-state id="editNetVolumeMeasure" flow="netvolumemeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.netVolumeMeasure"
+					target="netVolumeMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="netVolumeMeasure"
+					target="flowScope.netVolumeMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- NetVolumeMeasure element end-->
+	
+<!-- TotalGoodsItemQuantity element start-->	
+	<subflow-state id="editTotalGoodsItemQuantity" flow="totalgoodsitemquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.totalGoodsItemQuantity"
+					target="totalGoodsItemQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalGoodsItemQuantity"
+					target="flowScope.totalGoodsItemQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalGoodsItemQuantity element end-->
+	
+<!-- TotalTransportHandlingUnitQuantity element start-->	
+	<subflow-state id="editTotalTransportHandlingUnitQuantity" flow="totaltransporthandlingunitquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.totalTransportHandlingUnitQuantity"
+					target="totalTransportHandlingUnitQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalTransportHandlingUnitQuantity"
+					target="flowScope.totalTransportHandlingUnitQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalTransportHandlingUnitQuantity element end-->
+	
+<!-- InsuranceValueAmount element start-->	
+	<subflow-state id="editInsuranceValueAmount" flow="insurancevalueamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.insuranceValueAmount"
+					target="insuranceValueAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="insuranceValueAmount"
+					target="flowScope.insuranceValueAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InsuranceValueAmount element end-->
+	
+<!-- DeclaredCustomsValueAmount element start-->	
+	<subflow-state id="editDeclaredCustomsValueAmount" flow="declaredcustomsvalueamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.declaredCustomsValueAmount"
+					target="declaredCustomsValueAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="declaredCustomsValueAmount"
+					target="flowScope.declaredCustomsValueAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeclaredCustomsValueAmount element end-->
+	
+<!-- DeclaredForCarriageValueAmount element start-->	
+	<subflow-state id="editDeclaredForCarriageValueAmount" flow="declaredforcarriagevalueamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.declaredForCarriageValueAmount"
+					target="declaredForCarriageValueAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="declaredForCarriageValueAmount"
+					target="flowScope.declaredForCarriageValueAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeclaredForCarriageValueAmount element end-->
+	
+<!-- DeclaredStatisticsValueAmount element start-->	
+	<subflow-state id="editDeclaredStatisticsValueAmount" flow="declaredstatisticsvalueamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.declaredStatisticsValueAmount"
+					target="declaredStatisticsValueAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="declaredStatisticsValueAmount"
+					target="flowScope.declaredStatisticsValueAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeclaredStatisticsValueAmount element end-->
+	
+<!-- FreeOnBoardValueAmount element start-->	
+	<subflow-state id="editFreeOnBoardValueAmount" flow="freeonboardvalueamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.freeOnBoardValueAmount"
+					target="freeOnBoardValueAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="freeOnBoardValueAmount"
+					target="flowScope.freeOnBoardValueAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FreeOnBoardValueAmount element end-->
+	
+<!-- SpecialInstructions list element start-->	
+	<subflow-state id="editSpecialInstructionsList" flow="specialinstructionstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.specialInstructions"
+					target="specialInstructionsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="specialInstructions"
+					target="flowScope.specialInstructionsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SpecialInstructions list element end-->
+	
+<!-- DeliveryInstructions list element start-->	
+	<subflow-state id="editDeliveryInstructionsList" flow="deliveryinstructionstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.deliveryInstructions"
+					target="deliveryInstructionsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryInstructions"
+					target="flowScope.deliveryInstructionsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryInstructions list element end-->
+	
+<!-- Consignment element start-->	
+	<subflow-state id="editConsignment" flow="consignmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.consignment"
+					target="consignment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="consignment"
+					target="flowScope.consignment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Consignment element end-->
+	
+<!-- TransportContract element start-->	
+	<subflow-state id="editTransportContract" flow="contracttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.transportContract"
+					target="contract" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportContract"
+					target="flowScope.contract" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportContract element end-->
+	
+<!-- GoodsItem list element start-->	
+	<subflow-state id="editGoodsItemList" flow="goodsitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.goodsItem"
+					target="goodsItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="goodsItem"
+					target="flowScope.goodsItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GoodsItem list element end-->
+	
+<!-- ShipmentStage list element start-->	
+	<subflow-state id="editShipmentStageList" flow="shipmentstagetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.shipmentStage"
+					target="shipmentStageList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipmentStage"
+					target="flowScope.shipmentStageList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ShipmentStage list element end-->
+	
+<!-- Delivery element start-->	
+	<subflow-state id="editDelivery" flow="deliverytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.delivery"
+					target="delivery" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="delivery"
+					target="flowScope.delivery" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Delivery element end-->
+	
+<!-- TransportHandlingUnit list element start-->	
+	<subflow-state id="editTransportHandlingUnitList" flow="transporthandlingunittypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.transportHandlingUnit"
+					target="transportHandlingUnitList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportHandlingUnit"
+					target="flowScope.transportHandlingUnitList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportHandlingUnit list element end-->
+	
+<!-- OriginAddress element start-->	
+	<subflow-state id="editOriginAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.originAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginAddress element end-->
+	
+<!-- FirstArrivalPort element start-->	
+	<subflow-state id="editFirstArrivalPort" flow="porttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.firstArrivalPort"
+					target="port" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="firstArrivalPort"
+					target="flowScope.port" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FirstArrivalPort element end-->
+	
+<!-- LastExitPort element start-->	
+	<subflow-state id="editLastExitPort" flow="porttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.lastExitPort"
+					target="port" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lastExitPort"
+					target="flowScope.port" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LastExitPort element end-->
+	
+<!-- ExportCountry element start-->	
+	<subflow-state id="editExportCountry" flow="countrytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.exportCountry"
+					target="country" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exportCountry"
+					target="flowScope.country" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExportCountry element end-->
+	
+<!-- FreightAllowanceCharge list element start-->	
+	<subflow-state id="editFreightAllowanceChargeList" flow="freightallowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipment.freightAllowanceCharge"
+					target="freightAllowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="freightAllowanceCharge"
+					target="flowScope.freightAllowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FreightAllowanceCharge list element end-->
+	
+
+	<view-state id="displayShipment" view="/views/cac/ShipmentTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.shipment" target="shipment" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="shipmenttype-bean.xml" />
+
+</flow>

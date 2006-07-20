@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="temperature" target="flowScope.temperature" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TemperatureTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTemperature">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="temperature" result-scope="flow" />
+		</transition>
+		<transition on="editAttributeID" to="editAttributeID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMeasure" to="editMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- AttributeID element start-->	
+	<subflow-state id="editAttributeID" flow="attributeidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.temperature.attributeID"
+					target="attributeID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="attributeID"
+					target="flowScope.attributeID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AttributeID element end-->
+	
+<!-- Measure element start-->	
+	<subflow-state id="editMeasure" flow="measuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.temperature.measure"
+					target="measure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="measure"
+					target="flowScope.measure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Measure element end-->
+	
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.temperature.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+
+	<view-state id="displayTemperature" view="/views/cac/TemperatureTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.temperature" target="temperature" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="temperaturetype-bean.xml" />
+
+</flow>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="title" target="flowScope.title" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/TitleTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTitle">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="title" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayTitle" view="/views/cbc/TitleTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.title" target="title" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="titletype-bean.xml" />
+
+</flow>

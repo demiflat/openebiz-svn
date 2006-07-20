@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ResponseType"/>
+
+	<input-mapper>
+		<mapping source="discrepancyResponseList" target="flowScope.discrepancyResponseList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DiscrepancyResponseTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDiscrepancyResponseTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="discrepancyResponse" result-scope="flow" />
+		</transition>
+		<transition on="clearDiscrepancyResponse" to="clearDiscrepancyResponse">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDiscrepancyResponse" to="addDiscrepancyResponse">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addDiscrepancyResponse" flow="responsetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="response" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="response"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.discrepancyResponseList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearDiscrepancyResponse">
+		<action bean="listUtils"
+			method="clearList(${flowScope.discrepancyResponseList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayDiscrepancyResponseTypeList" view="/views/lists/DiscrepancyResponseTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.discrepancyResponseList" target="discrepancyResponseList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="discrepancyresponsetypelist-bean.xml" />
+
+</flow>

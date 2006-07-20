@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="relatedItem" target="flowScope.relatedItem" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/RelatedItemTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRelatedItem">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="relatedItem" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescriptionList" to="editDescriptionList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.relatedItem.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.relatedItem.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+<!-- Description list element start-->	
+	<subflow-state id="editDescriptionList" flow="descriptiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.relatedItem.description"
+					target="descriptionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.descriptionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description list element end-->
+	
+
+	<view-state id="displayRelatedItem" view="/views/cac/RelatedItemTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.relatedItem" target="relatedItem" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="relateditemtype-bean.xml" />
+
+</flow>

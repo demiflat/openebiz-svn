@@ -1,0 +1,43 @@
+<%@ include file="/WEB-INF/jsp/forms/formHeader.jsp" %>
+<!--  start form -->
+<form action="openebiz" method="post" accept-charset="UTF-8">
+	<div class="form_wrapper">
+	<fieldset>
+		<legend>Trading Terms List</legend>
+		<spring:hasBindErrors name="tradingTermsList">
+			<div class="error"><fmt:message key="error.form.header" /></div>
+		</spring:hasBindErrors>
+		<table class="form_tbody">
+		<!-- form element start -->
+		<tr class="form_thead">
+		<th>Reference</th>
+		<th>Address</th>
+		</tr>
+		<c:if test="${not empty tradingTermsList}">
+			<c:forEach items="${tradingTermsList}" var="item" varStatus="status">
+			<tr>
+				<!-- type specific start -->
+				<td class="form_titem">
+				<c:out value="${item.reference.languageID}" />:
+				<c:out value="${item.reference.value}" />
+				</td>
+				<!-- type specific end -->
+				<!-- type specific start -->
+				<td class="form_titem"><c:out value="${item.applicableAddress.shortDisplay}" /></td>
+				<!-- type specific end -->
+			</tr>
+			</c:forEach>
+		</c:if>	
+		<!-- form element end -->
+		</table>
+		<div class="submitButtons">
+			<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}" />
+			<input type="submit" class="button" name="_eventId_addTradingTerms" value="<fmt:message key="ui.button.add" />" />
+			<input type="submit" class="button" name="_eventId_clearTradingTerms" value="<fmt:message key="ui.button.clear" />" />
+			<input type="submit" class="button" name="_eventId_submit" value="<fmt:message key="ui.button.submit" />" />
+		</div>
+	</fieldset>
+	</div>
+</form>
+<!--  end form -->
+<%@ include file="/WEB-INF/jsp/forms/formFooter.jsp" %>

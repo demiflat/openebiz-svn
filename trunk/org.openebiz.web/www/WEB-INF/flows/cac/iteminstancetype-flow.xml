@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="itemInstance" target="flowScope.itemInstance" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ItemInstanceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItemInstance">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="itemInstance" result-scope="flow" />
+		</transition>
+		<transition on="editProductTraceID" to="editProductTraceID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editManufactureDateTime" to="editManufactureDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationDateTime" to="editRegistrationDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationID" to="editRegistrationID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSerialID" to="editSerialID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalItemPropertyList" to="editAdditionalItemPropertyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ProductTraceID element start-->	
+	<subflow-state id="editProductTraceID" flow="producttraceidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.productTraceID"
+					target="productTraceID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="productTraceID"
+					target="flowScope.productTraceID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ProductTraceID element end-->
+	
+<!-- ManufactureDateTime element start-->	
+	<subflow-state id="editManufactureDateTime" flow="manufacturedatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.manufactureDateTime"
+					target="manufactureDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="manufactureDateTime"
+					target="flowScope.manufactureDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ManufactureDateTime element end-->
+	
+<!-- RegistrationDateTime element start-->	
+	<subflow-state id="editRegistrationDateTime" flow="registrationdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.registrationDateTime"
+					target="registrationDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationDateTime"
+					target="flowScope.registrationDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationDateTime element end-->
+	
+<!-- RegistrationID element start-->	
+	<subflow-state id="editRegistrationID" flow="registrationidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.registrationID"
+					target="registrationID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationID"
+					target="flowScope.registrationID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationID element end-->
+	
+<!-- SerialID element start-->	
+	<subflow-state id="editSerialID" flow="serialidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.serialID"
+					target="serialID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="serialID"
+					target="flowScope.serialID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SerialID element end-->
+	
+<!-- AdditionalItemProperty list element start-->	
+	<subflow-state id="editAdditionalItemPropertyList" flow="additionalitempropertytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemInstance.additionalItemProperty"
+					target="additionalItemPropertyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalItemProperty"
+					target="flowScope.additionalItemPropertyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalItemProperty list element end-->
+	
+
+	<view-state id="displayItemInstance" view="/views/cac/ItemInstanceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.itemInstance" target="itemInstance" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="iteminstancetype-bean.xml" />
+
+</flow>

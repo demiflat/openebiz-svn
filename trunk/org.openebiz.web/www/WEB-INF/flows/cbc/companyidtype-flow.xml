@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="companyID" target="flowScope.companyID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/CompanyIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCompanyID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="companyID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayCompanyID" view="/views/cbc/CompanyIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.companyID" target="companyID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="companyidtype-bean.xml" />
+
+</flow>

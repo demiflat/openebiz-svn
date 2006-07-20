@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="orderLine" target="flowScope.orderLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/OrderLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOrderLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="orderLine" result-scope="flow" />
+		</transition>
+		<transition on="editSubstitutionStatusCode" to="editSubstitutionStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineItem" to="editLineItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSellerProposedLineItemList" to="editSellerProposedLineItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editSellerSubstitutedLineItemList" to="editSellerSubstitutedLineItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editBuyerProposedLineItemList" to="editBuyerProposedLineItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editQuotationLineReference" to="editQuotationLineReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- SubstitutionStatusCode element start-->	
+	<subflow-state id="editSubstitutionStatusCode" flow="substitutionstatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.substitutionStatusCode"
+					target="substitutionStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="substitutionStatusCode"
+					target="flowScope.substitutionStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SubstitutionStatusCode element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- LineItem element start-->	
+	<subflow-state id="editLineItem" flow="lineitemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.lineItem"
+					target="lineItem" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineItem"
+					target="flowScope.lineItem" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineItem element end-->
+	
+<!-- SellerProposedLineItem list element start-->	
+	<subflow-state id="editSellerProposedLineItemList" flow="sellerproposedlineitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.sellerProposedLineItem"
+					target="sellerProposedLineItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerProposedLineItem"
+					target="flowScope.sellerProposedLineItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerProposedLineItem list element end-->
+	
+<!-- SellerSubstitutedLineItem list element start-->	
+	<subflow-state id="editSellerSubstitutedLineItemList" flow="sellersubstitutedlineitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.sellerSubstitutedLineItem"
+					target="sellerSubstitutedLineItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerSubstitutedLineItem"
+					target="flowScope.sellerSubstitutedLineItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerSubstitutedLineItem list element end-->
+	
+<!-- BuyerProposedLineItem list element start-->	
+	<subflow-state id="editBuyerProposedLineItemList" flow="buyerproposedlineitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.buyerProposedLineItem"
+					target="buyerProposedLineItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="buyerProposedLineItem"
+					target="flowScope.buyerProposedLineItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BuyerProposedLineItem list element end-->
+	
+<!-- QuotationLineReference element start-->	
+	<subflow-state id="editQuotationLineReference" flow="linereferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.orderLine.quotationLineReference"
+					target="lineReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quotationLineReference"
+					target="flowScope.lineReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- QuotationLineReference element end-->
+	
+
+	<view-state id="displayOrderLine" view="/views/cac/OrderLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.orderLine" target="orderLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="orderlinetype-bean.xml" />
+
+</flow>

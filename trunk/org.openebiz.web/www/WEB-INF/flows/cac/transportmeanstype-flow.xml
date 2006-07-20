@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="transportMeans" target="flowScope.transportMeans" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TransportMeansTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTransportMeans">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="transportMeans" result-scope="flow" />
+		</transition>
+		<transition on="editJourneyID" to="editJourneyID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationNationalityID" to="editRegistrationNationalityID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationNationalityList" to="editRegistrationNationalityList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDirectionCode" to="editDirectionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editStowage" to="editStowage">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAirTransport" to="editAirTransport">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRoadTransport" to="editRoadTransport">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRailTransport" to="editRailTransport">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaritimeTransport" to="editMaritimeTransport">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOwnerParty" to="editOwnerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- JourneyID element start-->	
+	<subflow-state id="editJourneyID" flow="journeyidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.journeyID"
+					target="journeyID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="journeyID"
+					target="flowScope.journeyID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- JourneyID element end-->
+	
+<!-- RegistrationNationalityID element start-->	
+	<subflow-state id="editRegistrationNationalityID" flow="registrationnationalityidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.registrationNationalityID"
+					target="registrationNationalityID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationNationalityID"
+					target="flowScope.registrationNationalityID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationNationalityID element end-->
+	
+<!-- RegistrationNationality list element start-->	
+	<subflow-state id="editRegistrationNationalityList" flow="registrationnationalitytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.registrationNationality"
+					target="registrationNationalityList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationNationality"
+					target="flowScope.registrationNationalityList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationNationality list element end-->
+	
+<!-- DirectionCode element start-->	
+	<subflow-state id="editDirectionCode" flow="directioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.directionCode"
+					target="directionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="directionCode"
+					target="flowScope.directionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DirectionCode element end-->
+	
+<!-- Stowage element start-->	
+	<subflow-state id="editStowage" flow="stowagetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.stowage"
+					target="stowage" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="stowage"
+					target="flowScope.stowage" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Stowage element end-->
+	
+<!-- AirTransport element start-->	
+	<subflow-state id="editAirTransport" flow="airtransporttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.airTransport"
+					target="airTransport" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="airTransport"
+					target="flowScope.airTransport" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AirTransport element end-->
+	
+<!-- RoadTransport element start-->	
+	<subflow-state id="editRoadTransport" flow="roadtransporttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.roadTransport"
+					target="roadTransport" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="roadTransport"
+					target="flowScope.roadTransport" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RoadTransport element end-->
+	
+<!-- RailTransport element start-->	
+	<subflow-state id="editRailTransport" flow="railtransporttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.railTransport"
+					target="railTransport" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="railTransport"
+					target="flowScope.railTransport" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RailTransport element end-->
+	
+<!-- MaritimeTransport element start-->	
+	<subflow-state id="editMaritimeTransport" flow="maritimetransporttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.maritimeTransport"
+					target="maritimeTransport" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maritimeTransport"
+					target="flowScope.maritimeTransport" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaritimeTransport element end-->
+	
+<!-- OwnerParty element start-->	
+	<subflow-state id="editOwnerParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportMeans.ownerParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ownerParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OwnerParty element end-->
+	
+
+	<view-state id="displayTransportMeans" view="/views/cac/TransportMeansTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.transportMeans" target="transportMeans" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="transportmeanstype-bean.xml" />
+
+</flow>

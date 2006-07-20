@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="country" target="flowScope.country" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CountryTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCountry">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="country" result-scope="flow" />
+		</transition>
+		<transition on="editIdentificationCode" to="editIdentificationCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- IdentificationCode element start-->	
+	<subflow-state id="editIdentificationCode" flow="identificationcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.country.identificationCode"
+					target="identificationCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="identificationCode"
+					target="flowScope.identificationCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IdentificationCode element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.country.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+
+	<view-state id="displayCountry" view="/views/cac/CountryTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.country" target="country" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="countrytype-bean.xml" />
+
+</flow>

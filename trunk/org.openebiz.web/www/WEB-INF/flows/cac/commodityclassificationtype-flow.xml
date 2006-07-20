@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="commodityClassification" target="flowScope.commodityClassification" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CommodityClassificationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCommodityClassification">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="commodityClassification" result-scope="flow" />
+		</transition>
+		<transition on="editNatureCode" to="editNatureCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCargoTypeCode" to="editCargoTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCommodityCode" to="editCommodityCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editItemClassificationCode" to="editItemClassificationCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- NatureCode element start-->	
+	<subflow-state id="editNatureCode" flow="naturecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.commodityClassification.natureCode"
+					target="natureCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="natureCode"
+					target="flowScope.natureCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- NatureCode element end-->
+	
+<!-- CargoTypeCode element start-->	
+	<subflow-state id="editCargoTypeCode" flow="cargotypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.commodityClassification.cargoTypeCode"
+					target="cargoTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="cargoTypeCode"
+					target="flowScope.cargoTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CargoTypeCode element end-->
+	
+<!-- CommodityCode element start-->	
+	<subflow-state id="editCommodityCode" flow="commoditycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.commodityClassification.commodityCode"
+					target="commodityCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="commodityCode"
+					target="flowScope.commodityCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CommodityCode element end-->
+	
+<!-- ItemClassificationCode element start-->	
+	<subflow-state id="editItemClassificationCode" flow="itemclassificationcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.commodityClassification.itemClassificationCode"
+					target="itemClassificationCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemClassificationCode"
+					target="flowScope.itemClassificationCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ItemClassificationCode element end-->
+	
+
+	<view-state id="displayCommodityClassification" view="/views/cac/CommodityClassificationTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.commodityClassification" target="commodityClassification" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="commodityclassificationtype-bean.xml" />
+
+</flow>

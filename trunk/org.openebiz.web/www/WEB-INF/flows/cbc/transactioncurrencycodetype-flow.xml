@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="transactionCurrencyCode" target="flowScope.transactionCurrencyCode" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/TransactionCurrencyCodeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTransactionCurrencyCode">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="transactionCurrencyCode" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayTransactionCurrencyCode" view="/views/cbc/TransactionCurrencyCodeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.transactionCurrencyCode" target="transactionCurrencyCode" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="transactioncurrencycodetype-bean.xml" />
+
+</flow>

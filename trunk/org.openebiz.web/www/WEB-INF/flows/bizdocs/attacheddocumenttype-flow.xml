@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/AttachedDocumentTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAttachedDocument">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="attachedDocument" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNoteList" to="editNoteList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDocumentQualifierCode" to="editDocumentQualifierCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentQualifier" to="editDocumentQualifier">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editParentDocumentID" to="editParentDocumentID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editParentDocumentQualifierCode" to="editParentDocumentQualifierCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSenderParty" to="editSenderParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReceiverParty" to="editReceiverParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAttachment" to="editAttachment">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- Note list element start-->
+	<subflow-state id="editNoteList" flow="notetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.note"
+					target="noteList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.noteList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note list element end-->
+		
+<!-- DocumentQualifierCode element start-->
+	<subflow-state id="editDocumentQualifierCode" flow="documentqualifiercodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.documentQualifierCode"
+					target="documentQualifierCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentQualifierCode"
+					target="flowScope.documentQualifierCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentQualifierCode element end-->
+
+<!-- DocumentQualifier element start-->
+	<subflow-state id="editDocumentQualifier" flow="documentqualifiertype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.documentQualifier"
+					target="documentQualifier" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentQualifier"
+					target="flowScope.documentQualifier" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentQualifier element end-->
+
+<!-- ParentDocumentID element start-->
+	<subflow-state id="editParentDocumentID" flow="parentdocumentidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.parentDocumentID"
+					target="parentDocumentID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="parentDocumentID"
+					target="flowScope.parentDocumentID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ParentDocumentID element end-->
+
+<!-- ParentDocumentQualifierCode element start-->
+	<subflow-state id="editParentDocumentQualifierCode" flow="parentdocumentqualifiercodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.parentDocumentQualifierCode"
+					target="parentDocumentQualifierCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="parentDocumentQualifierCode"
+					target="flowScope.parentDocumentQualifierCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ParentDocumentQualifierCode element end-->
+
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+<!-- SenderParty element start-->
+	<subflow-state id="editSenderParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.senderParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="senderParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SenderParty element end-->
+
+<!-- ReceiverParty element start-->
+	<subflow-state id="editReceiverParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.receiverParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receiverParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReceiverParty element end-->
+
+<!-- Attachment element start-->
+	<subflow-state id="editAttachment" flow="attachmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachedDocument.attachment"
+					target="attachment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="attachment"
+					target="flowScope.attachment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Attachment element end-->
+
+	<view-state id="displayAttachedDocument" view="/views/bizdocs/AttachedDocumentTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:attacheddocumenttype-flow" />
+
+	<import resource="attacheddocumenttype-bean.xml" />
+
+</flow>

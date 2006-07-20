@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.QuotationLineType"/>
+
+	<input-mapper>
+		<mapping source="quotationLineList" target="flowScope.quotationLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/QuotationLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayQuotationLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="quotationLine" result-scope="flow" />
+		</transition>
+		<transition on="clearQuotationLine" to="clearQuotationLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addQuotationLine" to="addQuotationLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addQuotationLine" flow="quotationlinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="quotationLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quotationLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.quotationLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearQuotationLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.quotationLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayQuotationLineTypeList" view="/views/lists/QuotationLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.quotationLineList" target="quotationLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="quotationlinetypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lineExtensionRoundingAmount" target="flowScope.lineExtensionRoundingAmount" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/LineExtensionRoundingAmountTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLineExtensionRoundingAmount">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lineExtensionRoundingAmount" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayLineExtensionRoundingAmount" view="/views/cbc/LineExtensionRoundingAmountTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lineExtensionRoundingAmount" target="lineExtensionRoundingAmount" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="lineextensionroundingamounttype-bean.xml" />
+
+</flow>

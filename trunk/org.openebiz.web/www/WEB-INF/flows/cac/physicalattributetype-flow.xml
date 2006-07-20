@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="physicalAttribute" target="flowScope.physicalAttribute" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PhysicalAttributeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPhysicalAttribute">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="physicalAttribute" result-scope="flow" />
+		</transition>
+		<transition on="editAttributeID" to="editAttributeID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPositionCode" to="editPositionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescriptionCode" to="editDescriptionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- AttributeID element start-->	
+	<subflow-state id="editAttributeID" flow="attributeidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.physicalAttribute.attributeID"
+					target="attributeID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="attributeID"
+					target="flowScope.attributeID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AttributeID element end-->
+	
+<!-- PositionCode element start-->	
+	<subflow-state id="editPositionCode" flow="positioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.physicalAttribute.positionCode"
+					target="positionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="positionCode"
+					target="flowScope.positionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PositionCode element end-->
+	
+<!-- DescriptionCode element start-->	
+	<subflow-state id="editDescriptionCode" flow="descriptioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.physicalAttribute.descriptionCode"
+					target="descriptionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="descriptionCode"
+					target="flowScope.descriptionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DescriptionCode element end-->
+	
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.physicalAttribute.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+
+	<view-state id="displayPhysicalAttribute" view="/views/cac/PhysicalAttributeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.physicalAttribute" target="physicalAttribute" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="physicalattributetype-bean.xml" />
+
+</flow>

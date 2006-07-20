@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="taxScheme" target="flowScope.taxScheme" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TaxSchemeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxScheme">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxScheme" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTypeCode" to="editTaxTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCurrencyCode" to="editCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editJurisdictionRegionAddressList" to="editJurisdictionRegionAddressList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxScheme.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxScheme.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- TaxTypeCode element start-->	
+	<subflow-state id="editTaxTypeCode" flow="taxtypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxScheme.taxTypeCode"
+					target="taxTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTypeCode"
+					target="flowScope.taxTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTypeCode element end-->
+	
+<!-- CurrencyCode element start-->	
+	<subflow-state id="editCurrencyCode" flow="currencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxScheme.currencyCode"
+					target="currencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="currencyCode"
+					target="flowScope.currencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CurrencyCode element end-->
+	
+<!-- JurisdictionRegionAddress list element start-->	
+	<subflow-state id="editJurisdictionRegionAddressList" flow="jurisdictionregionaddresstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxScheme.jurisdictionRegionAddress"
+					target="jurisdictionRegionAddressList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="jurisdictionRegionAddress"
+					target="flowScope.jurisdictionRegionAddressList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- JurisdictionRegionAddress list element end-->
+	
+
+	<view-state id="displayTaxScheme" view="/views/cac/TaxSchemeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxScheme" target="taxScheme" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxschemetype-bean.xml" />
+
+</flow>

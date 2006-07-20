@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="locationList" target="flowScope.locationList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/LocationTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLocationTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="location" result-scope="flow" />
+		</transition>
+		<transition on="clearLocation" to="clearLocation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addLocation" to="addLocation">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Location -->
+
+	<view-state id="displayLocationTypeList" view="/views/lists/LocationTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.locationList" target="locationList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="locationtypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.OrderLineReferenceType"/>
+
+	<input-mapper>
+		<mapping source="orderLineReferenceList" target="flowScope.orderLineReferenceList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/OrderLineReferenceTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOrderLineReferenceTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="orderLineReference" result-scope="flow" />
+		</transition>
+		<transition on="clearOrderLineReference" to="clearOrderLineReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addOrderLineReference" to="addOrderLineReference">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addOrderLineReference" flow="orderlinereferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="orderLineReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderLineReference"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.orderLineReferenceList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearOrderLineReference">
+		<action bean="listUtils"
+			method="clearList(${flowScope.orderLineReferenceList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayOrderLineReferenceTypeList" view="/views/lists/OrderLineReferenceTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.orderLineReferenceList" target="orderLineReferenceList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="orderlinereferencetypelist-bean.xml" />
+
+</flow>

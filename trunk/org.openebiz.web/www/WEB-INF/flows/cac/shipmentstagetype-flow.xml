@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="shipmentStage" target="flowScope.shipmentStage" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ShipmentStageTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayShipmentStage">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="shipmentStage" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransportModeCode" to="editTransportModeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransportMeansTypeCode" to="editTransportMeansTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransitDirectionCode" to="editTransitDirectionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPreCarriageIndicator" to="editPreCarriageIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOnCarriageIndicator" to="editOnCarriageIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransitPeriod" to="editTransitPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCarrierPartyList" to="editCarrierPartyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editTransportMeans" to="editTransportMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLoadingPort" to="editLoadingPort">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editUnloadingPort" to="editUnloadingPort">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransshipPort" to="editTransshipPort">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- TransportModeCode element start-->	
+	<subflow-state id="editTransportModeCode" flow="transportmodecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transportModeCode"
+					target="transportModeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportModeCode"
+					target="flowScope.transportModeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportModeCode element end-->
+	
+<!-- TransportMeansTypeCode element start-->	
+	<subflow-state id="editTransportMeansTypeCode" flow="transportmeanstypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transportMeansTypeCode"
+					target="transportMeansTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportMeansTypeCode"
+					target="flowScope.transportMeansTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportMeansTypeCode element end-->
+	
+<!-- TransitDirectionCode element start-->	
+	<subflow-state id="editTransitDirectionCode" flow="transitdirectioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transitDirectionCode"
+					target="transitDirectionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transitDirectionCode"
+					target="flowScope.transitDirectionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransitDirectionCode element end-->
+	
+<!-- PreCarriageIndicator element start-->	
+	<subflow-state id="editPreCarriageIndicator" flow="precarriageindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.preCarriageIndicator"
+					target="preCarriageIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="preCarriageIndicator"
+					target="flowScope.preCarriageIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PreCarriageIndicator element end-->
+	
+<!-- OnCarriageIndicator element start-->	
+	<subflow-state id="editOnCarriageIndicator" flow="oncarriageindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.onCarriageIndicator"
+					target="onCarriageIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="onCarriageIndicator"
+					target="flowScope.onCarriageIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OnCarriageIndicator element end-->
+	
+<!-- TransitPeriod element start-->	
+	<subflow-state id="editTransitPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transitPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transitPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransitPeriod element end-->
+	
+<!-- CarrierParty list element start-->	
+	<subflow-state id="editCarrierPartyList" flow="carrierpartytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.carrierParty"
+					target="carrierPartyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="carrierParty"
+					target="flowScope.carrierPartyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CarrierParty list element end-->
+	
+<!-- TransportMeans element start-->	
+	<subflow-state id="editTransportMeans" flow="transportmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transportMeans"
+					target="transportMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportMeans"
+					target="flowScope.transportMeans" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportMeans element end-->
+	
+<!-- LoadingPort element start-->	
+	<subflow-state id="editLoadingPort" flow="porttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.loadingPort"
+					target="port" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="loadingPort"
+					target="flowScope.port" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LoadingPort element end-->
+	
+<!-- UnloadingPort element start-->	
+	<subflow-state id="editUnloadingPort" flow="porttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.unloadingPort"
+					target="port" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="unloadingPort"
+					target="flowScope.port" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- UnloadingPort element end-->
+	
+<!-- TransshipPort element start-->	
+	<subflow-state id="editTransshipPort" flow="porttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.shipmentStage.transshipPort"
+					target="port" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transshipPort"
+					target="flowScope.port" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransshipPort element end-->
+	
+
+	<view-state id="displayShipmentStage" view="/views/cac/ShipmentStageTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.shipmentStage" target="shipmentStage" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="shipmentstagetype-bean.xml" />
+
+</flow>

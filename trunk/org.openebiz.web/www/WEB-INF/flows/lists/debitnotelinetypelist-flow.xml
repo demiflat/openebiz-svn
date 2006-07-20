@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.DebitNoteLineType"/>
+
+	<input-mapper>
+		<mapping source="debitNoteLineList" target="flowScope.debitNoteLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DebitNoteLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDebitNoteLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="debitNoteLine" result-scope="flow" />
+		</transition>
+		<transition on="clearDebitNoteLine" to="clearDebitNoteLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDebitNoteLine" to="addDebitNoteLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addDebitNoteLine" flow="debitnotelinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="debitNoteLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debitNoteLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.debitNoteLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearDebitNoteLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.debitNoteLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayDebitNoteLineTypeList" view="/views/lists/DebitNoteLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.debitNoteLineList" target="debitNoteLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="debitnotelinetypelist-bean.xml" />
+
+</flow>

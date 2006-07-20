@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ReceiptLineType"/>
+
+	<input-mapper>
+		<mapping source="receivedReceiptLineList" target="flowScope.receivedReceiptLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/ReceivedReceiptLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayReceivedReceiptLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="receivedReceiptLine" result-scope="flow" />
+		</transition>
+		<transition on="clearReceivedReceiptLine" to="clearReceivedReceiptLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addReceivedReceiptLine" to="addReceivedReceiptLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addReceivedReceiptLine" flow="receiptlinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="receiptLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receiptLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.receivedReceiptLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearReceivedReceiptLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.receivedReceiptLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayReceivedReceiptLineTypeList" view="/views/lists/ReceivedReceiptLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.receivedReceiptLineList" target="receivedReceiptLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="receivedreceiptlinetypelist-bean.xml" />
+
+</flow>

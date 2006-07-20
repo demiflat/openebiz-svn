@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="documentResponse" target="flowScope.documentResponse" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DocumentResponseTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDocumentResponse">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="documentResponse" result-scope="flow" />
+		</transition>
+		<transition on="editResponse" to="editResponse">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentReference" to="editDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssuerParty" to="editIssuerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRecipientParty" to="editRecipientParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineResponseList" to="editLineResponseList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- Response element start-->	
+	<subflow-state id="editResponse" flow="responsetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentResponse.response"
+					target="response" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="response"
+					target="flowScope.response" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Response element end-->
+	
+<!-- DocumentReference element start-->	
+	<subflow-state id="editDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentResponse.documentReference"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentReference"
+					target="flowScope.documentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentReference element end-->
+	
+<!-- IssuerParty element start-->	
+	<subflow-state id="editIssuerParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentResponse.issuerParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issuerParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssuerParty element end-->
+	
+<!-- RecipientParty element start-->	
+	<subflow-state id="editRecipientParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentResponse.recipientParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="recipientParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RecipientParty element end-->
+	
+<!-- LineResponse list element start-->	
+	<subflow-state id="editLineResponseList" flow="lineresponsetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentResponse.lineResponse"
+					target="lineResponseList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineResponse"
+					target="flowScope.lineResponseList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineResponse list element end-->
+	
+
+	<view-state id="displayDocumentResponse" view="/views/cac/DocumentResponseTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.documentResponse" target="documentResponse" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="documentresponsetype-bean.xml" />
+
+</flow>

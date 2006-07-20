@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="handlingInstructions" target="flowScope.handlingInstructions" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/HandlingInstructionsTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayHandlingInstructions">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="handlingInstructions" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayHandlingInstructions" view="/views/cbc/HandlingInstructionsTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.handlingInstructions" target="handlingInstructions" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="handlinginstructionstype-bean.xml" />
+
+</flow>

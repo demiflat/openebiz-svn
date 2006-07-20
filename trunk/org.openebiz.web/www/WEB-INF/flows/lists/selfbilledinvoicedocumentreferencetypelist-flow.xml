@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.DocumentReferenceType"/>
+
+	<input-mapper>
+		<mapping source="selfBilledInvoiceDocumentReferenceList" target="flowScope.selfBilledInvoiceDocumentReferenceList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/SelfBilledInvoiceDocumentReferenceTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySelfBilledInvoiceDocumentReferenceTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="selfBilledInvoiceDocumentReference" result-scope="flow" />
+		</transition>
+		<transition on="clearSelfBilledInvoiceDocumentReference" to="clearSelfBilledInvoiceDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addSelfBilledInvoiceDocumentReference" to="addSelfBilledInvoiceDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addSelfBilledInvoiceDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentReference"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.selfBilledInvoiceDocumentReferenceList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearSelfBilledInvoiceDocumentReference">
+		<action bean="listUtils"
+			method="clearList(${flowScope.selfBilledInvoiceDocumentReferenceList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displaySelfBilledInvoiceDocumentReferenceTypeList" view="/views/lists/SelfBilledInvoiceDocumentReferenceTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.selfBilledInvoiceDocumentReferenceList" target="selfBilledInvoiceDocumentReferenceList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="selfbilledinvoicedocumentreferencetypelist-bean.xml" />
+
+</flow>

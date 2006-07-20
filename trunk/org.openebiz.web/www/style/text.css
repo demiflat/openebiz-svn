@@ -1,0 +1,132 @@
+/* start text.css */
+body {
+	font: 76% Verdana, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,p.description {
+	font-family: "Trebuchet MS", Trebuchet, sans-serif;
+}
+
+h1 {
+	font-size: 3em;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+h2 {
+	font-size: 2em;
+	font-weight: normal;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
+h4 {
+	font-size: 1.2em;
+	letter-spacing: 0.2em;
+}
+
+h5 {
+	font-size: 1.2em;
+}
+
+h6 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+p,td {
+	line-height: 1em;
+}
+
+code,kbd {
+	font-size: 1.25em;
+}
+
+/* Basic HTML style
+  ----------------------------------------------- */
+a:link,a:visited {
+	color: #666;
+	font-weight: bold;
+	margin: -1px -2px -2px;
+	padding: 1px 2px 2px;
+}
+
+a:hover,a:active {
+	text-decoration: none;
+	color: #333;
+	background: #f6f6f6;;
+	color: #333;
+}
+
+body {
+	font: 71% "Lucida Grande", "Lucida Sans", Verdana, Arial, sans-serif;
+	color: #333;
+	margin: 10px;
+	padding: 0;
+}
+
+blockquote {
+	margin: 1em 2em;
+	color: #666;
+}
+
+blockquote p {
+	line-height: 1.2;
+}
+
+caption {
+	font-weight: bold;
+	background: #ccc;
+	padding: .5em;
+}
+
+dd {
+	margin: 1em 2em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+hr {
+	width: 100%;	
+}
+
+/*
+  li {
+  	margin: 1em 0;
+}  	
+*/
+
+table {
+	border: 1px solid #ccc;
+}
+
+td {
+	vertical-align: top;
+	padding: 0.5em;
+}
+
+th {
+	text-align: left;
+	padding: .5em;
+}
+
+/* Nested HTML elements
+  ----------------------------------------------- */
+ol li {
+	margin-left: 2em;
+	list-style-type: decimal;
+}
+
+ol,ul {
+	margin: 1em 0;
+	padding-left: 1.7em;
+}
+
+ul li {
+	list-style-type: disc;
+}
+/* end text.css */

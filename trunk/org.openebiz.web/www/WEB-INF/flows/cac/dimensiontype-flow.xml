@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="dimension" target="flowScope.dimension" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DimensionTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDimension">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="dimension" result-scope="flow" />
+		</transition>
+		<transition on="editAttributeID" to="editAttributeID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMeasure" to="editMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumMeasure" to="editMinimumMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumMeasure" to="editMaximumMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- AttributeID element start-->	
+	<subflow-state id="editAttributeID" flow="attributeidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.dimension.attributeID"
+					target="attributeID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="attributeID"
+					target="flowScope.attributeID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AttributeID element end-->
+	
+<!-- Measure element start-->	
+	<subflow-state id="editMeasure" flow="measuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.dimension.measure"
+					target="measure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="measure"
+					target="flowScope.measure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Measure element end-->
+	
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.dimension.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+<!-- MinimumMeasure element start-->	
+	<subflow-state id="editMinimumMeasure" flow="minimummeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.dimension.minimumMeasure"
+					target="minimumMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumMeasure"
+					target="flowScope.minimumMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumMeasure element end-->
+	
+<!-- MaximumMeasure element start-->	
+	<subflow-state id="editMaximumMeasure" flow="maximummeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.dimension.maximumMeasure"
+					target="maximumMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumMeasure"
+					target="flowScope.maximumMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumMeasure element end-->
+	
+
+	<view-state id="displayDimension" view="/views/cac/DimensionTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.dimension" target="dimension" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="dimensiontype-bean.xml" />
+
+</flow>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="basePrice" target="flowScope.basePrice" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/BasePriceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayBasePrice">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="basePrice" result-scope="flow" />
+		</transition>
+		<transition on="editPriceAmount" to="editPriceAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBaseQuantity" to="editBaseQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPriceChangeReasonList" to="editPriceChangeReasonList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPriceType" to="editPriceType">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderableUnitFactorRate" to="editOrderableUnitFactorRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidityPeriodList" to="editValidityPeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPriceList" to="editPriceList">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAllowanceChargeList" to="editAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- PriceAmount element start-->	
+	<subflow-state id="editPriceAmount" flow="priceamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.priceAmount"
+					target="priceAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priceAmount"
+					target="flowScope.priceAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriceAmount element end-->
+	
+<!-- BaseQuantity element start-->	
+	<subflow-state id="editBaseQuantity" flow="basequantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.baseQuantity"
+					target="baseQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="baseQuantity"
+					target="flowScope.baseQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BaseQuantity element end-->
+	
+<!-- PriceChangeReason list element start-->	
+	<subflow-state id="editPriceChangeReasonList" flow="pricechangereasontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.priceChangeReason"
+					target="priceChangeReasonList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priceChangeReason"
+					target="flowScope.priceChangeReasonList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriceChangeReason list element end-->
+	
+<!-- PriceType element start-->	
+	<subflow-state id="editPriceType" flow="pricetypetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.priceType"
+					target="priceType" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priceType"
+					target="flowScope.priceType" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriceType element end-->
+	
+<!-- OrderableUnitFactorRate element start-->	
+	<subflow-state id="editOrderableUnitFactorRate" flow="orderableunitfactorratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.orderableUnitFactorRate"
+					target="orderableUnitFactorRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderableUnitFactorRate"
+					target="flowScope.orderableUnitFactorRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderableUnitFactorRate element end-->
+	
+<!-- ValidityPeriod list element start-->	
+	<subflow-state id="editValidityPeriodList" flow="validityperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.validityPeriod"
+					target="validityPeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validityPeriod"
+					target="flowScope.validityPeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidityPeriod list element end-->
+	
+<!-- PriceList element start-->	
+	<subflow-state id="editPriceList" flow="pricelisttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.priceList"
+					target="priceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priceList"
+					target="flowScope.priceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriceList element end-->
+	
+<!-- AllowanceCharge list element start-->	
+	<subflow-state id="editAllowanceChargeList" flow="allowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.basePrice.allowanceCharge"
+					target="allowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge list element end-->
+	
+
+	<view-state id="displayBasePrice" view="/views/cac/BasePriceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.basePrice" target="basePrice" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="basepricetype-bean.xml" />
+
+</flow>

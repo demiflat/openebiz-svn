@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.DocumentReferenceType"/>
+
+	<input-mapper>
+		<mapping source="statementDocumentReferenceList" target="flowScope.statementDocumentReferenceList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/StatementDocumentReferenceTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayStatementDocumentReferenceTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="statementDocumentReference" result-scope="flow" />
+		</transition>
+		<transition on="clearStatementDocumentReference" to="clearStatementDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addStatementDocumentReference" to="addStatementDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addStatementDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentReference"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.statementDocumentReferenceList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearStatementDocumentReference">
+		<action bean="listUtils"
+			method="clearList(${flowScope.statementDocumentReferenceList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayStatementDocumentReferenceTypeList" view="/views/lists/StatementDocumentReferenceTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.statementDocumentReferenceList" target="statementDocumentReferenceList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="statementdocumentreferencetypelist-bean.xml" />
+
+</flow>

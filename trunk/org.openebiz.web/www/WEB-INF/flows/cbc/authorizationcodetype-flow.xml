@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="authorizationCode" target="flowScope.authorizationCode" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/AuthorizationCodeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAuthorizationCode">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="authorizationCode" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayAuthorizationCode" view="/views/cbc/AuthorizationCodeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.authorizationCode" target="authorizationCode" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="authorizationcodetype-bean.xml" />
+
+</flow>

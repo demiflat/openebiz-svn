@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="noteList" target="flowScope.noteList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/NoteTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayNoteTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="note" result-scope="flow" />
+		</transition>
+		<transition on="clearNote" to="clearNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addNote" to="addNote">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Note -->
+
+	<view-state id="displayNoteTypeList" view="/views/lists/NoteTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.noteList" target="noteList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="notetypelist-bean.xml" />
+
+</flow>

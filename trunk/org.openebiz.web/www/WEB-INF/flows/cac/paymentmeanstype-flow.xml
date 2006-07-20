@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="paymentMeans" target="flowScope.paymentMeans" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PaymentMeansTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPaymentMeans">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="paymentMeans" result-scope="flow" />
+		</transition>
+		<transition on="editPaymentMeansCode" to="editPaymentMeansCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentDueDate" to="editPaymentDueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentChannelCode" to="editPaymentChannelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCardAccount" to="editCardAccount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayerFinancialAccount" to="editPayerFinancialAccount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayeeFinancialAccount" to="editPayeeFinancialAccount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCreditAccount" to="editCreditAccount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentList" to="editPaymentList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- PaymentMeansCode element start-->	
+	<subflow-state id="editPaymentMeansCode" flow="paymentmeanscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.paymentMeansCode"
+					target="paymentMeansCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeansCode"
+					target="flowScope.paymentMeansCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeansCode element end-->
+	
+<!-- PaymentDueDate element start-->	
+	<subflow-state id="editPaymentDueDate" flow="paymentduedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.paymentDueDate"
+					target="paymentDueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentDueDate"
+					target="flowScope.paymentDueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentDueDate element end-->
+	
+<!-- PaymentChannelCode element start-->	
+	<subflow-state id="editPaymentChannelCode" flow="paymentchannelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.paymentChannelCode"
+					target="paymentChannelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentChannelCode"
+					target="flowScope.paymentChannelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentChannelCode element end-->
+	
+<!-- CardAccount element start-->	
+	<subflow-state id="editCardAccount" flow="cardaccounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.cardAccount"
+					target="cardAccount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="cardAccount"
+					target="flowScope.cardAccount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CardAccount element end-->
+	
+<!-- PayerFinancialAccount element start-->	
+	<subflow-state id="editPayerFinancialAccount" flow="financialaccounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.payerFinancialAccount"
+					target="financialAccount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payerFinancialAccount"
+					target="flowScope.financialAccount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayerFinancialAccount element end-->
+	
+<!-- PayeeFinancialAccount element start-->	
+	<subflow-state id="editPayeeFinancialAccount" flow="financialaccounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.payeeFinancialAccount"
+					target="financialAccount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payeeFinancialAccount"
+					target="flowScope.financialAccount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayeeFinancialAccount element end-->
+	
+<!-- CreditAccount element start-->	
+	<subflow-state id="editCreditAccount" flow="creditaccounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.creditAccount"
+					target="creditAccount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditAccount"
+					target="flowScope.creditAccount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditAccount element end-->
+	
+<!-- Payment list element start-->	
+	<subflow-state id="editPaymentList" flow="paymenttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentMeans.payment"
+					target="paymentList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payment"
+					target="flowScope.paymentList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Payment list element end-->
+	
+
+	<view-state id="displayPaymentMeans" view="/views/cac/PaymentMeansTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.paymentMeans" target="paymentMeans" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="paymentmeanstype-bean.xml" />
+
+</flow>

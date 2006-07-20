@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="paymentChannelCode" target="flowScope.paymentChannelCode" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/PaymentChannelCodeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPaymentChannelCode">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="paymentChannelCode" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayPaymentChannelCode" view="/views/cbc/PaymentChannelCodeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.paymentChannelCode" target="paymentChannelCode" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="paymentchannelcodetype-bean.xml" />
+
+</flow>

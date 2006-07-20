@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="GUID" target="flowScope.GUID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/GUIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayGUID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="GUID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayGUID" view="/views/cbc/GUIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.GUID" target="GUID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="guidtype-bean.xml" />
+
+</flow>

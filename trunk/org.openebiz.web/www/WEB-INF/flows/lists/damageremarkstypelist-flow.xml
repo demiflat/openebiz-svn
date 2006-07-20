@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="damageRemarksList" target="flowScope.damageRemarksList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DamageRemarksTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDamageRemarksTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="damageRemarks" result-scope="flow" />
+		</transition>
+		<transition on="clearDamageRemarks" to="clearDamageRemarks">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDamageRemarks" to="addDamageRemarks">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Damage Remarks -->
+
+	<view-state id="displayDamageRemarksTypeList" view="/views/lists/DamageRemarksTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.damageRemarksList" target="damageRemarksList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="damageremarkstypelist-bean.xml" />
+
+</flow>

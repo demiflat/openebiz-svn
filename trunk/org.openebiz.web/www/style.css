@@ -1,0 +1,222 @@
+/*
+  	-- -- -- -- -- -- --
+  	Browser Fixes
+  	-- -- -- -- -- -- --
+  	This file uses CSS filtering methods to fix various
+  	layout bugs.
+
+  	Each of the following three imported files is a 
+  	separate, browser-specific CSS file that keeps all 
+  	hacks out of the main style sheet.
+  	
+  	Over time, as supporting these browsers no longer
+  	remains a priority, cleaning up the hacks is as
+  	easy as deleting the @import statement below, or
+  	simply no longer linking this file from the HTML.
+
+	-- -- -- -- -- -- --
+    fix ie6 "peekaboo bug" using the "holly hack". 
+    Note, this style only gets applied to ie6
+  */
+* html .wrapper {
+	height: 0.1%;
+}
+
+/* 
+   * IE5 mac - overrides the IE/Win hack 
+   */ /*\*/ /*/
+
+  * html #threecolumn div {
+  	height: auto;
+  }
+
+  /**/ /* 
+   * IE5/Win-specific CSS -ensures #container wraps all content on window resize
+   */
+@media tty {
+	i {
+		content: "\";/*" "*/}} * html #container { height: 1%; } /*";
+	}
+}
+
+a img,:link img,:visited img {
+	border: none;
+}
+
+/*
+
+  	-- -- -- -- -- -- --
+  	Base CSS
+  	-- -- -- -- -- -- --
+  	
+  	This simply removes default styling on most HTML elements in 
+  	order to reduce the need to later override them.
+  	
+  */
+h1,h2,h3,h4,h5,h6,pre,code,p {
+	font-size: 1em;
+}
+
+dl,li,dt,dd,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input
+	{
+	margin: 0;
+	padding: 0;
+}
+
+a img,:link img,:visited img {
+	border: none;
+}
+
+/* Center #container, constrain to 718px width
+  ----------------------------------------------- */
+body {
+	text-align: center;
+	height: auto;
+	padding: 0px;
+	background-color: #330099;
+	color: #330099;
+}
+
+#container {
+	width: 718px;
+	/*	height: 100%;*/
+	text-align: left;
+	margin: 0 auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* Set up the columns
+  ----------------------------------------------- */
+#main-content {
+	float: right;
+	width: 470px;
+	overflow: hidden;
+}
+
+#sidebar {
+	float: right;
+	width: 230px;
+	overflow: hidden;
+}
+
+/* Clear the Footer
+  ----------------------------------------------- */
+#footer {
+	clear: both;
+}
+
+/* to use spiffy corners:
+<div>
+<b class="corners">
+<b class="corners1"><b></b></b>
+<b class="corners2"><b></b></b>
+<b class="corners3"></b>
+<b class="corners4"></b>
+<b class="corners5"></b>
+</b> <div class="corners_content">
+
+<!-- Your Content Goes Here -->
+
+</div><!-- corners_content -->
+<b class="corners">
+<b class="corners5"></b>
+<b class="corners4"></b>
+<b class="corners3"></b>
+<b class="corners2"><b></b></b>
+<b class="corners1"><b></b></b>
+</b>
+</div><!-- corners -->
+*/
+.corners {
+	display: block
+}
+
+.corners * {
+	display: block;
+	height: 1px;
+	overflow: hidden;
+	background: #f6f6f6
+}
+
+.corners1 {
+	border-right: 1px solid #fbfbfb;
+	padding-right: 1px;
+	margin-right: 3px;
+	border-left: 1px solid #fbfbfb;
+	padding-left: 1px;
+	margin-left: 3px;
+	background: #f8f8f8;
+}
+
+.corners2 {
+	border-right: 1px solid #fefefe;
+	border-left: 1px solid #fefefe;
+	padding: 0px 1px;
+	background: #f7f7f7;
+	margin: 0px 1px;
+}
+
+.corners3 {
+	border-right: 1px solid #f7f7f7;
+	border-left: 1px solid #f7f7f7;
+	margin: 0px 1px;
+}
+
+.corners4 {
+	border-right: 1px solid #fbfbfb;
+	border-left: 1px solid #fbfbfb;
+}
+
+.corners5 {
+	border-right: 1px solid #f8f8f8;
+	border-left: 1px solid #f8f8f8;
+}
+
+.corners_content {
+	height: 480px;
+	padding: 5px;
+	background: #f6f6f6;
+	text-align: left;
+}
+
+div#footer p {
+	width: 85%;
+	padding-right: 5px;	
+	text-align: right;
+	font-family: Tahoma, sans-serif;
+	font-style: italic;
+	font-size: 65%;
+	color: #330099;
+	font-weight: italics;
+}
+
+div#welcome p {
+	height: 480px;
+	text-align: center;
+}
+
+div#form {
+	width: 75%;
+	height: 480px;
+	padding: 5px;
+}
+
+.formElement {
+	font-family: Tahoma, sans-serif;
+	color: #330099;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+}
+
+span.fieldError {
+	margin: 0px;
+	padding: 5px;
+	color: red;
+	font-size: 85%;
+	font-weight: italics;
+}

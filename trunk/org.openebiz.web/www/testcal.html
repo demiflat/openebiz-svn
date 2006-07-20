@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+<link rel="stylesheet" type="text/css" href="style/hacks.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/base.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/theme.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/corners.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/text.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style/forms.css" media="all" />
+
+  <!-- calendar stylesheet -->
+  <link rel="stylesheet" type="text/css" media="all" href="style/cal/theme.css" title="calendar" />
+
+  <!-- main calendar program -->
+  <script type="text/javascript" src="scripts/calendar.js"></script>
+
+  <!-- language for the calendar -->
+  <script type="text/javascript" src="lang/calendar-en.js"></script>
+
+  <!-- the following script defines the Calendar.setup helper function, which makes
+       adding a calendar a matter of 1 or 2 lines of code. -->
+  <script type="text/javascript" src="scripts/calendar-setup.js"></script>
+
+<title>test</title>
+
+
+</head>
+<script type="text/javascript"></script>
+<body>
+<div id="container">
+<div class="wrapper">
+		<div>
+		<b class="corners">
+		<b class="corners1"><b></b></b>
+		<b class="corners2"><b></b></b>
+		<b class="corners3"></b>
+		<b class="corners4"></b>
+		<b class="corners5"></b>
+		</b> 
+		<div class="corners_content">
+
+<div id="form_header">
+	<div class="wrapper">
+	<h4>Bossart LLC Enterprise 2006</h4>
+	<p class="description">Manage your world</p>
+	</div>
+</div>
+<div id="main-content">
+<div id="form">
+<form action="enterprise.bossart" method="post">
+	<fieldset>
+		<legend>Order Form</legend>
+
+				<div class="formElement">
+				<p><div class="formLabel">date: </div>
+				<input type="text" name="order_date" value="date" readonly="1" />
+				<img id="order_cal" src="icons/cal.gif" />
+				</p>
+				</div>
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "order_date",     // id of the input field
+        ifFormat       :    "%B %e, %Y",      // format of the input field
+        button         :    "order_cal",  // trigger for the calendar (button ID)
+        align          :    "Tl",           // alignment (defaults to "Bl")
+        singleClick    :    true
+    });
+</script>
+					
+		
+		<div class="submitButtons">
+		<input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}" />
+		<button type="button" class="button" name="_eventId_submit" value="Submit" style="color: gray">submit</button>
+		</div>
+	</fieldset>
+</form>
+</div><!-- form -->	
+	<div style="clear: both;"></div>
+</div><!-- main-content -->
+
+			<div id="sidebar">
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<p>asdfsdfasdfasdfadsfasdfasdf</p>
+				<div style="clear: both;"></div>
+			</div>
+			<div id="footer">
+				<div class="wrapper">
+					<hr>
+					<p>Bossart LLC Enterprise 2006</p>
+				</div><!-- wrapper -->	
+			</div><!-- footer -->	
+		</div>
+		<b class="corners">
+		<b class="corners5"></b>
+		<b class="corners4"></b>
+		<b class="corners3"></b>
+		<b class="corners2"><b></b></b>
+		<b class="corners1"><b></b></b>
+		</b>
+		</div> 
+</div>
+</div>
+</body>
+</html>

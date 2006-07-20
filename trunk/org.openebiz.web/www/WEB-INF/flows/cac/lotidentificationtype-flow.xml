@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lotIdentification" target="flowScope.lotIdentification" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LotIdentificationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLotIdentification">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lotIdentification" result-scope="flow" />
+		</transition>
+		<transition on="editLotNumberID" to="editLotNumberID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExpiryDate" to="editExpiryDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalItemPropertyList" to="editAdditionalItemPropertyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- LotNumberID element start-->	
+	<subflow-state id="editLotNumberID" flow="lotnumberidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lotIdentification.lotNumberID"
+					target="lotNumberID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lotNumberID"
+					target="flowScope.lotNumberID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LotNumberID element end-->
+	
+<!-- ExpiryDate element start-->	
+	<subflow-state id="editExpiryDate" flow="expirydatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lotIdentification.expiryDate"
+					target="expiryDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="expiryDate"
+					target="flowScope.expiryDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExpiryDate element end-->
+	
+<!-- AdditionalItemProperty list element start-->	
+	<subflow-state id="editAdditionalItemPropertyList" flow="additionalitempropertytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lotIdentification.additionalItemProperty"
+					target="additionalItemPropertyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalItemProperty"
+					target="flowScope.additionalItemPropertyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalItemProperty list element end-->
+	
+
+	<view-state id="displayLotIdentification" view="/views/cac/LotIdentificationTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lotIdentification" target="lotIdentification" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="lotidentificationtype-bean.xml" />
+
+</flow>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="exchangeRate" target="flowScope.exchangeRate" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ExchangeRateTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayExchangeRate">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="exchangeRate" result-scope="flow" />
+		</transition>
+		<transition on="editSourceCurrencyCode" to="editSourceCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSourceCurrencyBaseRate" to="editSourceCurrencyBaseRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTargetCurrencyCode" to="editTargetCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTargetCurrencyBaseRate" to="editTargetCurrencyBaseRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExchangeMarketID" to="editExchangeMarketID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCalculationRate" to="editCalculationRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOperatorCode" to="editOperatorCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDate" to="editDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editForeignExchangeContract" to="editForeignExchangeContract">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- SourceCurrencyCode element start-->	
+	<subflow-state id="editSourceCurrencyCode" flow="sourcecurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.sourceCurrencyCode"
+					target="sourceCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sourceCurrencyCode"
+					target="flowScope.sourceCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SourceCurrencyCode element end-->
+	
+<!-- SourceCurrencyBaseRate element start-->	
+	<subflow-state id="editSourceCurrencyBaseRate" flow="sourcecurrencybaseratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.sourceCurrencyBaseRate"
+					target="sourceCurrencyBaseRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sourceCurrencyBaseRate"
+					target="flowScope.sourceCurrencyBaseRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SourceCurrencyBaseRate element end-->
+	
+<!-- TargetCurrencyCode element start-->	
+	<subflow-state id="editTargetCurrencyCode" flow="targetcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.targetCurrencyCode"
+					target="targetCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="targetCurrencyCode"
+					target="flowScope.targetCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TargetCurrencyCode element end-->
+	
+<!-- TargetCurrencyBaseRate element start-->	
+	<subflow-state id="editTargetCurrencyBaseRate" flow="targetcurrencybaseratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.targetCurrencyBaseRate"
+					target="targetCurrencyBaseRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="targetCurrencyBaseRate"
+					target="flowScope.targetCurrencyBaseRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TargetCurrencyBaseRate element end-->
+	
+<!-- ExchangeMarketID element start-->	
+	<subflow-state id="editExchangeMarketID" flow="exchangemarketidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.exchangeMarketID"
+					target="exchangeMarketID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exchangeMarketID"
+					target="flowScope.exchangeMarketID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExchangeMarketID element end-->
+	
+<!-- CalculationRate element start-->	
+	<subflow-state id="editCalculationRate" flow="calculationratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.calculationRate"
+					target="calculationRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="calculationRate"
+					target="flowScope.calculationRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CalculationRate element end-->
+	
+<!-- OperatorCode element start-->	
+	<subflow-state id="editOperatorCode" flow="operatorcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.operatorCode"
+					target="operatorCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="operatorCode"
+					target="flowScope.operatorCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OperatorCode element end-->
+	
+<!-- Date element start-->	
+	<subflow-state id="editDate" flow="datetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.date"
+					target="date" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="date"
+					target="flowScope.date" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Date element end-->
+	
+<!-- ForeignExchangeContract element start-->	
+	<subflow-state id="editForeignExchangeContract" flow="contracttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.exchangeRate.foreignExchangeContract"
+					target="contract" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="foreignExchangeContract"
+					target="flowScope.contract" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ForeignExchangeContract element end-->
+	
+
+	<view-state id="displayExchangeRate" view="/views/cac/ExchangeRateTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.exchangeRate" target="exchangeRate" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="exchangeratetype-bean.xml" />
+
+</flow>

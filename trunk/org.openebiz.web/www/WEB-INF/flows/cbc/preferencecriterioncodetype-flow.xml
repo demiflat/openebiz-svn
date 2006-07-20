@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="preferenceCriterionCode" target="flowScope.preferenceCriterionCode" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/PreferenceCriterionCodeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPreferenceCriterionCode">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="preferenceCriterionCode" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayPreferenceCriterionCode" view="/views/cbc/PreferenceCriterionCodeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.preferenceCriterionCode" target="preferenceCriterionCode" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="preferencecriterioncodetype-bean.xml" />
+
+</flow>

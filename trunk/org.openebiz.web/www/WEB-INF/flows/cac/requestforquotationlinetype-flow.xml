@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="requestForQuotationLine" target="flowScope.requestForQuotationLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/RequestForQuotationLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRequestForQuotationLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="requestForQuotationLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineItem" to="editLineItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.requestForQuotationLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.requestForQuotationLine.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.requestForQuotationLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- LineItem element start-->	
+	<subflow-state id="editLineItem" flow="lineitemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.requestForQuotationLine.lineItem"
+					target="lineItem" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineItem"
+					target="flowScope.lineItem" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineItem element end-->
+	
+
+	<view-state id="displayRequestForQuotationLine" view="/views/cac/RequestForQuotationLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.requestForQuotationLine" target="requestForQuotationLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="requestforquotationlinetype-bean.xml" />
+
+</flow>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="manufactureDateTime" target="flowScope.manufactureDateTime" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/ManufactureDateTimeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayManufactureDateTime">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="manufactureDateTime" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayManufactureDateTime" view="/views/cbc/ManufactureDateTimeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.manufactureDateTime" target="manufactureDateTime" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="manufacturedatetimetype-bean.xml" />
+
+</flow>

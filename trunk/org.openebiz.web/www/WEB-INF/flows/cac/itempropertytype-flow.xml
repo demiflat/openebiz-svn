@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="itemProperty" target="flowScope.itemProperty" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ItemPropertyTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItemProperty">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="itemProperty" result-scope="flow" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValue" to="editValue">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editUsabilityPeriod" to="editUsabilityPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editItemPropertyGroupList" to="editItemPropertyGroupList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemProperty.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- Value element start-->	
+	<subflow-state id="editValue" flow="valuetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemProperty.value"
+					target="value" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="value"
+					target="flowScope.value" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Value element end-->
+	
+<!-- UsabilityPeriod element start-->	
+	<subflow-state id="editUsabilityPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemProperty.usabilityPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="usabilityPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- UsabilityPeriod element end-->
+	
+<!-- ItemPropertyGroup list element start-->	
+	<subflow-state id="editItemPropertyGroupList" flow="itempropertygrouptypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemProperty.itemPropertyGroup"
+					target="itemPropertyGroupList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemPropertyGroup"
+					target="flowScope.itemPropertyGroupList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ItemPropertyGroup list element end-->
+	
+
+	<view-state id="displayItemProperty" view="/views/cac/ItemPropertyTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.itemProperty" target="itemProperty" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="itempropertytype-bean.xml" />
+
+</flow>

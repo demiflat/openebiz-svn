@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="secondaryHazard" target="flowScope.secondaryHazard" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/SecondaryHazardTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySecondaryHazard">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="secondaryHazard" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPlacardNotation" to="editPlacardNotation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPlacardEndorsement" to="editPlacardEndorsement">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEmergencyProceduresCode" to="editEmergencyProceduresCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExtension" to="editExtension">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.secondaryHazard.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- PlacardNotation element start-->	
+	<subflow-state id="editPlacardNotation" flow="placardnotationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.secondaryHazard.placardNotation"
+					target="placardNotation" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="placardNotation"
+					target="flowScope.placardNotation" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PlacardNotation element end-->
+	
+<!-- PlacardEndorsement element start-->	
+	<subflow-state id="editPlacardEndorsement" flow="placardendorsementtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.secondaryHazard.placardEndorsement"
+					target="placardEndorsement" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="placardEndorsement"
+					target="flowScope.placardEndorsement" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PlacardEndorsement element end-->
+	
+<!-- EmergencyProceduresCode element start-->	
+	<subflow-state id="editEmergencyProceduresCode" flow="emergencyprocedurescodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.secondaryHazard.emergencyProceduresCode"
+					target="emergencyProceduresCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="emergencyProceduresCode"
+					target="flowScope.emergencyProceduresCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EmergencyProceduresCode element end-->
+	
+<!-- Extension element start-->	
+	<subflow-state id="editExtension" flow="extensiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.secondaryHazard.extension"
+					target="extension" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="extension"
+					target="flowScope.extension" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Extension element end-->
+	
+
+	<view-state id="displaySecondaryHazard" view="/views/cac/SecondaryHazardTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.secondaryHazard" target="secondaryHazard" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="secondaryhazardtype-bean.xml" />
+
+</flow>

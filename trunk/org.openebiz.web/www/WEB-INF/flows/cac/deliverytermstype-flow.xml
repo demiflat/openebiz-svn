@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="deliveryTerms" target="flowScope.deliveryTerms" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DeliveryTermsTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDeliveryTerms">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="deliveryTerms" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRelevantLocationConditions" to="editRelevantLocationConditions">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSpecialTerms" to="editSpecialTerms">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLossRiskResponsibilityCode" to="editLossRiskResponsibilityCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLossRisk" to="editLossRisk">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAllowanceCharge" to="editAllowanceCharge">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- RelevantLocationConditions element start-->	
+	<subflow-state id="editRelevantLocationConditions" flow="relevantlocationconditionstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.relevantLocationConditions"
+					target="relevantLocationConditions" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="relevantLocationConditions"
+					target="flowScope.relevantLocationConditions" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RelevantLocationConditions element end-->
+	
+<!-- SpecialTerms element start-->	
+	<subflow-state id="editSpecialTerms" flow="specialtermstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.specialTerms"
+					target="specialTerms" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="specialTerms"
+					target="flowScope.specialTerms" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SpecialTerms element end-->
+	
+<!-- LossRiskResponsibilityCode element start-->	
+	<subflow-state id="editLossRiskResponsibilityCode" flow="lossriskresponsibilitycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.lossRiskResponsibilityCode"
+					target="lossRiskResponsibilityCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lossRiskResponsibilityCode"
+					target="flowScope.lossRiskResponsibilityCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LossRiskResponsibilityCode element end-->
+	
+<!-- LossRisk element start-->	
+	<subflow-state id="editLossRisk" flow="lossrisktype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.lossRisk"
+					target="lossRisk" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lossRisk"
+					target="flowScope.lossRisk" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LossRisk element end-->
+	
+<!-- AllowanceCharge element start-->	
+	<subflow-state id="editAllowanceCharge" flow="allowancechargetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryTerms.allowanceCharge"
+					target="allowanceCharge" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceCharge" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge element end-->
+	
+
+	<view-state id="displayDeliveryTerms" view="/views/cac/DeliveryTermsTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.deliveryTerms" target="deliveryTerms" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="deliverytermstype-bean.xml" />
+
+</flow>

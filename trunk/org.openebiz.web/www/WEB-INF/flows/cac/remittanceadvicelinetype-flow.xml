@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="remittanceAdviceLine" target="flowScope.remittanceAdviceLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/RemittanceAdviceLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRemittanceAdviceLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="remittanceAdviceLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDebitLineAmount" to="editDebitLineAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCreditLineAmount" to="editCreditLineAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBalanceAmount" to="editBalanceAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCreditorSupplierParty" to="editCreditorSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDebtorSupplierParty" to="editDebtorSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBuyerCustomerParty" to="editBuyerCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSellerSupplierParty" to="editSellerSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginatorCustomerParty" to="editOriginatorCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayeeParty" to="editPayeeParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoicePeriodList" to="editInvoicePeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAccountingDocumentReferenceList" to="editAccountingDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editExchangeRate" to="editExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- DebitLineAmount element start-->	
+	<subflow-state id="editDebitLineAmount" flow="debitlineamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.debitLineAmount"
+					target="debitLineAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debitLineAmount"
+					target="flowScope.debitLineAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebitLineAmount element end-->
+	
+<!-- CreditLineAmount element start-->	
+	<subflow-state id="editCreditLineAmount" flow="creditlineamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.creditLineAmount"
+					target="creditLineAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditLineAmount"
+					target="flowScope.creditLineAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditLineAmount element end-->
+	
+<!-- BalanceAmount element start-->	
+	<subflow-state id="editBalanceAmount" flow="balanceamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.balanceAmount"
+					target="balanceAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="balanceAmount"
+					target="flowScope.balanceAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BalanceAmount element end-->
+	
+<!-- CreditorSupplierParty element start-->	
+	<subflow-state id="editCreditorSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.creditorSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditorSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditorSupplierParty element end-->
+	
+<!-- DebtorSupplierParty element start-->	
+	<subflow-state id="editDebtorSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.debtorSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debtorSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebtorSupplierParty element end-->
+	
+<!-- BuyerCustomerParty element start-->	
+	<subflow-state id="editBuyerCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.buyerCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="buyerCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BuyerCustomerParty element end-->
+	
+<!-- SellerSupplierParty element start-->	
+	<subflow-state id="editSellerSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.sellerSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerSupplierParty element end-->
+	
+<!-- OriginatorCustomerParty element start-->	
+	<subflow-state id="editOriginatorCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.originatorCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originatorCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginatorCustomerParty element end-->
+	
+<!-- PayeeParty element start-->	
+	<subflow-state id="editPayeeParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.payeeParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payeeParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayeeParty element end-->
+	
+<!-- InvoicePeriod list element start-->	
+	<subflow-state id="editInvoicePeriodList" flow="invoiceperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.invoicePeriod"
+					target="invoicePeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoicePeriod"
+					target="flowScope.invoicePeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoicePeriod list element end-->
+	
+<!-- AccountingDocumentReference list element start-->	
+	<subflow-state id="editAccountingDocumentReferenceList" flow="accountingdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.accountingDocumentReference"
+					target="accountingDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference list element end-->
+	
+<!-- ExchangeRate element start-->	
+	<subflow-state id="editExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdviceLine.exchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExchangeRate element end-->
+	
+
+	<view-state id="displayRemittanceAdviceLine" view="/views/cac/RemittanceAdviceLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.remittanceAdviceLine" target="remittanceAdviceLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="remittanceadvicelinetype-bean.xml" />
+
+</flow>

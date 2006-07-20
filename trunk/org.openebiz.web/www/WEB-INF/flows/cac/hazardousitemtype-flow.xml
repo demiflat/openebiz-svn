@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="hazardousItem" target="flowScope.hazardousItem" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/HazardousItemTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayHazardousItem">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="hazardousItem" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPlacardNotation" to="editPlacardNotation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPlacardEndorsement" to="editPlacardEndorsement">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalInformation" to="editAdditionalInformation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editUNDGCode" to="editUNDGCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEmergencyProceduresCode" to="editEmergencyProceduresCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMedicalFirstAidGuideCode" to="editMedicalFirstAidGuideCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTechnicalName" to="editTechnicalName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCategoryName" to="editCategoryName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCategoryCode" to="editCategoryCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editUpperOrangeHazardPlacardID" to="editUpperOrangeHazardPlacardID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLowerOrangeHazardPlacardID" to="editLowerOrangeHazardPlacardID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMarkingID" to="editMarkingID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHazardClassID" to="editHazardClassID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editContactParty" to="editContactParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSecondaryHazardList" to="editSecondaryHazardList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editHazardousGoodsTransitList" to="editHazardousGoodsTransitList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editEmergencyTemperature" to="editEmergencyTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFlashpointTemperature" to="editFlashpointTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalTemperatureList" to="editAdditionalTemperatureList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- PlacardNotation element start-->	
+	<subflow-state id="editPlacardNotation" flow="placardnotationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.placardNotation"
+					target="placardNotation" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="placardNotation"
+					target="flowScope.placardNotation" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PlacardNotation element end-->
+	
+<!-- PlacardEndorsement element start-->	
+	<subflow-state id="editPlacardEndorsement" flow="placardendorsementtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.placardEndorsement"
+					target="placardEndorsement" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="placardEndorsement"
+					target="flowScope.placardEndorsement" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PlacardEndorsement element end-->
+	
+<!-- AdditionalInformation element start-->	
+	<subflow-state id="editAdditionalInformation" flow="additionalinformationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.additionalInformation"
+					target="additionalInformation" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalInformation"
+					target="flowScope.additionalInformation" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalInformation element end-->
+	
+<!-- UNDGCode element start-->	
+	<subflow-state id="editUNDGCode" flow="undgcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.UNDGCode"
+					target="UNDGCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="UNDGCode"
+					target="flowScope.UNDGCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- UNDGCode element end-->
+	
+<!-- EmergencyProceduresCode element start-->	
+	<subflow-state id="editEmergencyProceduresCode" flow="emergencyprocedurescodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.emergencyProceduresCode"
+					target="emergencyProceduresCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="emergencyProceduresCode"
+					target="flowScope.emergencyProceduresCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EmergencyProceduresCode element end-->
+	
+<!-- MedicalFirstAidGuideCode element start-->	
+	<subflow-state id="editMedicalFirstAidGuideCode" flow="medicalfirstaidguidecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.medicalFirstAidGuideCode"
+					target="medicalFirstAidGuideCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="medicalFirstAidGuideCode"
+					target="flowScope.medicalFirstAidGuideCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MedicalFirstAidGuideCode element end-->
+	
+<!-- TechnicalName element start-->	
+	<subflow-state id="editTechnicalName" flow="technicalnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.technicalName"
+					target="technicalName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="technicalName"
+					target="flowScope.technicalName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TechnicalName element end-->
+	
+<!-- CategoryName element start-->	
+	<subflow-state id="editCategoryName" flow="categorynametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.categoryName"
+					target="categoryName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="categoryName"
+					target="flowScope.categoryName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CategoryName element end-->
+	
+<!-- CategoryCode element start-->	
+	<subflow-state id="editCategoryCode" flow="categorycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.categoryCode"
+					target="categoryCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="categoryCode"
+					target="flowScope.categoryCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CategoryCode element end-->
+	
+<!-- UpperOrangeHazardPlacardID element start-->	
+	<subflow-state id="editUpperOrangeHazardPlacardID" flow="upperorangehazardplacardidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.upperOrangeHazardPlacardID"
+					target="upperOrangeHazardPlacardID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="upperOrangeHazardPlacardID"
+					target="flowScope.upperOrangeHazardPlacardID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- UpperOrangeHazardPlacardID element end-->
+	
+<!-- LowerOrangeHazardPlacardID element start-->	
+	<subflow-state id="editLowerOrangeHazardPlacardID" flow="lowerorangehazardplacardidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.lowerOrangeHazardPlacardID"
+					target="lowerOrangeHazardPlacardID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lowerOrangeHazardPlacardID"
+					target="flowScope.lowerOrangeHazardPlacardID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LowerOrangeHazardPlacardID element end-->
+	
+<!-- MarkingID element start-->	
+	<subflow-state id="editMarkingID" flow="markingidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.markingID"
+					target="markingID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="markingID"
+					target="flowScope.markingID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MarkingID element end-->
+	
+<!-- HazardClassID element start-->	
+	<subflow-state id="editHazardClassID" flow="hazardclassidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.hazardClassID"
+					target="hazardClassID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardClassID"
+					target="flowScope.hazardClassID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardClassID element end-->
+	
+<!-- ContactParty element start-->	
+	<subflow-state id="editContactParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.contactParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contactParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContactParty element end-->
+	
+<!-- SecondaryHazard list element start-->	
+	<subflow-state id="editSecondaryHazardList" flow="secondaryhazardtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.secondaryHazard"
+					target="secondaryHazardList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="secondaryHazard"
+					target="flowScope.secondaryHazardList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SecondaryHazard list element end-->
+	
+<!-- HazardousGoodsTransit list element start-->	
+	<subflow-state id="editHazardousGoodsTransitList" flow="hazardousgoodstransittypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.hazardousGoodsTransit"
+					target="hazardousGoodsTransitList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardousGoodsTransit"
+					target="flowScope.hazardousGoodsTransitList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardousGoodsTransit list element end-->
+	
+<!-- EmergencyTemperature element start-->	
+	<subflow-state id="editEmergencyTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.emergencyTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="emergencyTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EmergencyTemperature element end-->
+	
+<!-- FlashpointTemperature element start-->	
+	<subflow-state id="editFlashpointTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.flashpointTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="flashpointTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FlashpointTemperature element end-->
+	
+<!-- AdditionalTemperature list element start-->	
+	<subflow-state id="editAdditionalTemperatureList" flow="additionaltemperaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousItem.additionalTemperature"
+					target="additionalTemperatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalTemperature"
+					target="flowScope.additionalTemperatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalTemperature list element end-->
+	
+
+	<view-state id="displayHazardousItem" view="/views/cac/HazardousItemTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.hazardousItem" target="hazardousItem" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="hazardousitemtype-bean.xml" />
+
+</flow>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="descriptionCodeList" target="flowScope.descriptionCodeList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DescriptionCodeTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDescriptionCodeTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="descriptionCode" result-scope="flow" />
+		</transition>
+		<transition on="clearDescriptionCode" to="clearDescriptionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDescriptionCode" to="addDescriptionCode">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Description Code -->
+
+	<view-state id="displayDescriptionCodeTypeList" view="/views/lists/DescriptionCodeTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.descriptionCodeList" target="descriptionCodeList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="descriptioncodetypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="party" target="flowScope.party" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PartyTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayParty">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="party" result-scope="flow" />
+		</transition>
+		<transition on="editMarkCareIndicator" to="editMarkCareIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMarkAttentionIndicator" to="editMarkAttentionIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLogoReferenceID" to="editLogoReferenceID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPartyIdentificationList" to="editPartyIdentificationList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPartyNameList" to="editPartyNameList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editLanguage" to="editLanguage">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAddress" to="editAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPartyTaxSchemeList" to="editPartyTaxSchemeList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPartyLegalEntityList" to="editPartyLegalEntityList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editContact" to="editContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPerson" to="editPerson">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAgentParty" to="editAgentParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- MarkCareIndicator element start-->	
+	<subflow-state id="editMarkCareIndicator" flow="markcareindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.markCareIndicator"
+					target="markCareIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="markCareIndicator"
+					target="flowScope.markCareIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MarkCareIndicator element end-->
+	
+<!-- MarkAttentionIndicator element start-->	
+	<subflow-state id="editMarkAttentionIndicator" flow="markattentionindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.markAttentionIndicator"
+					target="markAttentionIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="markAttentionIndicator"
+					target="flowScope.markAttentionIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MarkAttentionIndicator element end-->
+	
+<!-- LogoReferenceID element start-->	
+	<subflow-state id="editLogoReferenceID" flow="logoreferenceidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.logoReferenceID"
+					target="logoReferenceID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="logoReferenceID"
+					target="flowScope.logoReferenceID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LogoReferenceID element end-->
+	
+<!-- PartyIdentification list element start-->	
+	<subflow-state id="editPartyIdentificationList" flow="partyidentificationtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.partyIdentification"
+					target="partyIdentificationList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partyIdentification"
+					target="flowScope.partyIdentificationList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PartyIdentification list element end-->
+	
+<!-- PartyName list element start-->	
+	<subflow-state id="editPartyNameList" flow="partynametypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.partyName"
+					target="partyNameList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partyName"
+					target="flowScope.partyNameList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PartyName list element end-->
+	
+<!-- Language element start-->	
+	<subflow-state id="editLanguage" flow="languagetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.language"
+					target="language" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="language"
+					target="flowScope.language" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Language element end-->
+	
+<!-- Address element start-->	
+	<subflow-state id="editAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.address"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="address"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Address element end-->
+	
+<!-- PartyTaxScheme list element start-->	
+	<subflow-state id="editPartyTaxSchemeList" flow="partytaxschemetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.partyTaxScheme"
+					target="partyTaxSchemeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partyTaxScheme"
+					target="flowScope.partyTaxSchemeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PartyTaxScheme list element end-->
+	
+<!-- PartyLegalEntity list element start-->	
+	<subflow-state id="editPartyLegalEntityList" flow="partylegalentitytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.partyLegalEntity"
+					target="partyLegalEntityList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partyLegalEntity"
+					target="flowScope.partyLegalEntityList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PartyLegalEntity list element end-->
+	
+<!-- Contact element start-->	
+	<subflow-state id="editContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.contact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Contact element end-->
+	
+<!-- Person element start-->	
+	<subflow-state id="editPerson" flow="persontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.person"
+					target="person" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="person"
+					target="flowScope.person" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Person element end-->
+	
+<!-- AgentParty element start-->	
+	<subflow-state id="editAgentParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.party.agentParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="agentParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AgentParty element end-->
+	
+
+	<view-state id="displayParty" view="/views/cac/PartyTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.party" target="party" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="partytype-bean.xml" />
+
+</flow>

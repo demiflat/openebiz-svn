@@ -1,0 +1,107 @@
+/* start forms.css */
+
+#form {
+	position: inherit;
+	padding: 5px;
+}
+
+.form_wrapper{
+	padding: 5px;
+}
+
+.form_content{
+	padding: 5px;
+}
+
+#form_header {
+	text-align: center;
+	padding-top: 5px;
+}
+
+div#form {
+	position: inherit;
+	width: 95%;
+	padding: 5px;
+}
+
+.form_tbody {
+	border: 0;
+	padding: 5px;	
+}
+
+.form_tlabelcol {
+	font-size: xx-small;
+	text-align: left;
+	vertical-align: middle;
+	width: 10%;
+}
+
+.form_tdispcol {
+	font-size: xx-small;
+	text-align: right;
+	vertical-align: middle;
+	width: 80%;
+}
+
+.form_tinfocol {
+	width: 5%;
+	vertical-align: middle;	
+}
+
+.form_thead {
+	font-size: xx-small;
+	font-weight: bold;
+	vertical-align: baseline;		
+}	
+
+.form_titem {
+	font-size: xx-small;	
+}	
+
+.form_teditcol {
+	width: 5%;
+	vertical-align: middle;
+	font-size: xx-small;
+	font-weight: bold;	
+}
+
+.formElement {
+	display: block;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+.formLabel {
+	display: inline;
+	width: 375px;
+	min-width: 375px;	
+}
+
+span.formElementDescription {
+	display: inline;
+	padding: 0;
+	padding-left: 5px;	
+}
+
+.submitButtons {
+	text-align: left;
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+.error {
+	padding: 5px;
+	color: red;
+	font-weight: bold;
+	font-family: Arial, sans-serif;
+}
+
+span.fieldError {
+	margin: 0px;
+	padding: 5px;
+	color: red;
+	font-size: 85%;
+	font-weight: italics;
+}
+/* end forms.css */

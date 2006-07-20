@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="itemComparison" target="flowScope.itemComparison" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ItemComparisonTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItemComparison">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="itemComparison" result-scope="flow" />
+		</transition>
+		<transition on="editPriceAmount" to="editPriceAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- PriceAmount element start-->	
+	<subflow-state id="editPriceAmount" flow="priceamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemComparison.priceAmount"
+					target="priceAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="priceAmount"
+					target="flowScope.priceAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PriceAmount element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemComparison.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+
+	<view-state id="displayItemComparison" view="/views/cac/ItemComparisonTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.itemComparison" target="itemComparison" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="itemcomparisontype-bean.xml" />
+
+</flow>

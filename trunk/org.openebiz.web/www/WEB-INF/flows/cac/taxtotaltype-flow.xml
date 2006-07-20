@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="taxTotal" target="flowScope.taxTotal" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TaxTotalTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxTotal">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxTotal" result-scope="flow" />
+		</transition>
+		<transition on="editTaxAmount" to="editTaxAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRoundingAmount" to="editRoundingAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxEvidenceIndicator" to="editTaxEvidenceIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxSubTotalList" to="editTaxSubTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- TaxAmount element start-->	
+	<subflow-state id="editTaxAmount" flow="taxamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxTotal.taxAmount"
+					target="taxAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxAmount"
+					target="flowScope.taxAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxAmount element end-->
+	
+<!-- RoundingAmount element start-->	
+	<subflow-state id="editRoundingAmount" flow="roundingamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxTotal.roundingAmount"
+					target="roundingAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="roundingAmount"
+					target="flowScope.roundingAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RoundingAmount element end-->
+	
+<!-- TaxEvidenceIndicator element start-->	
+	<subflow-state id="editTaxEvidenceIndicator" flow="taxevidenceindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxTotal.taxEvidenceIndicator"
+					target="taxEvidenceIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxEvidenceIndicator"
+					target="flowScope.taxEvidenceIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxEvidenceIndicator element end-->
+	
+<!-- TaxSubTotal list element start-->	
+	<subflow-state id="editTaxSubTotalList" flow="taxsubtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxTotal.taxSubTotal"
+					target="taxSubTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxSubTotal"
+					target="flowScope.taxSubTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxSubTotal list element end-->
+	
+
+	<view-state id="displayTaxTotal" view="/views/cac/TaxTotalTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxTotal" target="taxTotal" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxtotaltype-bean.xml" />
+
+</flow>

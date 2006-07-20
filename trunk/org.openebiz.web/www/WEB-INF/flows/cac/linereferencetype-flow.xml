@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lineReference" target="flowScope.lineReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LineReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLineReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lineReference" result-scope="flow" />
+		</transition>
+		<transition on="editLineID" to="editLineID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGloballyUniqueGUID" to="editGloballyUniqueGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineStatusCode" to="editLineStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentReference" to="editDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingDocumentReference" to="editAccountingDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- LineID element start-->	
+	<subflow-state id="editLineID" flow="lineidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineReference.lineID"
+					target="lineID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineID"
+					target="flowScope.lineID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineID element end-->
+	
+<!-- GloballyUniqueGUID element start-->	
+	<subflow-state id="editGloballyUniqueGUID" flow="globallyuniqueguidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineReference.globallyUniqueGUID"
+					target="globallyUniqueGUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="globallyUniqueGUID"
+					target="flowScope.globallyUniqueGUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GloballyUniqueGUID element end-->
+	
+<!-- LineStatusCode element start-->	
+	<subflow-state id="editLineStatusCode" flow="linestatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineReference.lineStatusCode"
+					target="lineStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineStatusCode"
+					target="flowScope.lineStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineStatusCode element end-->
+	
+<!-- DocumentReference element start-->	
+	<subflow-state id="editDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineReference.documentReference"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentReference"
+					target="flowScope.documentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentReference element end-->
+	
+<!-- AccountingDocumentReference element start-->	
+	<subflow-state id="editAccountingDocumentReference" flow="accountingdocumentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineReference.accountingDocumentReference"
+					target="accountingDocumentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference element end-->
+	
+
+	<view-state id="displayLineReference" view="/views/cac/LineReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lineReference" target="lineReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="linereferencetype-bean.xml" />
+
+</flow>

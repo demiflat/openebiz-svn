@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="creditNoteLine" target="flowScope.creditNoteLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CreditNoteLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCreditNoteLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="creditNoteLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineExtensionAmount" to="editLineExtensionAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxPointDate" to="editTaxPointDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingCostCode" to="editAccountingCostCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDiscrepancyResponseList" to="editDiscrepancyResponseList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAccountingDocumentReference" to="editAccountingDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- LineExtensionAmount element start-->	
+	<subflow-state id="editLineExtensionAmount" flow="lineextensionamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.lineExtensionAmount"
+					target="lineExtensionAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineExtensionAmount"
+					target="flowScope.lineExtensionAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineExtensionAmount element end-->
+	
+<!-- TaxPointDate element start-->	
+	<subflow-state id="editTaxPointDate" flow="taxpointdatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.taxPointDate"
+					target="taxPointDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxPointDate"
+					target="flowScope.taxPointDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxPointDate element end-->
+	
+<!-- AccountingCostCode element start-->	
+	<subflow-state id="editAccountingCostCode" flow="accountingcostcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.accountingCostCode"
+					target="accountingCostCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingCostCode"
+					target="flowScope.accountingCostCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingCostCode element end-->
+	
+<!-- DiscrepancyResponse list element start-->	
+	<subflow-state id="editDiscrepancyResponseList" flow="discrepancyresponsetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.discrepancyResponse"
+					target="discrepancyResponseList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="discrepancyResponse"
+					target="flowScope.discrepancyResponseList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DiscrepancyResponse list element end-->
+	
+<!-- AccountingDocumentReference element start-->	
+	<subflow-state id="editAccountingDocumentReference" flow="accountingdocumentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.accountingDocumentReference"
+					target="accountingDocumentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference element end-->
+	
+<!-- TaxTotal list element start-->	
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditNoteLine.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+	
+
+	<view-state id="displayCreditNoteLine" view="/views/cac/CreditNoteLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.creditNoteLine" target="creditNoteLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="creditnotelinetype-bean.xml" />
+
+</flow>

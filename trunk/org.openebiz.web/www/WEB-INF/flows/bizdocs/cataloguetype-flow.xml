@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/CatalogueTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCatalogue">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="catalogue" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRevisionDateTime" to="editRevisionDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNoteList" to="editNoteList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDescriptionList" to="editDescriptionList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editVersionID" to="editVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPreviousVersionID" to="editPreviousVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidityPeriodList" to="editValidityPeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editReferencedContractList" to="editReferencedContractList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSellerSupplierParty" to="editSellerSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCatalogueManagingParty" to="editCatalogueManagingParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTradingTermsList" to="editTradingTermsList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editCatalogueLineList" to="editCatalogueLineList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- Name element start-->
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- RevisionDateTime element start-->
+	<subflow-state id="editRevisionDateTime" flow="revisiondatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.revisionDateTime"
+					target="revisionDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="revisionDateTime"
+					target="flowScope.revisionDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RevisionDateTime element end-->
+
+<!-- Note list element start-->
+	<subflow-state id="editNoteList" flow="notetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.note"
+					target="noteList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.noteList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note list element end-->
+		
+<!-- Description list element start-->
+	<subflow-state id="editDescriptionList" flow="descriptiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.description"
+					target="descriptionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.descriptionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description list element end-->
+		
+<!-- VersionID element start-->
+	<subflow-state id="editVersionID" flow="versionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.versionID"
+					target="versionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="versionID"
+					target="flowScope.versionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VersionID element end-->
+
+<!-- PreviousVersionID element start-->
+	<subflow-state id="editPreviousVersionID" flow="previousversionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.previousVersionID"
+					target="previousVersionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="previousVersionID"
+					target="flowScope.previousVersionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PreviousVersionID element end-->
+
+<!-- ValidityPeriod list element start-->
+	<subflow-state id="editValidityPeriodList" flow="validityperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.validityPeriod"
+					target="validityPeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validityPeriod"
+					target="flowScope.validityPeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidityPeriod list element end-->
+		
+<!-- ReferencedContract list element start-->
+	<subflow-state id="editReferencedContractList" flow="referencedcontracttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.referencedContract"
+					target="referencedContractList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="referencedContract"
+					target="flowScope.referencedContractList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReferencedContract list element end-->
+		
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+<!-- SellerSupplierParty element start-->
+	<subflow-state id="editSellerSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.sellerSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerSupplierParty element end-->
+
+<!-- CatalogueManagingParty element start-->
+	<subflow-state id="editCatalogueManagingParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.catalogueManagingParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueManagingParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CatalogueManagingParty element end-->
+
+<!-- TradingTerms list element start-->
+	<subflow-state id="editTradingTermsList" flow="tradingtermstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.tradingTerms"
+					target="tradingTermsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tradingTerms"
+					target="flowScope.tradingTermsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TradingTerms list element end-->
+		
+<!-- CatalogueLine list element start-->
+	<subflow-state id="editCatalogueLineList" flow="cataloguelinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogue.catalogueLine"
+					target="catalogueLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueLine"
+					target="flowScope.catalogueLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CatalogueLine list element end-->
+		
+	<view-state id="displayCatalogue" view="/views/bizdocs/CatalogueTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:cataloguetype-flow" />
+
+	<import resource="cataloguetype-bean.xml" />
+
+</flow>

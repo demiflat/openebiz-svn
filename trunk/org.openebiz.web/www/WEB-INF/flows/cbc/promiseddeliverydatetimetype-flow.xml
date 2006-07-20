@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="promisedDeliveryDateTime" target="flowScope.promisedDeliveryDateTime" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/PromisedDeliveryDateTimeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPromisedDeliveryDateTime">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="promisedDeliveryDateTime" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayPromisedDeliveryDateTime" view="/views/cbc/PromisedDeliveryDateTimeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.promisedDeliveryDateTime" target="promisedDeliveryDateTime" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="promiseddeliverydatetimetype-bean.xml" />
+
+</flow>

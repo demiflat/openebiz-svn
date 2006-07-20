@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="revisionDateTime" target="flowScope.revisionDateTime" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/RevisionDateTimeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRevisionDateTime">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="revisionDateTime" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayRevisionDateTime" view="/views/cbc/RevisionDateTimeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.revisionDateTime" target="revisionDateTime" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="revisiondatetimetype-bean.xml" />
+
+</flow>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="attachment" target="flowScope.attachment" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/AttachmentTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAttachment">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="attachment" result-scope="flow" />
+		</transition>
+		<transition on="editMIMEReference" to="editMIMEReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEmbeddedDocumentBinaryObject" to="editEmbeddedDocumentBinaryObject">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExternalReference" to="editExternalReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- MIMEReference element start-->	
+	<subflow-state id="editMIMEReference" flow="mimereferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachment.MIMEReference"
+					target="MIMEReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="MIMEReference"
+					target="flowScope.MIMEReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MIMEReference element end-->
+	
+<!-- EmbeddedDocumentBinaryObject element start-->	
+	<subflow-state id="editEmbeddedDocumentBinaryObject" flow="embeddeddocumentbinaryobjecttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachment.embeddedDocumentBinaryObject"
+					target="embeddedDocumentBinaryObject" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="embeddedDocumentBinaryObject"
+					target="flowScope.embeddedDocumentBinaryObject" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EmbeddedDocumentBinaryObject element end-->
+	
+<!-- ExternalReference element start-->	
+	<subflow-state id="editExternalReference" flow="externalreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.attachment.externalReference"
+					target="externalReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="externalReference"
+					target="flowScope.externalReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExternalReference element end-->
+	
+
+	<view-state id="displayAttachment" view="/views/cac/AttachmentTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.attachment" target="attachment" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="attachmenttype-bean.xml" />
+
+</flow>

@@ -1,0 +1,49 @@
+.corners {
+	display: block
+}
+
+.corners * {
+	display: block;
+	height: 1px;
+	overflow: hidden;
+	background: #ffffff
+}
+
+.corners1 {
+	border-right: 1px solid #f9f9f9;
+	padding-right: 1px;
+	margin-right: 3px;
+	border-left: 1px solid #f9f9f9;
+	padding-left: 1px;
+	margin-left: 3px;
+	background: #fcfcfc;
+}
+
+.corners2 {
+	border-right: 1px solid #f6f6f6;
+	border-left: 1px solid #f6f6f6;
+	padding: 0px 1px;
+	background: #fdfdfd;
+	margin: 0px 1px;
+}
+
+.corners3 {
+	border-right: 1px solid #fdfdfd;
+	border-left: 1px solid #fdfdfd;
+	margin: 0px 1px;
+}
+
+.corners4 {
+	border-right: 1px solid #f9f9f9;
+	border-left: 1px solid #f9f9f9;
+}
+
+.corners5 {
+	border-right: 1px solid #fcfcfc;
+	border-left: 1px solid #fcfcfc;
+}
+
+.corners_content {
+	padding: 0px 5px;
+	background: #ffffff;
+}

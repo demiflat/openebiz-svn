@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.AllowanceChargeType"/>
+
+	<input-mapper>
+		<mapping source="freightAllowanceChargeList" target="flowScope.freightAllowanceChargeList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/FreightAllowanceChargeTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayFreightAllowanceChargeTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="freightAllowanceCharge" result-scope="flow" />
+		</transition>
+		<transition on="clearFreightAllowanceCharge" to="clearFreightAllowanceCharge">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addFreightAllowanceCharge" to="addFreightAllowanceCharge">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addFreightAllowanceCharge" flow="allowancechargetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="allowanceCharge" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.freightAllowanceChargeList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearFreightAllowanceCharge">
+		<action bean="listUtils"
+			method="clearList(${flowScope.freightAllowanceChargeList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayFreightAllowanceChargeTypeList" view="/views/lists/FreightAllowanceChargeTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.freightAllowanceChargeList" target="freightAllowanceChargeList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="freightallowancechargetypelist-bean.xml" />
+
+</flow>

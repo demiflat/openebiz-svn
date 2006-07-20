@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/FreightInvoiceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayFreightInvoice">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="freightInvoice" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCopyIndicator" to="editCopyIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoiceTypeCode" to="editInvoiceTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxPointDate" to="editTaxPointDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionCurrencyCode" to="editTransactionCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentCurrencyCode" to="editDocumentCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxCurrencyCode" to="editTaxCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPricingCurrencyCode" to="editPricingCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingCostCode" to="editAccountingCostCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoicePeriodList" to="editInvoicePeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editShipment" to="editShipment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderReferenceList" to="editOrderReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDespatchDocumentReferenceList" to="editDespatchDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editReceiptDocumentReferenceList" to="editReceiptDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAccountingDocumentReferenceList" to="editAccountingDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editOriginatorDocumentReferenceList" to="editOriginatorDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editContractDocumentReferenceList" to="editContractDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAdditionalDocumentReferenceList" to="editAdditionalDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editCreditorSupplierParty" to="editCreditorSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDebtorCustomerParty" to="editDebtorCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayeeParty" to="editPayeeParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentMeansList" to="editPaymentMeansList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editPaymentTermsList" to="editPaymentTermsList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAllowanceChargeList" to="editAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editTransactionExchangeRate" to="editTransactionExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxExchangeRate" to="editTaxExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPricingExchangeRate" to="editPricingExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editLegalTotal" to="editLegalTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoiceLineList" to="editInvoiceLineList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- CopyIndicator element start-->
+	<subflow-state id="editCopyIndicator" flow="copyindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.copyIndicator"
+					target="copyIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="copyIndicator"
+					target="flowScope.copyIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CopyIndicator element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- InvoiceTypeCode element start-->
+	<subflow-state id="editInvoiceTypeCode" flow="invoicetypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.invoiceTypeCode"
+					target="invoiceTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoiceTypeCode"
+					target="flowScope.invoiceTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoiceTypeCode element end-->
+
+<!-- Note element start-->
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+
+<!-- TaxPointDate element start-->
+	<subflow-state id="editTaxPointDate" flow="taxpointdatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.taxPointDate"
+					target="taxPointDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxPointDate"
+					target="flowScope.taxPointDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxPointDate element end-->
+
+<!-- TransactionCurrencyCode element start-->
+	<subflow-state id="editTransactionCurrencyCode" flow="transactioncurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.transactionCurrencyCode"
+					target="transactionCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionCurrencyCode"
+					target="flowScope.transactionCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionCurrencyCode element end-->
+
+<!-- DocumentCurrencyCode element start-->
+	<subflow-state id="editDocumentCurrencyCode" flow="documentcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.documentCurrencyCode"
+					target="documentCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentCurrencyCode"
+					target="flowScope.documentCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentCurrencyCode element end-->
+
+<!-- TaxCurrencyCode element start-->
+	<subflow-state id="editTaxCurrencyCode" flow="taxcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.taxCurrencyCode"
+					target="taxCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxCurrencyCode"
+					target="flowScope.taxCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxCurrencyCode element end-->
+
+<!-- PricingCurrencyCode element start-->
+	<subflow-state id="editPricingCurrencyCode" flow="pricingcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.pricingCurrencyCode"
+					target="pricingCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="pricingCurrencyCode"
+					target="flowScope.pricingCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PricingCurrencyCode element end-->
+
+<!-- AccountingCostCode element start-->
+	<subflow-state id="editAccountingCostCode" flow="accountingcostcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.accountingCostCode"
+					target="accountingCostCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingCostCode"
+					target="flowScope.accountingCostCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingCostCode element end-->
+
+<!-- InvoicePeriod list element start-->
+	<subflow-state id="editInvoicePeriodList" flow="invoiceperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.invoicePeriod"
+					target="invoicePeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoicePeriod"
+					target="flowScope.invoicePeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoicePeriod list element end-->
+		
+<!-- Shipment element start-->
+	<subflow-state id="editShipment" flow="shipmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.shipment"
+					target="shipment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.shipment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Shipment element end-->
+
+<!-- OrderReference list element start-->
+	<subflow-state id="editOrderReferenceList" flow="orderreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.orderReference"
+					target="orderReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderReference"
+					target="flowScope.orderReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderReference list element end-->
+		
+<!-- DespatchDocumentReference list element start-->
+	<subflow-state id="editDespatchDocumentReferenceList" flow="despatchdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.despatchDocumentReference"
+					target="despatchDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatchDocumentReference"
+					target="flowScope.despatchDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DespatchDocumentReference list element end-->
+		
+<!-- ReceiptDocumentReference list element start-->
+	<subflow-state id="editReceiptDocumentReferenceList" flow="receiptdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.receiptDocumentReference"
+					target="receiptDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receiptDocumentReference"
+					target="flowScope.receiptDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReceiptDocumentReference list element end-->
+		
+<!-- AccountingDocumentReference list element start-->
+	<subflow-state id="editAccountingDocumentReferenceList" flow="accountingdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.accountingDocumentReference"
+					target="accountingDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference list element end-->
+		
+<!-- OriginatorDocumentReference list element start-->
+	<subflow-state id="editOriginatorDocumentReferenceList" flow="originatordocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.originatorDocumentReference"
+					target="originatorDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originatorDocumentReference"
+					target="flowScope.originatorDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginatorDocumentReference list element end-->
+		
+<!-- ContractDocumentReference list element start-->
+	<subflow-state id="editContractDocumentReferenceList" flow="contractdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.contractDocumentReference"
+					target="contractDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contractDocumentReference"
+					target="flowScope.contractDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContractDocumentReference list element end-->
+		
+<!-- AdditionalDocumentReference list element start-->
+	<subflow-state id="editAdditionalDocumentReferenceList" flow="additionaldocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.additionalDocumentReference"
+					target="additionalDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalDocumentReference"
+					target="flowScope.additionalDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalDocumentReference list element end-->
+		
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+<!-- CreditorSupplierParty element start-->
+	<subflow-state id="editCreditorSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.creditorSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditorSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditorSupplierParty element end-->
+
+<!-- DebtorCustomerParty element start-->
+	<subflow-state id="editDebtorCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.debtorCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debtorCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebtorCustomerParty element end-->
+
+<!-- PayeeParty element start-->
+	<subflow-state id="editPayeeParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.payeeParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payeeParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayeeParty element end-->
+
+<!-- PaymentMeans list element start-->
+	<subflow-state id="editPaymentMeansList" flow="paymentmeanstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.paymentMeans"
+					target="paymentMeansList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeansList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans list element end-->
+		
+<!-- PaymentTerms list element start-->
+	<subflow-state id="editPaymentTermsList" flow="paymenttermstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.paymentTerms"
+					target="paymentTermsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentTerms"
+					target="flowScope.paymentTermsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentTerms list element end-->
+		
+<!-- AllowanceCharge list element start-->
+	<subflow-state id="editAllowanceChargeList" flow="allowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.allowanceCharge"
+					target="allowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge list element end-->
+		
+<!-- TransactionExchangeRate element start-->
+	<subflow-state id="editTransactionExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.transactionExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionExchangeRate element end-->
+
+<!-- TaxExchangeRate element start-->
+	<subflow-state id="editTaxExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.taxExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxExchangeRate element end-->
+
+<!-- PricingExchangeRate element start-->
+	<subflow-state id="editPricingExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.pricingExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="pricingExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PricingExchangeRate element end-->
+
+<!-- TaxTotal list element start-->
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+		
+<!-- LegalTotal element start-->
+	<subflow-state id="editLegalTotal" flow="legaltotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.legalTotal"
+					target="legalTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalTotal"
+					target="flowScope.legalTotal" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LegalTotal element end-->
+
+<!-- InvoiceLine list element start-->
+	<subflow-state id="editInvoiceLineList" flow="invoicelinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.freightInvoice.invoiceLine"
+					target="invoiceLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoiceLine"
+					target="flowScope.invoiceLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoiceLine list element end-->
+		
+	<view-state id="displayFreightInvoice" view="/views/bizdocs/FreightInvoiceTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:freightinvoicetype-flow" />
+
+	<import resource="freightinvoicetype-bean.xml" />
+
+</flow>

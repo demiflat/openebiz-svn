@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.LegalTotalType"/>
+
+	<input-mapper>
+		<mapping source="legalTotalList" target="flowScope.legalTotalList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/LegalTotalTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLegalTotalTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="legalTotal" result-scope="flow" />
+		</transition>
+		<transition on="clearLegalTotal" to="clearLegalTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addLegalTotal" to="addLegalTotal">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addLegalTotal" flow="legaltotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="legalTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalTotal"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.legalTotalList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearLegalTotal">
+		<action bean="listUtils"
+			method="clearList(${flowScope.legalTotalList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayLegalTotalTypeList" view="/views/lists/LegalTotalTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.legalTotalList" target="legalTotalList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="legaltotaltypelist-bean.xml" />
+
+</flow>

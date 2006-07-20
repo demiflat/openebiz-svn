@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="payment" target="flowScope.payment" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PaymentTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPayment">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="payment" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaidAmount" to="editPaidAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReceivedDate" to="editReceivedDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaidDateTime" to="editPaidDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExpectedReceiptDateTime" to="editExpectedReceiptDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInstructionID" to="editInstructionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- PaidAmount element start-->	
+	<subflow-state id="editPaidAmount" flow="paidamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.paidAmount"
+					target="paidAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paidAmount"
+					target="flowScope.paidAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaidAmount element end-->
+	
+<!-- ReceivedDate element start-->	
+	<subflow-state id="editReceivedDate" flow="receiveddatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.receivedDate"
+					target="receivedDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receivedDate"
+					target="flowScope.receivedDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReceivedDate element end-->
+	
+<!-- PaidDateTime element start-->	
+	<subflow-state id="editPaidDateTime" flow="paiddatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.paidDateTime"
+					target="paidDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paidDateTime"
+					target="flowScope.paidDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaidDateTime element end-->
+	
+<!-- ExpectedReceiptDateTime element start-->	
+	<subflow-state id="editExpectedReceiptDateTime" flow="expectedreceiptdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.expectedReceiptDateTime"
+					target="expectedReceiptDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="expectedReceiptDateTime"
+					target="flowScope.expectedReceiptDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExpectedReceiptDateTime element end-->
+	
+<!-- InstructionID element start-->	
+	<subflow-state id="editInstructionID" flow="instructionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.payment.instructionID"
+					target="instructionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="instructionID"
+					target="flowScope.instructionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InstructionID element end-->
+	
+
+	<view-state id="displayPayment" view="/views/cac/PaymentTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.payment" target="payment" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="paymenttype-bean.xml" />
+
+</flow>

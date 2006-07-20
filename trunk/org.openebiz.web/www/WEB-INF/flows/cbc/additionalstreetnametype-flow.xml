@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="additionalStreetName" target="flowScope.additionalStreetName" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/AdditionalStreetNameTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAdditionalStreetName">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="additionalStreetName" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayAdditionalStreetName" view="/views/cbc/AdditionalStreetNameTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.additionalStreetName" target="additionalStreetName" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="additionalstreetnametype-bean.xml" />
+
+</flow>

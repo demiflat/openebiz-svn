@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="allowanceCharge" target="flowScope.allowanceCharge" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/AllowanceChargeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAllowanceCharge">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="allowanceCharge" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editChargeIndicator" to="editChargeIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReasonCode" to="editReasonCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMultiplierFactorNumeric" to="editMultiplierFactorNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPrepaidIndicator" to="editPrepaidIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSequenceNumeric" to="editSequenceNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAmount" to="editAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBaseAmount" to="editBaseAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingCostCode" to="editAccountingCostCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxCategoryList" to="editTaxCategoryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPaymentMeansList" to="editPaymentMeansList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- ChargeIndicator element start-->	
+	<subflow-state id="editChargeIndicator" flow="chargeindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.chargeIndicator"
+					target="chargeIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="chargeIndicator"
+					target="flowScope.chargeIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ChargeIndicator element end-->
+	
+<!-- ReasonCode element start-->	
+	<subflow-state id="editReasonCode" flow="reasoncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.reasonCode"
+					target="reasonCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="reasonCode"
+					target="flowScope.reasonCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReasonCode element end-->
+	
+<!-- MultiplierFactorNumeric element start-->	
+	<subflow-state id="editMultiplierFactorNumeric" flow="multiplierfactornumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.multiplierFactorNumeric"
+					target="multiplierFactorNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="multiplierFactorNumeric"
+					target="flowScope.multiplierFactorNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MultiplierFactorNumeric element end-->
+	
+<!-- PrepaidIndicator element start-->	
+	<subflow-state id="editPrepaidIndicator" flow="prepaidindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.prepaidIndicator"
+					target="prepaidIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="prepaidIndicator"
+					target="flowScope.prepaidIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PrepaidIndicator element end-->
+	
+<!-- SequenceNumeric element start-->	
+	<subflow-state id="editSequenceNumeric" flow="sequencenumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.sequenceNumeric"
+					target="sequenceNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sequenceNumeric"
+					target="flowScope.sequenceNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SequenceNumeric element end-->
+	
+<!-- Amount element start-->	
+	<subflow-state id="editAmount" flow="amounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.amount"
+					target="amount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="amount"
+					target="flowScope.amount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Amount element end-->
+	
+<!-- BaseAmount element start-->	
+	<subflow-state id="editBaseAmount" flow="baseamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.baseAmount"
+					target="baseAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="baseAmount"
+					target="flowScope.baseAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BaseAmount element end-->
+	
+<!-- AccountingCostCode element start-->	
+	<subflow-state id="editAccountingCostCode" flow="accountingcostcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.accountingCostCode"
+					target="accountingCostCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingCostCode"
+					target="flowScope.accountingCostCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingCostCode element end-->
+	
+<!-- TaxCategory list element start-->	
+	<subflow-state id="editTaxCategoryList" flow="taxcategorytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.taxCategory"
+					target="taxCategoryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxCategory"
+					target="flowScope.taxCategoryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxCategory list element end-->
+	
+<!-- PaymentMeans list element start-->	
+	<subflow-state id="editPaymentMeansList" flow="paymentmeanstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.allowanceCharge.paymentMeans"
+					target="paymentMeansList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeansList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans list element end-->
+	
+
+	<view-state id="displayAllowanceCharge" view="/views/cac/AllowanceChargeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.allowanceCharge" target="allowanceCharge" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="allowancechargetype-bean.xml" />
+
+</flow>

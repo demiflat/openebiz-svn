@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="supplierParty" target="flowScope.supplierParty" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/SupplierPartyTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySupplierParty">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="supplierParty" result-scope="flow" />
+		</transition>
+		<transition on="editCustomerAssignedAccountID" to="editCustomerAssignedAccountID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSupplierAssignedAccountID" to="editSupplierAssignedAccountID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalAccountIDList" to="editAdditionalAccountIDList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDataSendingCapability" to="editDataSendingCapability">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editParty" to="editParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShippingContact" to="editShippingContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountsContact" to="editAccountsContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderContact" to="editOrderContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- CustomerAssignedAccountID element start-->	
+	<subflow-state id="editCustomerAssignedAccountID" flow="customerassignedaccountidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.customerAssignedAccountID"
+					target="customerAssignedAccountID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="customerAssignedAccountID"
+					target="flowScope.customerAssignedAccountID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CustomerAssignedAccountID element end-->
+	
+<!-- SupplierAssignedAccountID element start-->	
+	<subflow-state id="editSupplierAssignedAccountID" flow="supplierassignedaccountidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.supplierAssignedAccountID"
+					target="supplierAssignedAccountID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="supplierAssignedAccountID"
+					target="flowScope.supplierAssignedAccountID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SupplierAssignedAccountID element end-->
+	
+<!-- AdditionalAccountID list element start-->	
+	<subflow-state id="editAdditionalAccountIDList" flow="additionalaccountidtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.additionalAccountID"
+					target="additionalAccountIDList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalAccountID"
+					target="flowScope.additionalAccountIDList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalAccountID list element end-->
+	
+<!-- DataSendingCapability element start-->	
+	<subflow-state id="editDataSendingCapability" flow="datasendingcapabilitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.dataSendingCapability"
+					target="dataSendingCapability" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="dataSendingCapability"
+					target="flowScope.dataSendingCapability" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DataSendingCapability element end-->
+	
+<!-- Party element start-->	
+	<subflow-state id="editParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.party"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="party"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Party element end-->
+	
+<!-- ShippingContact element start-->	
+	<subflow-state id="editShippingContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.shippingContact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shippingContact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ShippingContact element end-->
+	
+<!-- AccountsContact element start-->	
+	<subflow-state id="editAccountsContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.accountsContact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountsContact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountsContact element end-->
+	
+<!-- OrderContact element start-->	
+	<subflow-state id="editOrderContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.supplierParty.orderContact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderContact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderContact element end-->
+	
+
+	<view-state id="displaySupplierParty" view="/views/cac/SupplierPartyTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.supplierParty" target="supplierParty" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="supplierpartytype-bean.xml" />
+
+</flow>

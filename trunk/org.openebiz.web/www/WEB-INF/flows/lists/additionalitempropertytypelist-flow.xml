@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ItemPropertyType"/>
+
+	<input-mapper>
+		<mapping source="additionalItemPropertyList" target="flowScope.additionalItemPropertyList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/AdditionalItemPropertyTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAdditionalItemPropertyTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="additionalItemProperty" result-scope="flow" />
+		</transition>
+		<transition on="clearAdditionalItemProperty" to="clearAdditionalItemProperty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addAdditionalItemProperty" to="addAdditionalItemProperty">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addAdditionalItemProperty" flow="itempropertytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="itemProperty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemProperty"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.additionalItemPropertyList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearAdditionalItemProperty">
+		<action bean="listUtils"
+			method="clearList(${flowScope.additionalItemPropertyList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayAdditionalItemPropertyTypeList" view="/views/lists/AdditionalItemPropertyTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.additionalItemPropertyList" target="additionalItemPropertyList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="additionalitempropertytypelist-bean.xml" />
+
+</flow>

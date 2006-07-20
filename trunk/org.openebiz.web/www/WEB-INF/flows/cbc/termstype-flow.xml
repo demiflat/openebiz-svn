@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="terms" target="flowScope.terms" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/TermsTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTerms">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="terms" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayTerms" view="/views/cbc/TermsTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.terms" target="terms" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="termstype-bean.xml" />
+
+</flow>

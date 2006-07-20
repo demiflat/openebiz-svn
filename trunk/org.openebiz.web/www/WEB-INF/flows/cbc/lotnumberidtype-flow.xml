@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lotNumberID" target="flowScope.lotNumberID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/LotNumberIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLotNumberID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lotNumberID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayLotNumberID" view="/views/cbc/LotNumberIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lotNumberID" target="lotNumberID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="lotnumberidtype-bean.xml" />
+
+</flow>

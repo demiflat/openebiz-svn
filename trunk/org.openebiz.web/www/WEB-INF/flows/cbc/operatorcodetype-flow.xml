@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="operatorCode" target="flowScope.operatorCode" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/OperatorCodeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOperatorCode">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="operatorCode" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayOperatorCode" view="/views/cbc/OperatorCodeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.operatorCode" target="operatorCode" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="operatorcodetype-bean.xml" />
+
+</flow>

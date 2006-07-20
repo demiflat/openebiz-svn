@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/SelfBilledCreditNoteTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySelfBilledCreditNote">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="selfBilledCreditNote" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCopyIndicator" to="editCopyIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxPointDate" to="editTaxPointDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionCurrencyCode" to="editTransactionCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentCurrencyCode" to="editDocumentCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxCurrencyCode" to="editTaxCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPricingCurrencyCode" to="editPricingCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingCostCode" to="editAccountingCostCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoicePeriodList" to="editInvoicePeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDiscrepancyResponseList" to="editDiscrepancyResponseList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editOrderReferenceList" to="editOrderReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAccountingDocumentReferenceList" to="editAccountingDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editContractDocumentReferenceList" to="editContractDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAdditionalDocumentReferenceList" to="editAdditionalDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editCreditorSupplierParty" to="editCreditorSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDebtorCustomerParty" to="editDebtorCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayeeParty" to="editPayeeParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAllowanceChargeList" to="editAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editTransactionExchangeRate" to="editTransactionExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxExchangeRate" to="editTaxExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPricingExchangeRate" to="editPricingExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExchangeRate" to="editExchangeRate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editLegalTotal" to="editLegalTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCreditNoteLineList" to="editCreditNoteLineList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- CopyIndicator element start-->
+	<subflow-state id="editCopyIndicator" flow="copyindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.copyIndicator"
+					target="copyIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="copyIndicator"
+					target="flowScope.copyIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CopyIndicator element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- TaxPointDate element start-->
+	<subflow-state id="editTaxPointDate" flow="taxpointdatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.taxPointDate"
+					target="taxPointDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxPointDate"
+					target="flowScope.taxPointDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxPointDate element end-->
+
+<!-- Note element start-->
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+
+<!-- TransactionCurrencyCode element start-->
+	<subflow-state id="editTransactionCurrencyCode" flow="transactioncurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.transactionCurrencyCode"
+					target="transactionCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionCurrencyCode"
+					target="flowScope.transactionCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionCurrencyCode element end-->
+
+<!-- DocumentCurrencyCode element start-->
+	<subflow-state id="editDocumentCurrencyCode" flow="documentcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.documentCurrencyCode"
+					target="documentCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentCurrencyCode"
+					target="flowScope.documentCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentCurrencyCode element end-->
+
+<!-- TaxCurrencyCode element start-->
+	<subflow-state id="editTaxCurrencyCode" flow="taxcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.taxCurrencyCode"
+					target="taxCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxCurrencyCode"
+					target="flowScope.taxCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxCurrencyCode element end-->
+
+<!-- PricingCurrencyCode element start-->
+	<subflow-state id="editPricingCurrencyCode" flow="pricingcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.pricingCurrencyCode"
+					target="pricingCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="pricingCurrencyCode"
+					target="flowScope.pricingCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PricingCurrencyCode element end-->
+
+<!-- AccountingCostCode element start-->
+	<subflow-state id="editAccountingCostCode" flow="accountingcostcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.accountingCostCode"
+					target="accountingCostCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingCostCode"
+					target="flowScope.accountingCostCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingCostCode element end-->
+
+<!-- InvoicePeriod list element start-->
+	<subflow-state id="editInvoicePeriodList" flow="invoiceperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.invoicePeriod"
+					target="invoicePeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoicePeriod"
+					target="flowScope.invoicePeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoicePeriod list element end-->
+		
+<!-- DiscrepancyResponse list element start-->
+	<subflow-state id="editDiscrepancyResponseList" flow="discrepancyresponsetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.discrepancyResponse"
+					target="discrepancyResponseList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="discrepancyResponse"
+					target="flowScope.discrepancyResponseList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DiscrepancyResponse list element end-->
+		
+<!-- OrderReference list element start-->
+	<subflow-state id="editOrderReferenceList" flow="orderreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.orderReference"
+					target="orderReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderReference"
+					target="flowScope.orderReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderReference list element end-->
+		
+<!-- AccountingDocumentReference list element start-->
+	<subflow-state id="editAccountingDocumentReferenceList" flow="accountingdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.accountingDocumentReference"
+					target="accountingDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference list element end-->
+		
+<!-- ContractDocumentReference list element start-->
+	<subflow-state id="editContractDocumentReferenceList" flow="contractdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.contractDocumentReference"
+					target="contractDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contractDocumentReference"
+					target="flowScope.contractDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContractDocumentReference list element end-->
+		
+<!-- AdditionalDocumentReference list element start-->
+	<subflow-state id="editAdditionalDocumentReferenceList" flow="additionaldocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.additionalDocumentReference"
+					target="additionalDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalDocumentReference"
+					target="flowScope.additionalDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalDocumentReference list element end-->
+		
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+<!-- CreditorSupplierParty element start-->
+	<subflow-state id="editCreditorSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.creditorSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditorSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditorSupplierParty element end-->
+
+<!-- DebtorCustomerParty element start-->
+	<subflow-state id="editDebtorCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.debtorCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debtorCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebtorCustomerParty element end-->
+
+<!-- PayeeParty element start-->
+	<subflow-state id="editPayeeParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.payeeParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payeeParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayeeParty element end-->
+
+<!-- AllowanceCharge list element start-->
+	<subflow-state id="editAllowanceChargeList" flow="allowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.allowanceCharge"
+					target="allowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge list element end-->
+		
+<!-- TransactionExchangeRate element start-->
+	<subflow-state id="editTransactionExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.transactionExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionExchangeRate element end-->
+
+<!-- TaxExchangeRate element start-->
+	<subflow-state id="editTaxExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.taxExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxExchangeRate element end-->
+
+<!-- PricingExchangeRate element start-->
+	<subflow-state id="editPricingExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.pricingExchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="pricingExchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PricingExchangeRate element end-->
+
+<!-- ExchangeRate element start-->
+	<subflow-state id="editExchangeRate" flow="exchangeratetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.exchangeRate"
+					target="exchangeRate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exchangeRate"
+					target="flowScope.exchangeRate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExchangeRate element end-->
+
+<!-- TaxTotal list element start-->
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+		
+<!-- LegalTotal element start-->
+	<subflow-state id="editLegalTotal" flow="legaltotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.legalTotal"
+					target="legalTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalTotal"
+					target="flowScope.legalTotal" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LegalTotal element end-->
+
+<!-- CreditNoteLine list element start-->
+	<subflow-state id="editCreditNoteLineList" flow="creditnotelinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.selfBilledCreditNote.creditNoteLine"
+					target="creditNoteLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditNoteLine"
+					target="flowScope.creditNoteLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditNoteLine list element end-->
+		
+	<view-state id="displaySelfBilledCreditNote" view="/views/bizdocs/SelfBilledCreditNoteTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:selfbilledcreditnotetype-flow" />
+
+	<import resource="selfbilledcreditnotetype-bean.xml" />
+
+</flow>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.DespatchLineType"/>
+
+	<input-mapper>
+		<mapping source="despatchLineList" target="flowScope.despatchLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DespatchLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDespatchLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="despatchLine" result-scope="flow" />
+		</transition>
+		<transition on="clearDespatchLine" to="clearDespatchLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDespatchLine" to="addDespatchLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addDespatchLine" flow="despatchlinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="despatchLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatchLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.despatchLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearDespatchLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.despatchLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayDespatchLineTypeList" view="/views/lists/DespatchLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.despatchLineList" target="despatchLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="despatchlinetypelist-bean.xml" />
+
+</flow>

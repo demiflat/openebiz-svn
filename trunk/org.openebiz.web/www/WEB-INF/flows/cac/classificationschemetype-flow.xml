@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="classificationScheme" target="flowScope.classificationScheme" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ClassificationSchemeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayClassificationScheme">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="classificationScheme" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLastRevisionDateTime" to="editLastRevisionDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editStatusCode" to="editStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAgencyID" to="editAgencyID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAgencyName" to="editAgencyName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editVersionID" to="editVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editURI" to="editURI">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSchemeURI" to="editSchemeURI">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLanguageID" to="editLanguageID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editClassificationCategoryList" to="editClassificationCategoryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- LastRevisionDateTime element start-->	
+	<subflow-state id="editLastRevisionDateTime" flow="lastrevisiondatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.lastRevisionDateTime"
+					target="lastRevisionDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lastRevisionDateTime"
+					target="flowScope.lastRevisionDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LastRevisionDateTime element end-->
+	
+<!-- StatusCode element start-->	
+	<subflow-state id="editStatusCode" flow="statuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.statusCode"
+					target="statusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="statusCode"
+					target="flowScope.statusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- StatusCode element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+<!-- AgencyID element start-->	
+	<subflow-state id="editAgencyID" flow="agencyidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.agencyID"
+					target="agencyID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="agencyID"
+					target="flowScope.agencyID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AgencyID element end-->
+	
+<!-- AgencyName element start-->	
+	<subflow-state id="editAgencyName" flow="agencynametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.agencyName"
+					target="agencyName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="agencyName"
+					target="flowScope.agencyName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AgencyName element end-->
+	
+<!-- VersionID element start-->	
+	<subflow-state id="editVersionID" flow="versionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.versionID"
+					target="versionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="versionID"
+					target="flowScope.versionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VersionID element end-->
+	
+<!-- URI element start-->	
+	<subflow-state id="editURI" flow="uritype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.URI"
+					target="URI" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="URI"
+					target="flowScope.URI" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- URI element end-->
+	
+<!-- SchemeURI element start-->	
+	<subflow-state id="editSchemeURI" flow="schemeuritype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.schemeURI"
+					target="schemeURI" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="schemeURI"
+					target="flowScope.schemeURI" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SchemeURI element end-->
+	
+<!-- LanguageID element start-->	
+	<subflow-state id="editLanguageID" flow="languageidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.languageID"
+					target="languageID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="languageID"
+					target="flowScope.languageID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LanguageID element end-->
+	
+<!-- ClassificationCategory list element start-->	
+	<subflow-state id="editClassificationCategoryList" flow="classificationcategorytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationScheme.classificationCategory"
+					target="classificationCategoryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="classificationCategory"
+					target="flowScope.classificationCategoryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ClassificationCategory list element end-->
+	
+
+	<view-state id="displayClassificationScheme" view="/views/cac/ClassificationSchemeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.classificationScheme" target="classificationScheme" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="classificationschemetype-bean.xml" />
+
+</flow>

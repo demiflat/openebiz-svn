@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="hazardousGoodsTransit" target="flowScope.hazardousGoodsTransit" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/HazardousGoodsTransitTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayHazardousGoodsTransit">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="hazardousGoodsTransit" result-scope="flow" />
+		</transition>
+		<transition on="editTransportEmergencyCardCode" to="editTransportEmergencyCardCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackingCriteriaCode" to="editPackingCriteriaCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegulationCode" to="editRegulationCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInhalationToxicityZoneCode" to="editInhalationToxicityZoneCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransportAuthorizationCode" to="editTransportAuthorizationCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumTemperature" to="editMaximumTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumTemperature" to="editMinimumTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- TransportEmergencyCardCode element start-->	
+	<subflow-state id="editTransportEmergencyCardCode" flow="transportemergencycardcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.transportEmergencyCardCode"
+					target="transportEmergencyCardCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportEmergencyCardCode"
+					target="flowScope.transportEmergencyCardCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportEmergencyCardCode element end-->
+	
+<!-- PackingCriteriaCode element start-->	
+	<subflow-state id="editPackingCriteriaCode" flow="packingcriteriacodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.packingCriteriaCode"
+					target="packingCriteriaCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packingCriteriaCode"
+					target="flowScope.packingCriteriaCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackingCriteriaCode element end-->
+	
+<!-- RegulationCode element start-->	
+	<subflow-state id="editRegulationCode" flow="regulationcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.regulationCode"
+					target="regulationCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="regulationCode"
+					target="flowScope.regulationCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegulationCode element end-->
+	
+<!-- InhalationToxicityZoneCode element start-->	
+	<subflow-state id="editInhalationToxicityZoneCode" flow="inhalationtoxicityzonecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.inhalationToxicityZoneCode"
+					target="inhalationToxicityZoneCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="inhalationToxicityZoneCode"
+					target="flowScope.inhalationToxicityZoneCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InhalationToxicityZoneCode element end-->
+	
+<!-- TransportAuthorizationCode element start-->	
+	<subflow-state id="editTransportAuthorizationCode" flow="transportauthorizationcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.transportAuthorizationCode"
+					target="transportAuthorizationCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportAuthorizationCode"
+					target="flowScope.transportAuthorizationCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportAuthorizationCode element end-->
+	
+<!-- MaximumTemperature element start-->	
+	<subflow-state id="editMaximumTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.maximumTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumTemperature element end-->
+	
+<!-- MinimumTemperature element start-->	
+	<subflow-state id="editMinimumTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.hazardousGoodsTransit.minimumTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumTemperature element end-->
+	
+
+	<view-state id="displayHazardousGoodsTransit" view="/views/cac/HazardousGoodsTransitTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.hazardousGoodsTransit" target="hazardousGoodsTransit" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="hazardousgoodstransittype-bean.xml" />
+
+</flow>

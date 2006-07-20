@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="customerReference" target="flowScope.customerReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/CustomerReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCustomerReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="customerReference" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayCustomerReference" view="/views/cbc/CustomerReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.customerReference" target="customerReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="customerreferencetype-bean.xml" />
+
+</flow>

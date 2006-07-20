@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="catalogueLine" target="flowScope.catalogueLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CatalogueLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCatalogueLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="catalogueLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editActionCode" to="editActionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLifeCycleStatusCode" to="editLifeCycleStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editContractSubdivision" to="editContractSubdivision">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNoteList" to="editNoteList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editOrderableIndicator" to="editOrderableIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderingUnitMeasureID" to="editOrderingUnitMeasureID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editContentUnitQuantity" to="editContentUnitQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderQuantityIncrementNumeric" to="editOrderQuantityIncrementNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumOrderQuantity" to="editMinimumOrderQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumOrderQuantity" to="editMaximumOrderQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editWarrantyInformationList" to="editWarrantyInformationList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPackLevelCode" to="editPackLevelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInformationValidityPeriod" to="editInformationValidityPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidityPeriodList" to="editValidityPeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editItemComparisonList" to="editItemComparisonList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editComponentRelatedItemList" to="editComponentRelatedItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAccessoryRelatedItemList" to="editAccessoryRelatedItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editRequiredRelatedItemList" to="editRequiredRelatedItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editReplacementRelatedItemList" to="editReplacementRelatedItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editComplementaryRelatedItemList" to="editComplementaryRelatedItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editRequiredItemLocationQuantityList" to="editRequiredItemLocationQuantityList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editItem" to="editItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- ActionCode element start-->	
+	<subflow-state id="editActionCode" flow="actioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.actionCode"
+					target="actionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="actionCode"
+					target="flowScope.actionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ActionCode element end-->
+	
+<!-- LifeCycleStatusCode element start-->	
+	<subflow-state id="editLifeCycleStatusCode" flow="lifecyclestatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.lifeCycleStatusCode"
+					target="lifeCycleStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lifeCycleStatusCode"
+					target="flowScope.lifeCycleStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LifeCycleStatusCode element end-->
+	
+<!-- ContractSubdivision element start-->	
+	<subflow-state id="editContractSubdivision" flow="contractsubdivisiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.contractSubdivision"
+					target="contractSubdivision" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contractSubdivision"
+					target="flowScope.contractSubdivision" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContractSubdivision element end-->
+	
+<!-- Note list element start-->	
+	<subflow-state id="editNoteList" flow="notetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.note"
+					target="noteList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.noteList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note list element end-->
+	
+<!-- OrderableIndicator element start-->	
+	<subflow-state id="editOrderableIndicator" flow="orderableindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.orderableIndicator"
+					target="orderableIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderableIndicator"
+					target="flowScope.orderableIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderableIndicator element end-->
+	
+<!-- OrderingUnitMeasureID element start-->	
+	<subflow-state id="editOrderingUnitMeasureID" flow="orderingunitmeasureidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.orderingUnitMeasureID"
+					target="orderingUnitMeasureID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderingUnitMeasureID"
+					target="flowScope.orderingUnitMeasureID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderingUnitMeasureID element end-->
+	
+<!-- ContentUnitQuantity element start-->	
+	<subflow-state id="editContentUnitQuantity" flow="contentunitquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.contentUnitQuantity"
+					target="contentUnitQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contentUnitQuantity"
+					target="flowScope.contentUnitQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContentUnitQuantity element end-->
+	
+<!-- OrderQuantityIncrementNumeric element start-->	
+	<subflow-state id="editOrderQuantityIncrementNumeric" flow="orderquantityincrementnumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.orderQuantityIncrementNumeric"
+					target="orderQuantityIncrementNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderQuantityIncrementNumeric"
+					target="flowScope.orderQuantityIncrementNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderQuantityIncrementNumeric element end-->
+	
+<!-- MinimumOrderQuantity element start-->	
+	<subflow-state id="editMinimumOrderQuantity" flow="minimumorderquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.minimumOrderQuantity"
+					target="minimumOrderQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumOrderQuantity"
+					target="flowScope.minimumOrderQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumOrderQuantity element end-->
+	
+<!-- MaximumOrderQuantity element start-->	
+	<subflow-state id="editMaximumOrderQuantity" flow="maximumorderquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.maximumOrderQuantity"
+					target="maximumOrderQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumOrderQuantity"
+					target="flowScope.maximumOrderQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumOrderQuantity element end-->
+	
+<!-- WarrantyInformation list element start-->	
+	<subflow-state id="editWarrantyInformationList" flow="warrantyinformationtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.warrantyInformation"
+					target="warrantyInformationList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="warrantyInformation"
+					target="flowScope.warrantyInformationList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- WarrantyInformation list element end-->
+	
+<!-- PackLevelCode element start-->	
+	<subflow-state id="editPackLevelCode" flow="packlevelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.packLevelCode"
+					target="packLevelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packLevelCode"
+					target="flowScope.packLevelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackLevelCode element end-->
+	
+<!-- InformationValidityPeriod element start-->	
+	<subflow-state id="editInformationValidityPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.informationValidityPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="informationValidityPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InformationValidityPeriod element end-->
+	
+<!-- ValidityPeriod list element start-->	
+	<subflow-state id="editValidityPeriodList" flow="validityperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.validityPeriod"
+					target="validityPeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validityPeriod"
+					target="flowScope.validityPeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidityPeriod list element end-->
+	
+<!-- ItemComparison list element start-->	
+	<subflow-state id="editItemComparisonList" flow="itemcomparisontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.itemComparison"
+					target="itemComparisonList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemComparison"
+					target="flowScope.itemComparisonList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ItemComparison list element end-->
+	
+<!-- ComponentRelatedItem list element start-->	
+	<subflow-state id="editComponentRelatedItemList" flow="componentrelateditemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.componentRelatedItem"
+					target="componentRelatedItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="componentRelatedItem"
+					target="flowScope.componentRelatedItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ComponentRelatedItem list element end-->
+	
+<!-- AccessoryRelatedItem list element start-->	
+	<subflow-state id="editAccessoryRelatedItemList" flow="accessoryrelateditemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.accessoryRelatedItem"
+					target="accessoryRelatedItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accessoryRelatedItem"
+					target="flowScope.accessoryRelatedItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccessoryRelatedItem list element end-->
+	
+<!-- RequiredRelatedItem list element start-->	
+	<subflow-state id="editRequiredRelatedItemList" flow="requiredrelateditemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.requiredRelatedItem"
+					target="requiredRelatedItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="requiredRelatedItem"
+					target="flowScope.requiredRelatedItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RequiredRelatedItem list element end-->
+	
+<!-- ReplacementRelatedItem list element start-->	
+	<subflow-state id="editReplacementRelatedItemList" flow="replacementrelateditemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.replacementRelatedItem"
+					target="replacementRelatedItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="replacementRelatedItem"
+					target="flowScope.replacementRelatedItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReplacementRelatedItem list element end-->
+	
+<!-- ComplementaryRelatedItem list element start-->	
+	<subflow-state id="editComplementaryRelatedItemList" flow="complementaryrelateditemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.complementaryRelatedItem"
+					target="complementaryRelatedItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="complementaryRelatedItem"
+					target="flowScope.complementaryRelatedItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ComplementaryRelatedItem list element end-->
+	
+<!-- RequiredItemLocationQuantity list element start-->	
+	<subflow-state id="editRequiredItemLocationQuantityList" flow="requireditemlocationquantitytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.requiredItemLocationQuantity"
+					target="requiredItemLocationQuantityList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="requiredItemLocationQuantity"
+					target="flowScope.requiredItemLocationQuantityList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RequiredItemLocationQuantity list element end-->
+	
+<!-- Item element start-->	
+	<subflow-state id="editItem" flow="itemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueLine.item"
+					target="item" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="item"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Item element end-->
+	
+
+	<view-state id="displayCatalogueLine" view="/views/cac/CatalogueLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.catalogueLine" target="catalogueLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="cataloguelinetype-bean.xml" />
+
+</flow>

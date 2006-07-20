@@ -1,0 +1,125 @@
+/* start theme.css  */
+body {
+	text-align: center;
+	height: auto;
+	padding: 0px;
+	background-color: #b2b2b2;
+}
+
+div#lang {
+	font-size: .7em;
+	text-align: right;
+	padding-right: 5px;	
+}
+
+div#footer p {
+	width: 85%;
+	padding-right: 5px;
+	text-align: right;
+	font-family: Tahoma, sans-serif;
+	font-style: italic;
+	font-size: 65%;
+	color: #999;
+	font-weight: italics;
+}
+
+#footer {
+	margin-top: 10px;
+}
+
+#footer hr {
+	display: none;
+}
+
+#footer .wrapper {
+	padding: 5px 20px;
+}
+
+/* Custom font definitions for style
+  ----------------------------------------------- */ /*
+p {	
+}
+*/
+p.description {
+	margin: 5px 0 5px;
+	line-height: 1.5;
+	color: #999;
+}
+
+h1 {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 2.75em;
+	font-weight: normal;
+	letter-spacing: 3px;
+	text-shadow: #999 2px 2px 2px;
+	padding: 5px 35px;
+}
+
+h2 {
+	margin: 5px 0 5px;
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1.8em;
+	font-weight: normal;
+	text-shadow: #999 2px 2px 2px;
+}
+
+h3 {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1.5em;
+	font-weight: normal;
+	margin-top: 1em;
+}
+
+h4 {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1.2em;
+}
+
+h5 {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1em;
+}
+
+h6 {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1em;
+	font-weight: normal;
+	color: #515151;
+}
+
+.error_content {
+	text-align: left;
+	padding-top: 10px;
+	border: none;
+}
+
+textarea {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 1em;
+	border: 1px solid #C4C4B8;
+	padding: 3px;
+	background-color: #F7F7F7;
+}
+
+input {
+	font-family: "Palatino", "Palatino Linotype", serif;
+	font-size: 0.9em;
+	border: 1px solid #C4C4B8;
+	background-color: #F7F7F7;
+}
+
+input.text {
+	width: 50%;
+}
+
+input.checkbox {
+	background: white;
+	color: white;
+	border: 0;
+}
+
+.sidebarlist {
+	font-size: xx-small;
+}
+
+/** end theme.css **/

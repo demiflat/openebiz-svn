@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="declaredForCarriageValueAmount" target="flowScope.declaredForCarriageValueAmount" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/DeclaredForCarriageValueAmountTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDeclaredForCarriageValueAmount">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="declaredForCarriageValueAmount" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayDeclaredForCarriageValueAmount" view="/views/cbc/DeclaredForCarriageValueAmountTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.declaredForCarriageValueAmount" target="declaredForCarriageValueAmount" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="declaredforcarriagevalueamounttype-bean.xml" />
+
+</flow>

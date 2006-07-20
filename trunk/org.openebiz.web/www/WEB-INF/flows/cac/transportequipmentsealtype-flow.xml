@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="transportEquipmentSeal" target="flowScope.transportEquipmentSeal" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TransportEquipmentSealTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTransportEquipmentSeal">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="transportEquipmentSeal" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSealIssuerTypeCode" to="editSealIssuerTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCondition" to="editCondition">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSealStatusCode" to="editSealStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSealingPartyType" to="editSealingPartyType">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipmentSeal.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- SealIssuerTypeCode element start-->	
+	<subflow-state id="editSealIssuerTypeCode" flow="sealissuertypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipmentSeal.sealIssuerTypeCode"
+					target="sealIssuerTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sealIssuerTypeCode"
+					target="flowScope.sealIssuerTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SealIssuerTypeCode element end-->
+	
+<!-- Condition element start-->	
+	<subflow-state id="editCondition" flow="conditiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipmentSeal.condition"
+					target="condition" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="condition"
+					target="flowScope.condition" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Condition element end-->
+	
+<!-- SealStatusCode element start-->	
+	<subflow-state id="editSealStatusCode" flow="sealstatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipmentSeal.sealStatusCode"
+					target="sealStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sealStatusCode"
+					target="flowScope.sealStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SealStatusCode element end-->
+	
+<!-- SealingPartyType element start-->	
+	<subflow-state id="editSealingPartyType" flow="sealingpartytypetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipmentSeal.sealingPartyType"
+					target="sealingPartyType" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sealingPartyType"
+					target="flowScope.sealingPartyType" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SealingPartyType element end-->
+	
+
+	<view-state id="displayTransportEquipmentSeal" view="/views/cac/TransportEquipmentSealTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.transportEquipmentSeal" target="transportEquipmentSeal" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="transportequipmentsealtype-bean.xml" />
+
+</flow>

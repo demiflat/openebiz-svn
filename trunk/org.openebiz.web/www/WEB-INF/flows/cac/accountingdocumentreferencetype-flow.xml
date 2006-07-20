@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="accountingDocumentReference" target="flowScope.accountingDocumentReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/AccountingDocumentReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAccountingDocumentReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="accountingDocumentReference" result-scope="flow" />
+		</transition>
+		<transition on="editDocumentCurrencyCode" to="editDocumentCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxCurrencyCode" to="editTaxCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalDocumentReferenceList" to="editAdditionalDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editStatementDocumentReferenceList" to="editStatementDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editInvoiceDocumentReferenceList" to="editInvoiceDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editSelfBilledInvoiceDocumentReferenceList" to="editSelfBilledInvoiceDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editCreditNoteDocumentReferenceList" to="editCreditNoteDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editSelfBilledCreditNoteDocumentReferenceList" to="editSelfBilledCreditNoteDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDebitNoteDocumentReferenceList" to="editDebitNoteDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editRemittanceDocumentReferenceList" to="editRemittanceDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPaymentMeans" to="editPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentTermsList" to="editPaymentTermsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editLegalTotalList" to="editLegalTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAccountingDocumentReferenceLine" to="editAccountingDocumentReferenceLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- DocumentCurrencyCode element start-->	
+	<subflow-state id="editDocumentCurrencyCode" flow="documentcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.documentCurrencyCode"
+					target="documentCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentCurrencyCode"
+					target="flowScope.documentCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentCurrencyCode element end-->
+	
+<!-- TaxCurrencyCode element start-->	
+	<subflow-state id="editTaxCurrencyCode" flow="taxcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.taxCurrencyCode"
+					target="taxCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxCurrencyCode"
+					target="flowScope.taxCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxCurrencyCode element end-->
+	
+<!-- AdditionalDocumentReference list element start-->	
+	<subflow-state id="editAdditionalDocumentReferenceList" flow="additionaldocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.additionalDocumentReference"
+					target="additionalDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalDocumentReference"
+					target="flowScope.additionalDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalDocumentReference list element end-->
+	
+<!-- StatementDocumentReference list element start-->	
+	<subflow-state id="editStatementDocumentReferenceList" flow="statementdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.statementDocumentReference"
+					target="statementDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="statementDocumentReference"
+					target="flowScope.statementDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- StatementDocumentReference list element end-->
+	
+<!-- InvoiceDocumentReference list element start-->	
+	<subflow-state id="editInvoiceDocumentReferenceList" flow="invoicedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.invoiceDocumentReference"
+					target="invoiceDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoiceDocumentReference"
+					target="flowScope.invoiceDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoiceDocumentReference list element end-->
+	
+<!-- SelfBilledInvoiceDocumentReference list element start-->	
+	<subflow-state id="editSelfBilledInvoiceDocumentReferenceList" flow="selfbilledinvoicedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.selfBilledInvoiceDocumentReference"
+					target="selfBilledInvoiceDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="selfBilledInvoiceDocumentReference"
+					target="flowScope.selfBilledInvoiceDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SelfBilledInvoiceDocumentReference list element end-->
+	
+<!-- CreditNoteDocumentReference list element start-->	
+	<subflow-state id="editCreditNoteDocumentReferenceList" flow="creditnotedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.creditNoteDocumentReference"
+					target="creditNoteDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditNoteDocumentReference"
+					target="flowScope.creditNoteDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditNoteDocumentReference list element end-->
+	
+<!-- SelfBilledCreditNoteDocumentReference list element start-->	
+	<subflow-state id="editSelfBilledCreditNoteDocumentReferenceList" flow="selfbilledcreditnotedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.selfBilledCreditNoteDocumentReference"
+					target="selfBilledCreditNoteDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="selfBilledCreditNoteDocumentReference"
+					target="flowScope.selfBilledCreditNoteDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SelfBilledCreditNoteDocumentReference list element end-->
+	
+<!-- DebitNoteDocumentReference list element start-->	
+	<subflow-state id="editDebitNoteDocumentReferenceList" flow="debitnotedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.debitNoteDocumentReference"
+					target="debitNoteDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debitNoteDocumentReference"
+					target="flowScope.debitNoteDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebitNoteDocumentReference list element end-->
+	
+<!-- RemittanceDocumentReference list element start-->	
+	<subflow-state id="editRemittanceDocumentReferenceList" flow="remittancedocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.remittanceDocumentReference"
+					target="remittanceDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="remittanceDocumentReference"
+					target="flowScope.remittanceDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RemittanceDocumentReference list element end-->
+	
+<!-- PaymentMeans element start-->	
+	<subflow-state id="editPaymentMeans" flow="paymentmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.paymentMeans"
+					target="paymentMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeans" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans element end-->
+	
+<!-- PaymentTerms list element start-->	
+	<subflow-state id="editPaymentTermsList" flow="paymenttermstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.paymentTerms"
+					target="paymentTermsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentTerms"
+					target="flowScope.paymentTermsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentTerms list element end-->
+	
+<!-- LegalTotal list element start-->	
+	<subflow-state id="editLegalTotalList" flow="legaltotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.legalTotal"
+					target="legalTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalTotal"
+					target="flowScope.legalTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LegalTotal list element end-->
+	
+<!-- TaxTotal list element start-->	
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+	
+<!-- AccountingDocumentReferenceLine element start-->	
+	<subflow-state id="editAccountingDocumentReferenceLine" flow="accountingdocumentreferencelinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.accountingDocumentReference.accountingDocumentReferenceLine"
+					target="accountingDocumentReferenceLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReferenceLine"
+					target="flowScope.accountingDocumentReferenceLine" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReferenceLine element end-->
+	
+
+	<view-state id="displayAccountingDocumentReference" view="/views/cac/AccountingDocumentReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.accountingDocumentReference" target="accountingDocumentReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="accountingdocumentreferencetype-bean.xml" />
+
+</flow>

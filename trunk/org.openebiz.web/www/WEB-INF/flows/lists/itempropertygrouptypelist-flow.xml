@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ItemPropertyGroupType"/>
+
+	<input-mapper>
+		<mapping source="itemPropertyGroupList" target="flowScope.itemPropertyGroupList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/ItemPropertyGroupTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItemPropertyGroupTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="itemPropertyGroup" result-scope="flow" />
+		</transition>
+		<transition on="clearItemPropertyGroup" to="clearItemPropertyGroup">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addItemPropertyGroup" to="addItemPropertyGroup">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addItemPropertyGroup" flow="itempropertygrouptype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="itemPropertyGroup" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemPropertyGroup"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.itemPropertyGroupList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearItemPropertyGroup">
+		<action bean="listUtils"
+			method="clearList(${flowScope.itemPropertyGroupList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayItemPropertyGroupTypeList" view="/views/lists/ItemPropertyGroupTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.itemPropertyGroupList" target="itemPropertyGroupList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="itempropertygrouptypelist-bean.xml" />
+
+</flow>

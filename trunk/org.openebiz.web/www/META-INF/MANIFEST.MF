@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: 
+Created-By: Java 5 Eclipse SDK 3.2.0
+Implementation-Title: Bossart LLC Enterprise 2006 Web
+Implementation-Version: 2006

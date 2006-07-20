@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="itemLocationQuantity" target="flowScope.itemLocationQuantity" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ItemLocationQuantityTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItemLocationQuantity">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="itemLocationQuantity" result-scope="flow" />
+		</transition>
+		<transition on="editLeadTimeMeasure" to="editLeadTimeMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumQuantity" to="editMinimumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumQuantity" to="editMaximumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHazardousRiskIndicator" to="editHazardousRiskIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTradingRestrictionsList" to="editTradingRestrictionsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editApplicableTerritoryAddressList" to="editApplicableTerritoryAddressList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editBasePrice" to="editBasePrice">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeliveryUnitList" to="editDeliveryUnitList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editApplicableTaxCategoryList" to="editApplicableTaxCategoryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- LeadTimeMeasure element start-->	
+	<subflow-state id="editLeadTimeMeasure" flow="leadtimemeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.leadTimeMeasure"
+					target="leadTimeMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="leadTimeMeasure"
+					target="flowScope.leadTimeMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LeadTimeMeasure element end-->
+	
+<!-- MinimumQuantity element start-->	
+	<subflow-state id="editMinimumQuantity" flow="minimumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.minimumQuantity"
+					target="minimumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumQuantity"
+					target="flowScope.minimumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumQuantity element end-->
+	
+<!-- MaximumQuantity element start-->	
+	<subflow-state id="editMaximumQuantity" flow="maximumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.maximumQuantity"
+					target="maximumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumQuantity"
+					target="flowScope.maximumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumQuantity element end-->
+	
+<!-- HazardousRiskIndicator element start-->	
+	<subflow-state id="editHazardousRiskIndicator" flow="hazardousriskindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.hazardousRiskIndicator"
+					target="hazardousRiskIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardousRiskIndicator"
+					target="flowScope.hazardousRiskIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardousRiskIndicator element end-->
+	
+<!-- TradingRestrictions list element start-->	
+	<subflow-state id="editTradingRestrictionsList" flow="tradingrestrictionstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.tradingRestrictions"
+					target="tradingRestrictionsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tradingRestrictions"
+					target="flowScope.tradingRestrictionsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TradingRestrictions list element end-->
+	
+<!-- ApplicableTerritoryAddress list element start-->	
+	<subflow-state id="editApplicableTerritoryAddressList" flow="applicableterritoryaddresstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.applicableTerritoryAddress"
+					target="applicableTerritoryAddressList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="applicableTerritoryAddress"
+					target="flowScope.applicableTerritoryAddressList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ApplicableTerritoryAddress list element end-->
+	
+<!-- BasePrice element start-->	
+	<subflow-state id="editBasePrice" flow="basepricetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.basePrice"
+					target="basePrice" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="basePrice"
+					target="flowScope.basePrice" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BasePrice element end-->
+	
+<!-- DeliveryUnit list element start-->	
+	<subflow-state id="editDeliveryUnitList" flow="deliveryunittypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.deliveryUnit"
+					target="deliveryUnitList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryUnit"
+					target="flowScope.deliveryUnitList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryUnit list element end-->
+	
+<!-- ApplicableTaxCategory list element start-->	
+	<subflow-state id="editApplicableTaxCategoryList" flow="applicabletaxcategorytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.itemLocationQuantity.applicableTaxCategory"
+					target="applicableTaxCategoryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="applicableTaxCategory"
+					target="flowScope.applicableTaxCategoryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ApplicableTaxCategory list element end-->
+	
+
+	<view-state id="displayItemLocationQuantity" view="/views/cac/ItemLocationQuantityTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.itemLocationQuantity" target="itemLocationQuantity" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="itemlocationquantitytype-bean.xml" />
+
+</flow>

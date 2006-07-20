@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="tradingTerms" target="flowScope.tradingTerms" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TradingTermsTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTradingTerms">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="tradingTerms" result-scope="flow" />
+		</transition>
+		<transition on="editInformationList" to="editInformationList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editReference" to="editReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editApplicableAddress" to="editApplicableAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- Information list element start-->	
+	<subflow-state id="editInformationList" flow="informationtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.tradingTerms.information"
+					target="informationList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="information"
+					target="flowScope.informationList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Information list element end-->
+	
+<!-- Reference element start-->	
+	<subflow-state id="editReference" flow="referencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.tradingTerms.reference"
+					target="reference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="reference"
+					target="flowScope.reference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Reference element end-->
+	
+<!-- ApplicableAddress element start-->	
+	<subflow-state id="editApplicableAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.tradingTerms.applicableAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="applicableAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ApplicableAddress element end-->
+	
+
+	<view-state id="displayTradingTerms" view="/views/cac/TradingTermsTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.tradingTerms" target="tradingTerms" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="tradingtermstype-bean.xml" />
+
+</flow>

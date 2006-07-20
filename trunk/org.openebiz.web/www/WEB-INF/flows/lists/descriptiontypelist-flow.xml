@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="descriptionList" target="flowScope.descriptionList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DescriptionTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDescriptionTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="description" result-scope="flow" />
+		</transition>
+		<transition on="clearDescription" to="clearDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDescription" to="addDescription">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Description -->
+
+	<view-state id="displayDescriptionTypeList" view="/views/lists/DescriptionTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.descriptionList" target="descriptionList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="descriptiontypelist-bean.xml" />
+
+</flow>

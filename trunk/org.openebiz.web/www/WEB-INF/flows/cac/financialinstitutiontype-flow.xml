@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="financialInstitution" target="flowScope.financialInstitution" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/FinancialInstitutionTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayFinancialInstitution">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="financialInstitution" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAddress" to="editAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.financialInstitution.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.financialInstitution.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- Address element start-->	
+	<subflow-state id="editAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.financialInstitution.address"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="address"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Address element end-->
+	
+
+	<view-state id="displayFinancialInstitution" view="/views/cac/FinancialInstitutionTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.financialInstitution" target="financialInstitution" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="financialinstitutiontype-bean.xml" />
+
+</flow>

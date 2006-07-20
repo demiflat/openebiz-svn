@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="otherInstruction" target="flowScope.otherInstruction" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/OtherInstructionTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOtherInstruction">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="otherInstruction" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayOtherInstruction" view="/views/cbc/OtherInstructionTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.otherInstruction" target="otherInstruction" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="otherinstructiontype-bean.xml" />
+
+</flow>

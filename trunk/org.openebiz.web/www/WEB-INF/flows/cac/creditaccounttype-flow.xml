@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="creditAccount" target="flowScope.creditAccount" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CreditAccountTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCreditAccount">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="creditAccount" result-scope="flow" />
+		</transition>
+		<transition on="editAccountID" to="editAccountID">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- AccountID element start-->	
+	<subflow-state id="editAccountID" flow="accountidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.creditAccount.accountID"
+					target="accountID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountID"
+					target="flowScope.accountID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountID element end-->
+	
+
+	<view-state id="displayCreditAccount" view="/views/cac/CreditAccountTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.creditAccount" target="creditAccount" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="creditaccounttype-bean.xml" />
+
+</flow>

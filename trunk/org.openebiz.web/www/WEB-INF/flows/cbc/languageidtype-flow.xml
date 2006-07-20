@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="languageID" target="flowScope.languageID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/LanguageIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLanguageID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="languageID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayLanguageID" view="/views/cbc/LanguageIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.languageID" target="languageID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="languageidtype-bean.xml" />
+
+</flow>

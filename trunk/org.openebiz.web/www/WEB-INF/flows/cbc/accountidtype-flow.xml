@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="accountID" target="flowScope.accountID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/AccountIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAccountID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="accountID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayAccountID" view="/views/cbc/AccountIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.accountID" target="accountID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="accountidtype-bean.xml" />
+
+</flow>

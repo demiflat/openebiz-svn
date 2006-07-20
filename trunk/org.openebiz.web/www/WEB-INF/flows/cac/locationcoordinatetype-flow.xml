@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="locationCoordinate" target="flowScope.locationCoordinate" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LocationCoordinateTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLocationCoordinate">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="locationCoordinate" result-scope="flow" />
+		</transition>
+		<transition on="editCoordinateSystemCode" to="editCoordinateSystemCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLatitudeDegreesMeasure" to="editLatitudeDegreesMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLatitudeMinutesMeasure" to="editLatitudeMinutesMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLatitudeDirectionCode" to="editLatitudeDirectionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLongitudeDegreesMeasure" to="editLongitudeDegreesMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLongitudeMinutesMeasure" to="editLongitudeMinutesMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLongitudeDirectionCode" to="editLongitudeDirectionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- CoordinateSystemCode element start-->	
+	<subflow-state id="editCoordinateSystemCode" flow="coordinatesystemcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.coordinateSystemCode"
+					target="coordinateSystemCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="coordinateSystemCode"
+					target="flowScope.coordinateSystemCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CoordinateSystemCode element end-->
+	
+<!-- LatitudeDegreesMeasure element start-->	
+	<subflow-state id="editLatitudeDegreesMeasure" flow="latitudedegreesmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.latitudeDegreesMeasure"
+					target="latitudeDegreesMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="latitudeDegreesMeasure"
+					target="flowScope.latitudeDegreesMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LatitudeDegreesMeasure element end-->
+	
+<!-- LatitudeMinutesMeasure element start-->	
+	<subflow-state id="editLatitudeMinutesMeasure" flow="latitudeminutesmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.latitudeMinutesMeasure"
+					target="latitudeMinutesMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="latitudeMinutesMeasure"
+					target="flowScope.latitudeMinutesMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LatitudeMinutesMeasure element end-->
+	
+<!-- LatitudeDirectionCode element start-->	
+	<subflow-state id="editLatitudeDirectionCode" flow="latitudedirectioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.latitudeDirectionCode"
+					target="latitudeDirectionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="latitudeDirectionCode"
+					target="flowScope.latitudeDirectionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LatitudeDirectionCode element end-->
+	
+<!-- LongitudeDegreesMeasure element start-->	
+	<subflow-state id="editLongitudeDegreesMeasure" flow="longitudedegreesmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.longitudeDegreesMeasure"
+					target="longitudeDegreesMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="longitudeDegreesMeasure"
+					target="flowScope.longitudeDegreesMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LongitudeDegreesMeasure element end-->
+	
+<!-- LongitudeMinutesMeasure element start-->	
+	<subflow-state id="editLongitudeMinutesMeasure" flow="longitudeminutesmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.longitudeMinutesMeasure"
+					target="longitudeMinutesMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="longitudeMinutesMeasure"
+					target="flowScope.longitudeMinutesMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LongitudeMinutesMeasure element end-->
+	
+<!-- LongitudeDirectionCode element start-->	
+	<subflow-state id="editLongitudeDirectionCode" flow="longitudedirectioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.locationCoordinate.longitudeDirectionCode"
+					target="longitudeDirectionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="longitudeDirectionCode"
+					target="flowScope.longitudeDirectionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LongitudeDirectionCode element end-->
+	
+
+	<view-state id="displayLocationCoordinate" view="/views/cac/LocationCoordinateTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.locationCoordinate" target="locationCoordinate" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="locationcoordinatetype-bean.xml" />
+
+</flow>

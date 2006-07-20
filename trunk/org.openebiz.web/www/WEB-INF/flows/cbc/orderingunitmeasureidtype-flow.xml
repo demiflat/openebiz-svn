@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="orderingUnitMeasureID" target="flowScope.orderingUnitMeasureID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/OrderingUnitMeasureIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOrderingUnitMeasureID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="orderingUnitMeasureID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayOrderingUnitMeasureID" view="/views/cbc/OrderingUnitMeasureIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.orderingUnitMeasureID" target="orderingUnitMeasureID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="orderingunitmeasureidtype-bean.xml" />
+
+</flow>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.TemperatureType"/>
+
+	<input-mapper>
+		<mapping source="temperatureList" target="flowScope.temperatureList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/TemperatureTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTemperatureTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="temperature" result-scope="flow" />
+		</transition>
+		<transition on="clearTemperature" to="clearTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addTemperature" to="addTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="temperature"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.temperatureList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearTemperature">
+		<action bean="listUtils"
+			method="clearList(${flowScope.temperatureList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayTemperatureTypeList" view="/views/lists/TemperatureTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.temperatureList" target="temperatureList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="temperaturetypelist-bean.xml" />
+
+</flow>

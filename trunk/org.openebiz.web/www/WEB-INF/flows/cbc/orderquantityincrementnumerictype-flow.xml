@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="orderQuantityIncrementNumeric" target="flowScope.orderQuantityIncrementNumeric" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/OrderQuantityIncrementNumericTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOrderQuantityIncrementNumeric">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="orderQuantityIncrementNumeric" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayOrderQuantityIncrementNumeric" view="/views/cbc/OrderQuantityIncrementNumericTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.orderQuantityIncrementNumeric" target="orderQuantityIncrementNumeric" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="orderquantityincrementnumerictype-bean.xml" />
+
+</flow>

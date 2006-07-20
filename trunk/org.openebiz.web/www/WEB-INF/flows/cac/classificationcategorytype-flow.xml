@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="classificationCategory" target="flowScope.classificationCategory" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ClassificationCategoryTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayClassificationCategory">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="classificationCategory" result-scope="flow" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCodeValue" to="editCodeValue">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCategorizesClassificationCategoryList" to="editCategorizesClassificationCategoryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationCategory.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- CodeValue element start-->	
+	<subflow-state id="editCodeValue" flow="codevaluetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationCategory.codeValue"
+					target="codeValue" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="codeValue"
+					target="flowScope.codeValue" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CodeValue element end-->
+	
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationCategory.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+<!-- CategorizesClassificationCategory list element start-->	
+	<subflow-state id="editCategorizesClassificationCategoryList" flow="categorizesclassificationcategorytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.classificationCategory.categorizesClassificationCategory"
+					target="categorizesClassificationCategoryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="categorizesClassificationCategory"
+					target="flowScope.categorizesClassificationCategoryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CategorizesClassificationCategory list element end-->
+	
+
+	<view-state id="displayClassificationCategory" view="/views/cac/ClassificationCategoryTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.classificationCategory" target="classificationCategory" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="classificationcategorytype-bean.xml" />
+
+</flow>

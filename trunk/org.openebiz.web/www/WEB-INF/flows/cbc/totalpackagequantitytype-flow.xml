@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="totalPackageQuantity" target="flowScope.totalPackageQuantity" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/TotalPackageQuantityTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTotalPackageQuantity">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="totalPackageQuantity" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayTotalPackageQuantity" view="/views/cbc/TotalPackageQuantityTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.totalPackageQuantity" target="totalPackageQuantity" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="totalpackagequantitytype-bean.xml" />
+
+</flow>

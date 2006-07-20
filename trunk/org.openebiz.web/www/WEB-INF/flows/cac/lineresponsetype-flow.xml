@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lineResponse" target="flowScope.lineResponse" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LineResponseTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLineResponse">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lineResponse" result-scope="flow" />
+		</transition>
+		<transition on="editLineReference" to="editLineReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editResponseList" to="editResponseList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- LineReference element start-->	
+	<subflow-state id="editLineReference" flow="linereferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineResponse.lineReference"
+					target="lineReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineReference"
+					target="flowScope.lineReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineReference element end-->
+	
+<!-- Response list element start-->	
+	<subflow-state id="editResponseList" flow="responsetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineResponse.response"
+					target="responseList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="response"
+					target="flowScope.responseList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Response list element end-->
+	
+
+	<view-state id="displayLineResponse" view="/views/cac/LineResponseTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lineResponse" target="lineResponse" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="lineresponsetype-bean.xml" />
+
+</flow>

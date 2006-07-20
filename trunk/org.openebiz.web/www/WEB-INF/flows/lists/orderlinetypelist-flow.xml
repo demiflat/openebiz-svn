@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.OrderLineType"/>
+
+	<input-mapper>
+		<mapping source="orderLineList" target="flowScope.orderLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/OrderLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayOrderLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="orderLine" result-scope="flow" />
+		</transition>
+		<transition on="clearOrderLine" to="clearOrderLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addOrderLine" to="addOrderLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addOrderLine" flow="orderlinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="orderLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.orderLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearOrderLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.orderLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayOrderLineTypeList" view="/views/lists/OrderLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.orderLineList" target="orderLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="orderlinetypelist-bean.xml" />
+
+</flow>

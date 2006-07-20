@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="communication" target="flowScope.communication" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CommunicationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCommunication">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="communication" result-scope="flow" />
+		</transition>
+		<transition on="editChannelCode" to="editChannelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValue" to="editValue">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ChannelCode element start-->	
+	<subflow-state id="editChannelCode" flow="channelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.communication.channelCode"
+					target="channelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="channelCode"
+					target="flowScope.channelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ChannelCode element end-->
+	
+<!-- Value element start-->	
+	<subflow-state id="editValue" flow="valuetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.communication.value"
+					target="value" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="value"
+					target="flowScope.value" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Value element end-->
+	
+
+	<view-state id="displayCommunication" view="/views/cac/CommunicationTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.communication" target="communication" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="communicationtype-bean.xml" />
+
+</flow>

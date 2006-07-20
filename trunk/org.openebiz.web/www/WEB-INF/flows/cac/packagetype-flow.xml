@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="package" target="flowScope.package" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PackageTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPackage">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="package" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReturnableMaterialIndicator" to="editReturnableMaterialIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackageLevelCode" to="editPackageLevelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackagingTypeCode" to="editPackagingTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackingMaterialList" to="editPackingMaterialList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editContainedPackage" to="editContainedPackage">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGoodsItemList" to="editGoodsItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editMeasurementDimensionList" to="editMeasurementDimensionList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDeliveryUnitList" to="editDeliveryUnitList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+<!-- ReturnableMaterialIndicator element start-->	
+	<subflow-state id="editReturnableMaterialIndicator" flow="returnablematerialindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.returnableMaterialIndicator"
+					target="returnableMaterialIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="returnableMaterialIndicator"
+					target="flowScope.returnableMaterialIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReturnableMaterialIndicator element end-->
+	
+<!-- PackageLevelCode element start-->	
+	<subflow-state id="editPackageLevelCode" flow="packagelevelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.packageLevelCode"
+					target="packageLevelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packageLevelCode"
+					target="flowScope.packageLevelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackageLevelCode element end-->
+	
+<!-- PackagingTypeCode element start-->	
+	<subflow-state id="editPackagingTypeCode" flow="packagingtypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.packagingTypeCode"
+					target="packagingTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packagingTypeCode"
+					target="flowScope.packagingTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackagingTypeCode element end-->
+	
+<!-- PackingMaterial list element start-->	
+	<subflow-state id="editPackingMaterialList" flow="packingmaterialtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.packingMaterial"
+					target="packingMaterialList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packingMaterial"
+					target="flowScope.packingMaterialList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackingMaterial list element end-->
+	
+<!-- ContainedPackage element start-->	
+	<subflow-state id="editContainedPackage" flow="packagetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.containedPackage"
+					target="package" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="containedPackage"
+					target="flowScope.package" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ContainedPackage element end-->
+	
+<!-- GoodsItem list element start-->	
+	<subflow-state id="editGoodsItemList" flow="goodsitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.goodsItem"
+					target="goodsItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="goodsItem"
+					target="flowScope.goodsItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GoodsItem list element end-->
+	
+<!-- MeasurementDimension list element start-->	
+	<subflow-state id="editMeasurementDimensionList" flow="measurementdimensiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.measurementDimension"
+					target="measurementDimensionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="measurementDimension"
+					target="flowScope.measurementDimensionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MeasurementDimension list element end-->
+	
+<!-- DeliveryUnit list element start-->	
+	<subflow-state id="editDeliveryUnitList" flow="deliveryunittypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.package.deliveryUnit"
+					target="deliveryUnitList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryUnit"
+					target="flowScope.deliveryUnitList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryUnit list element end-->
+	
+
+	<view-state id="displayPackage" view="/views/cac/PackageTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.package" target="package" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="packagetype-bean.xml" />
+
+</flow>

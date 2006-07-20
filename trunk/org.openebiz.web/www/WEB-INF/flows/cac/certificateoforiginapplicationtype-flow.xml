@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="certificateOfOriginApplication" target="flowScope.certificateOfOriginApplication" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CertificateOfOriginApplicationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCertificateOfOriginApplication">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="certificateOfOriginApplication" result-scope="flow" />
+		</transition>
+		<transition on="editReferenceID" to="editReferenceID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCertificateType" to="editCertificateType">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editStatusCode" to="editStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginalJobID" to="editOriginalJobID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPreviousJobID" to="editPreviousJobID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRemarks" to="editRemarks">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShipment" to="editShipment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEndorserPartyList" to="editEndorserPartyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editPreparationParty" to="editPreparationParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssuerParty" to="editIssuerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssuingCountry" to="editIssuingCountry">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentDistributionList" to="editDocumentDistributionList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editSupportingDocumentReferenceList" to="editSupportingDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ReferenceID element start-->	
+	<subflow-state id="editReferenceID" flow="referenceidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.referenceID"
+					target="referenceID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="referenceID"
+					target="flowScope.referenceID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReferenceID element end-->
+	
+<!-- CertificateType element start-->	
+	<subflow-state id="editCertificateType" flow="certificatetypetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.certificateType"
+					target="certificateType" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="certificateType"
+					target="flowScope.certificateType" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CertificateType element end-->
+	
+<!-- StatusCode element start-->	
+	<subflow-state id="editStatusCode" flow="statuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.statusCode"
+					target="statusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="statusCode"
+					target="flowScope.statusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- StatusCode element end-->
+	
+<!-- OriginalJobID element start-->	
+	<subflow-state id="editOriginalJobID" flow="originaljobidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.originalJobID"
+					target="originalJobID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originalJobID"
+					target="flowScope.originalJobID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginalJobID element end-->
+	
+<!-- PreviousJobID element start-->	
+	<subflow-state id="editPreviousJobID" flow="previousjobidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.previousJobID"
+					target="previousJobID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="previousJobID"
+					target="flowScope.previousJobID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PreviousJobID element end-->
+	
+<!-- Remarks element start-->	
+	<subflow-state id="editRemarks" flow="remarkstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.remarks"
+					target="remarks" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="remarks"
+					target="flowScope.remarks" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Remarks element end-->
+	
+<!-- Shipment element start-->	
+	<subflow-state id="editShipment" flow="shipmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.shipment"
+					target="shipment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.shipment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Shipment element end-->
+	
+<!-- EndorserParty list element start-->	
+	<subflow-state id="editEndorserPartyList" flow="endorserpartytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.endorserParty"
+					target="endorserPartyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="endorserParty"
+					target="flowScope.endorserPartyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EndorserParty list element end-->
+	
+<!-- PreparationParty element start-->	
+	<subflow-state id="editPreparationParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.preparationParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="preparationParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PreparationParty element end-->
+	
+<!-- IssuerParty element start-->	
+	<subflow-state id="editIssuerParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.issuerParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issuerParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssuerParty element end-->
+	
+<!-- IssuingCountry element start-->	
+	<subflow-state id="editIssuingCountry" flow="countrytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.issuingCountry"
+					target="country" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issuingCountry"
+					target="flowScope.country" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssuingCountry element end-->
+	
+<!-- DocumentDistribution list element start-->	
+	<subflow-state id="editDocumentDistributionList" flow="documentdistributiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.documentDistribution"
+					target="documentDistributionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentDistribution"
+					target="flowScope.documentDistributionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentDistribution list element end-->
+	
+<!-- SupportingDocumentReference list element start-->	
+	<subflow-state id="editSupportingDocumentReferenceList" flow="supportingdocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.supportingDocumentReference"
+					target="supportingDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="supportingDocumentReference"
+					target="flowScope.supportingDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SupportingDocumentReference list element end-->
+	
+<!-- Signature list element start-->	
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.certificateOfOriginApplication.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+	
+
+	<view-state id="displayCertificateOfOriginApplication" view="/views/cac/CertificateOfOriginApplicationTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.certificateOfOriginApplication" target="certificateOfOriginApplication" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="certificateoforiginapplicationtype-bean.xml" />
+
+</flow>

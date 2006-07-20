@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="person" target="flowScope.person" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PersonTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPerson">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="person" result-scope="flow" />
+		</transition>
+		<transition on="editFirstName" to="editFirstName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFamilyName" to="editFamilyName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTitle" to="editTitle">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMiddleName" to="editMiddleName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNameSuffix" to="editNameSuffix">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editJobTitle" to="editJobTitle">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrganizationDepartment" to="editOrganizationDepartment">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- FirstName element start-->	
+	<subflow-state id="editFirstName" flow="firstnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.firstName"
+					target="firstName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="firstName"
+					target="flowScope.firstName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FirstName element end-->
+	
+<!-- FamilyName element start-->	
+	<subflow-state id="editFamilyName" flow="familynametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.familyName"
+					target="familyName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="familyName"
+					target="flowScope.familyName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FamilyName element end-->
+	
+<!-- Title element start-->	
+	<subflow-state id="editTitle" flow="titletype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.title"
+					target="title" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="title"
+					target="flowScope.title" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Title element end-->
+	
+<!-- MiddleName element start-->	
+	<subflow-state id="editMiddleName" flow="middlenametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.middleName"
+					target="middleName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="middleName"
+					target="flowScope.middleName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MiddleName element end-->
+	
+<!-- NameSuffix element start-->	
+	<subflow-state id="editNameSuffix" flow="namesuffixtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.nameSuffix"
+					target="nameSuffix" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="nameSuffix"
+					target="flowScope.nameSuffix" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- NameSuffix element end-->
+	
+<!-- JobTitle element start-->	
+	<subflow-state id="editJobTitle" flow="jobtitletype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.jobTitle"
+					target="jobTitle" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="jobTitle"
+					target="flowScope.jobTitle" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- JobTitle element end-->
+	
+<!-- OrganizationDepartment element start-->	
+	<subflow-state id="editOrganizationDepartment" flow="organizationdepartmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.person.organizationDepartment"
+					target="organizationDepartment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="organizationDepartment"
+					target="flowScope.organizationDepartment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrganizationDepartment element end-->
+	
+
+	<view-state id="displayPerson" view="/views/cac/PersonTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.person" target="person" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="persontype-bean.xml" />
+
+</flow>

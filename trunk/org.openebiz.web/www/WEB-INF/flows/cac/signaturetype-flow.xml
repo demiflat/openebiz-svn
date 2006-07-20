@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="signature" target="flowScope.signature" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/SignatureTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySignature">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="signature" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidationDateTime" to="editValidationDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidatorID" to="editValidatorID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCanonicalizationMethod" to="editCanonicalizationMethod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSignatureMethod" to="editSignatureMethod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSignatoryParty" to="editSignatoryParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDigitalSignatureAttachment" to="editDigitalSignatureAttachment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginalDocumentReference" to="editOriginalDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- ValidationDateTime element start-->	
+	<subflow-state id="editValidationDateTime" flow="validationdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.validationDateTime"
+					target="validationDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validationDateTime"
+					target="flowScope.validationDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidationDateTime element end-->
+	
+<!-- ValidatorID element start-->	
+	<subflow-state id="editValidatorID" flow="validatoridtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.validatorID"
+					target="validatorID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validatorID"
+					target="flowScope.validatorID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidatorID element end-->
+	
+<!-- CanonicalizationMethod element start-->	
+	<subflow-state id="editCanonicalizationMethod" flow="canonicalizationmethodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.canonicalizationMethod"
+					target="canonicalizationMethod" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="canonicalizationMethod"
+					target="flowScope.canonicalizationMethod" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CanonicalizationMethod element end-->
+	
+<!-- SignatureMethod element start-->	
+	<subflow-state id="editSignatureMethod" flow="signaturemethodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.signatureMethod"
+					target="signatureMethod" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signatureMethod"
+					target="flowScope.signatureMethod" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SignatureMethod element end-->
+	
+<!-- SignatoryParty element start-->	
+	<subflow-state id="editSignatoryParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.signatoryParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signatoryParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SignatoryParty element end-->
+	
+<!-- DigitalSignatureAttachment element start-->	
+	<subflow-state id="editDigitalSignatureAttachment" flow="attachmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.digitalSignatureAttachment"
+					target="attachment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="digitalSignatureAttachment"
+					target="flowScope.attachment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DigitalSignatureAttachment element end-->
+	
+<!-- OriginalDocumentReference element start-->	
+	<subflow-state id="editOriginalDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.signature.originalDocumentReference"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originalDocumentReference"
+					target="flowScope.documentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginalDocumentReference element end-->
+	
+
+	<view-state id="displaySignature" view="/views/cac/SignatureTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.signature" target="signature" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="signaturetype-bean.xml" />
+
+</flow>

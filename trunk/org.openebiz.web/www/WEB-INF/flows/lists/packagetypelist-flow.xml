@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.PackageType"/>
+
+	<input-mapper>
+		<mapping source="packageList" target="flowScope.packageList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/PackageTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPackageTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="package" result-scope="flow" />
+		</transition>
+		<transition on="clearPackage" to="clearPackage">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addPackage" to="addPackage">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addPackage" flow="packagetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="package" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="package"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.packageList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearPackage">
+		<action bean="listUtils"
+			method="clearList(${flowScope.packageList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayPackageTypeList" view="/views/lists/PackageTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.packageList" target="packageList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="packagetypelist-bean.xml" />
+
+</flow>

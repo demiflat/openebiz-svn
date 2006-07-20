@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="lineItem" target="flowScope.lineItem" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LineItemTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLineItem">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="lineItem" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSalesOrderID" to="editSalesOrderID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGloballyUniqueGUID" to="editGloballyUniqueGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineStatusCode" to="editLineStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineExtensionAmount" to="editLineExtensionAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalTaxAmount" to="editTotalTaxAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumQuantity" to="editMinimumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumQuantity" to="editMaximumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumBackorderQuantity" to="editMinimumBackorderQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumBackorderQuantity" to="editMaximumBackorderQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInspectionMethodCode" to="editInspectionMethodCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPartialDeliveryIndicator" to="editPartialDeliveryIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBackOrderAllowedIndicator" to="editBackOrderAllowedIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAccountingCostCode" to="editAccountingCostCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeliveryList" to="editDeliveryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDeliveryTerms" to="editDeliveryTerms">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDestinationParty" to="editDestinationParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderedShipmentList" to="editOrderedShipmentList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAllowanceChargeList" to="editAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editBasePrice" to="editBasePrice">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editItem" to="editItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- SalesOrderID element start-->	
+	<subflow-state id="editSalesOrderID" flow="salesorderidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.salesOrderID"
+					target="salesOrderID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="salesOrderID"
+					target="flowScope.salesOrderID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SalesOrderID element end-->
+	
+<!-- GloballyUniqueGUID element start-->	
+	<subflow-state id="editGloballyUniqueGUID" flow="globallyuniqueguidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.globallyUniqueGUID"
+					target="globallyUniqueGUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="globallyUniqueGUID"
+					target="flowScope.globallyUniqueGUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GloballyUniqueGUID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- LineStatusCode element start-->	
+	<subflow-state id="editLineStatusCode" flow="linestatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.lineStatusCode"
+					target="lineStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineStatusCode"
+					target="flowScope.lineStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineStatusCode element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+<!-- LineExtensionAmount element start-->	
+	<subflow-state id="editLineExtensionAmount" flow="lineextensionamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.lineExtensionAmount"
+					target="lineExtensionAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineExtensionAmount"
+					target="flowScope.lineExtensionAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineExtensionAmount element end-->
+	
+<!-- TotalTaxAmount element start-->	
+	<subflow-state id="editTotalTaxAmount" flow="totaltaxamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.totalTaxAmount"
+					target="totalTaxAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalTaxAmount"
+					target="flowScope.totalTaxAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalTaxAmount element end-->
+	
+<!-- MinimumQuantity element start-->	
+	<subflow-state id="editMinimumQuantity" flow="minimumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.minimumQuantity"
+					target="minimumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumQuantity"
+					target="flowScope.minimumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumQuantity element end-->
+	
+<!-- MaximumQuantity element start-->	
+	<subflow-state id="editMaximumQuantity" flow="maximumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.maximumQuantity"
+					target="maximumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumQuantity"
+					target="flowScope.maximumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumQuantity element end-->
+	
+<!-- MinimumBackorderQuantity element start-->	
+	<subflow-state id="editMinimumBackorderQuantity" flow="minimumbackorderquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.minimumBackorderQuantity"
+					target="minimumBackorderQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumBackorderQuantity"
+					target="flowScope.minimumBackorderQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumBackorderQuantity element end-->
+	
+<!-- MaximumBackorderQuantity element start-->	
+	<subflow-state id="editMaximumBackorderQuantity" flow="maximumbackorderquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.maximumBackorderQuantity"
+					target="maximumBackorderQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumBackorderQuantity"
+					target="flowScope.maximumBackorderQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumBackorderQuantity element end-->
+	
+<!-- InspectionMethodCode element start-->	
+	<subflow-state id="editInspectionMethodCode" flow="inspectionmethodcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.inspectionMethodCode"
+					target="inspectionMethodCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="inspectionMethodCode"
+					target="flowScope.inspectionMethodCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InspectionMethodCode element end-->
+	
+<!-- PartialDeliveryIndicator element start-->	
+	<subflow-state id="editPartialDeliveryIndicator" flow="partialdeliveryindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.partialDeliveryIndicator"
+					target="partialDeliveryIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partialDeliveryIndicator"
+					target="flowScope.partialDeliveryIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PartialDeliveryIndicator element end-->
+	
+<!-- BackOrderAllowedIndicator element start-->	
+	<subflow-state id="editBackOrderAllowedIndicator" flow="backorderallowedindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.backOrderAllowedIndicator"
+					target="backOrderAllowedIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="backOrderAllowedIndicator"
+					target="flowScope.backOrderAllowedIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BackOrderAllowedIndicator element end-->
+	
+<!-- AccountingCostCode element start-->	
+	<subflow-state id="editAccountingCostCode" flow="accountingcostcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.accountingCostCode"
+					target="accountingCostCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingCostCode"
+					target="flowScope.accountingCostCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingCostCode element end-->
+	
+<!-- Delivery list element start-->	
+	<subflow-state id="editDeliveryList" flow="deliverytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.delivery"
+					target="deliveryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="delivery"
+					target="flowScope.deliveryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Delivery list element end-->
+	
+<!-- DeliveryTerms element start-->	
+	<subflow-state id="editDeliveryTerms" flow="deliverytermstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.deliveryTerms"
+					target="deliveryTerms" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryTerms"
+					target="flowScope.deliveryTerms" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryTerms element end-->
+	
+<!-- DestinationParty element start-->	
+	<subflow-state id="editDestinationParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.destinationParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="destinationParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DestinationParty element end-->
+	
+<!-- OrderedShipment list element start-->	
+	<subflow-state id="editOrderedShipmentList" flow="orderedshipmenttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.orderedShipment"
+					target="orderedShipmentList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderedShipment"
+					target="flowScope.orderedShipmentList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderedShipment list element end-->
+	
+<!-- AllowanceCharge list element start-->	
+	<subflow-state id="editAllowanceChargeList" flow="allowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.allowanceCharge"
+					target="allowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge list element end-->
+	
+<!-- BasePrice element start-->	
+	<subflow-state id="editBasePrice" flow="basepricetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.basePrice"
+					target="basePrice" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="basePrice"
+					target="flowScope.basePrice" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BasePrice element end-->
+	
+<!-- Item element start-->	
+	<subflow-state id="editItem" flow="itemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.lineItem.item"
+					target="item" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="item"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Item element end-->
+	
+
+	<view-state id="displayLineItem" view="/views/cac/LineItemTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.lineItem" target="lineItem" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="lineitemtype-bean.xml" />
+
+</flow>

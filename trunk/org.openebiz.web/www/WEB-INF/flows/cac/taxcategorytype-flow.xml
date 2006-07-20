@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="taxCategory" target="flowScope.taxCategory" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TaxCategoryTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxCategory">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxCategory" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPercent" to="editPercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBaseUnitMeasure" to="editBaseUnitMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPerUnitAmount" to="editPerUnitAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTierRange" to="editTierRange">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTierRatePercent" to="editTierRatePercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxScheme" to="editTaxScheme">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- Percent element start-->	
+	<subflow-state id="editPercent" flow="percenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.percent"
+					target="percent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="percent"
+					target="flowScope.percent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Percent element end-->
+	
+<!-- BaseUnitMeasure element start-->	
+	<subflow-state id="editBaseUnitMeasure" flow="baseunitmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.baseUnitMeasure"
+					target="baseUnitMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="baseUnitMeasure"
+					target="flowScope.baseUnitMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BaseUnitMeasure element end-->
+	
+<!-- PerUnitAmount element start-->	
+	<subflow-state id="editPerUnitAmount" flow="perunitamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.perUnitAmount"
+					target="perUnitAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="perUnitAmount"
+					target="flowScope.perUnitAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PerUnitAmount element end-->
+	
+<!-- TierRange element start-->	
+	<subflow-state id="editTierRange" flow="tierrangetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.tierRange"
+					target="tierRange" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tierRange"
+					target="flowScope.tierRange" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TierRange element end-->
+	
+<!-- TierRatePercent element start-->	
+	<subflow-state id="editTierRatePercent" flow="tierratepercenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.tierRatePercent"
+					target="tierRatePercent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tierRatePercent"
+					target="flowScope.tierRatePercent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TierRatePercent element end-->
+	
+<!-- TaxScheme element start-->	
+	<subflow-state id="editTaxScheme" flow="taxschemetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxCategory.taxScheme"
+					target="taxScheme" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxScheme"
+					target="flowScope.taxScheme" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxScheme element end-->
+	
+
+	<view-state id="displayTaxCategory" view="/views/cac/TaxCategoryTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxCategory" target="taxCategory" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxcategorytype-bean.xml" />
+
+</flow>

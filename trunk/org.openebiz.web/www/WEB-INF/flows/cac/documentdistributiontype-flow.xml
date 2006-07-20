@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="documentDistribution" target="flowScope.documentDistribution" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DocumentDistributionTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDocumentDistribution">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="documentDistribution" result-scope="flow" />
+		</transition>
+		<transition on="editPrintQualifier" to="editPrintQualifier">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumCopiesNumeric" to="editMaximumCopiesNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editParty" to="editParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- PrintQualifier element start-->	
+	<subflow-state id="editPrintQualifier" flow="printqualifiertype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentDistribution.printQualifier"
+					target="printQualifier" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="printQualifier"
+					target="flowScope.printQualifier" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PrintQualifier element end-->
+	
+<!-- MaximumCopiesNumeric element start-->	
+	<subflow-state id="editMaximumCopiesNumeric" flow="maximumcopiesnumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentDistribution.maximumCopiesNumeric"
+					target="maximumCopiesNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumCopiesNumeric"
+					target="flowScope.maximumCopiesNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumCopiesNumeric element end-->
+	
+<!-- Party element start-->	
+	<subflow-state id="editParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentDistribution.party"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="party"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Party element end-->
+	
+
+	<view-state id="displayDocumentDistribution" view="/views/cac/DocumentDistributionTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.documentDistribution" target="documentDistribution" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="documentdistributiontype-bean.xml" />
+
+</flow>

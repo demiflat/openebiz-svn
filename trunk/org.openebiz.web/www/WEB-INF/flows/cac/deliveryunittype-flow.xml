@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="deliveryUnit" target="flowScope.deliveryUnit" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DeliveryUnitTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDeliveryUnit">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="deliveryUnit" result-scope="flow" />
+		</transition>
+		<transition on="editBatchQuantity" to="editBatchQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editConsumerUnitQuantity" to="editConsumerUnitQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHazardousRiskIndicator" to="editHazardousRiskIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- BatchQuantity element start-->	
+	<subflow-state id="editBatchQuantity" flow="batchquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryUnit.batchQuantity"
+					target="batchQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="batchQuantity"
+					target="flowScope.batchQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BatchQuantity element end-->
+	
+<!-- ConsumerUnitQuantity element start-->	
+	<subflow-state id="editConsumerUnitQuantity" flow="consumerunitquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryUnit.consumerUnitQuantity"
+					target="consumerUnitQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="consumerUnitQuantity"
+					target="flowScope.consumerUnitQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ConsumerUnitQuantity element end-->
+	
+<!-- HazardousRiskIndicator element start-->	
+	<subflow-state id="editHazardousRiskIndicator" flow="hazardousriskindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.deliveryUnit.hazardousRiskIndicator"
+					target="hazardousRiskIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardousRiskIndicator"
+					target="flowScope.hazardousRiskIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardousRiskIndicator element end-->
+	
+
+	<view-state id="displayDeliveryUnit" view="/views/cac/DeliveryUnitTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.deliveryUnit" target="deliveryUnit" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="deliveryunittype-bean.xml" />
+
+</flow>

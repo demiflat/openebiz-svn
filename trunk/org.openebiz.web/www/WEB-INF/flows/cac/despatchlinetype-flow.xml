@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="despatchLine" target="flowScope.despatchLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DespatchLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDespatchLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="despatchLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineStatusCode" to="editLineStatusCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeliveredQuantity" to="editDeliveredQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBackOrderQuantity" to="editBackOrderQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBackOrderReason" to="editBackOrderReason">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOutstandingQuantity" to="editOutstandingQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOutstandingReason" to="editOutstandingReason">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOverSupplyQuantity" to="editOverSupplyQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderLineReferenceList" to="editOrderLineReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editItem" to="editItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShipmentList" to="editShipmentList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- LineStatusCode element start-->	
+	<subflow-state id="editLineStatusCode" flow="linestatuscodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.lineStatusCode"
+					target="lineStatusCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineStatusCode"
+					target="flowScope.lineStatusCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineStatusCode element end-->
+	
+<!-- DeliveredQuantity element start-->	
+	<subflow-state id="editDeliveredQuantity" flow="deliveredquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.deliveredQuantity"
+					target="deliveredQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveredQuantity"
+					target="flowScope.deliveredQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveredQuantity element end-->
+	
+<!-- BackOrderQuantity element start-->	
+	<subflow-state id="editBackOrderQuantity" flow="backorderquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.backOrderQuantity"
+					target="backOrderQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="backOrderQuantity"
+					target="flowScope.backOrderQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BackOrderQuantity element end-->
+	
+<!-- BackOrderReason element start-->	
+	<subflow-state id="editBackOrderReason" flow="backorderreasontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.backOrderReason"
+					target="backOrderReason" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="backOrderReason"
+					target="flowScope.backOrderReason" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BackOrderReason element end-->
+	
+<!-- OutstandingQuantity element start-->	
+	<subflow-state id="editOutstandingQuantity" flow="outstandingquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.outstandingQuantity"
+					target="outstandingQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="outstandingQuantity"
+					target="flowScope.outstandingQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OutstandingQuantity element end-->
+	
+<!-- OutstandingReason element start-->	
+	<subflow-state id="editOutstandingReason" flow="outstandingreasontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.outstandingReason"
+					target="outstandingReason" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="outstandingReason"
+					target="flowScope.outstandingReason" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OutstandingReason element end-->
+	
+<!-- OverSupplyQuantity element start-->	
+	<subflow-state id="editOverSupplyQuantity" flow="oversupplyquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.overSupplyQuantity"
+					target="overSupplyQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="overSupplyQuantity"
+					target="flowScope.overSupplyQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OverSupplyQuantity element end-->
+	
+<!-- OrderLineReference list element start-->	
+	<subflow-state id="editOrderLineReferenceList" flow="orderlinereferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.orderLineReference"
+					target="orderLineReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderLineReference"
+					target="flowScope.orderLineReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderLineReference list element end-->
+	
+<!-- Item element start-->	
+	<subflow-state id="editItem" flow="itemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.item"
+					target="item" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="item"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Item element end-->
+	
+<!-- Shipment list element start-->	
+	<subflow-state id="editShipmentList" flow="shipmenttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatchLine.shipment"
+					target="shipmentList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.shipmentList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Shipment list element end-->
+	
+
+	<view-state id="displayDespatchLine" view="/views/cac/DespatchLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.despatchLine" target="despatchLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="despatchlinetype-bean.xml" />
+
+</flow>

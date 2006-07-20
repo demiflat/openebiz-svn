@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="taxSubTotal" target="flowScope.taxSubTotal" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TaxSubTotalTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxSubTotal">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxSubTotal" result-scope="flow" />
+		</transition>
+		<transition on="editTaxableAmount" to="editTaxableAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxAmount" to="editTaxAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCalculationSequenceNumeric" to="editCalculationSequenceNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionCurrencyTaxAmount" to="editTransactionCurrencyTaxAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPercent" to="editPercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExemptionReason" to="editExemptionReason">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBaseUnitMeasure" to="editBaseUnitMeasure">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPerUnitAmount" to="editPerUnitAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTierRange" to="editTierRange">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTierRatePercent" to="editTierRatePercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxCategory" to="editTaxCategory">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- TaxableAmount element start-->	
+	<subflow-state id="editTaxableAmount" flow="taxableamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.taxableAmount"
+					target="taxableAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxableAmount"
+					target="flowScope.taxableAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxableAmount element end-->
+	
+<!-- TaxAmount element start-->	
+	<subflow-state id="editTaxAmount" flow="taxamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.taxAmount"
+					target="taxAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxAmount"
+					target="flowScope.taxAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxAmount element end-->
+	
+<!-- CalculationSequenceNumeric element start-->	
+	<subflow-state id="editCalculationSequenceNumeric" flow="calculationsequencenumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.calculationSequenceNumeric"
+					target="calculationSequenceNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="calculationSequenceNumeric"
+					target="flowScope.calculationSequenceNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CalculationSequenceNumeric element end-->
+	
+<!-- TransactionCurrencyTaxAmount element start-->	
+	<subflow-state id="editTransactionCurrencyTaxAmount" flow="transactioncurrencytaxamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.transactionCurrencyTaxAmount"
+					target="transactionCurrencyTaxAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionCurrencyTaxAmount"
+					target="flowScope.transactionCurrencyTaxAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionCurrencyTaxAmount element end-->
+	
+<!-- Percent element start-->	
+	<subflow-state id="editPercent" flow="percenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.percent"
+					target="percent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="percent"
+					target="flowScope.percent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Percent element end-->
+	
+<!-- ExemptionReason element start-->	
+	<subflow-state id="editExemptionReason" flow="exemptionreasontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.exemptionReason"
+					target="exemptionReason" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exemptionReason"
+					target="flowScope.exemptionReason" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExemptionReason element end-->
+	
+<!-- BaseUnitMeasure element start-->	
+	<subflow-state id="editBaseUnitMeasure" flow="baseunitmeasuretype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.baseUnitMeasure"
+					target="baseUnitMeasure" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="baseUnitMeasure"
+					target="flowScope.baseUnitMeasure" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BaseUnitMeasure element end-->
+	
+<!-- PerUnitAmount element start-->	
+	<subflow-state id="editPerUnitAmount" flow="perunitamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.perUnitAmount"
+					target="perUnitAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="perUnitAmount"
+					target="flowScope.perUnitAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PerUnitAmount element end-->
+	
+<!-- TierRange element start-->	
+	<subflow-state id="editTierRange" flow="tierrangetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.tierRange"
+					target="tierRange" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tierRange"
+					target="flowScope.tierRange" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TierRange element end-->
+	
+<!-- TierRatePercent element start-->	
+	<subflow-state id="editTierRatePercent" flow="tierratepercenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.tierRatePercent"
+					target="tierRatePercent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="tierRatePercent"
+					target="flowScope.tierRatePercent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TierRatePercent element end-->
+	
+<!-- TaxCategory element start-->	
+	<subflow-state id="editTaxCategory" flow="taxcategorytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.taxSubTotal.taxCategory"
+					target="taxCategory" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxCategory"
+					target="flowScope.taxCategory" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxCategory element end-->
+	
+
+	<view-state id="displayTaxSubTotal" view="/views/cac/TaxSubTotalTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxSubTotal" target="taxSubTotal" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxsubtotaltype-bean.xml" />
+
+</flow>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/PackingListTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPackingList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="packingList" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editVersionID" to="editVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOtherInstruction" to="editOtherInstruction">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editConsignorParty" to="editConsignorParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCarrierParty" to="editCarrierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFreightForwarderParty" to="editFreightForwarderParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShipment" to="editShipment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentReferenceList" to="editDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDocumentDistributionList" to="editDocumentDistributionList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- Name element start-->
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+
+<!-- Description element start-->
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+
+<!-- Note element start-->
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+
+<!-- VersionID element start-->
+	<subflow-state id="editVersionID" flow="versionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.versionID"
+					target="versionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="versionID"
+					target="flowScope.versionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VersionID element end-->
+
+<!-- OtherInstruction element start-->
+	<subflow-state id="editOtherInstruction" flow="otherinstructiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.otherInstruction"
+					target="otherInstruction" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="otherInstruction"
+					target="flowScope.otherInstruction" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OtherInstruction element end-->
+
+<!-- ConsignorParty element start-->
+	<subflow-state id="editConsignorParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.consignorParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="consignorParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ConsignorParty element end-->
+
+<!-- CarrierParty element start-->
+	<subflow-state id="editCarrierParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.carrierParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="carrierParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CarrierParty element end-->
+
+<!-- FreightForwarderParty element start-->
+	<subflow-state id="editFreightForwarderParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.freightForwarderParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="freightForwarderParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FreightForwarderParty element end-->
+
+<!-- Shipment element start-->
+	<subflow-state id="editShipment" flow="shipmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.shipment"
+					target="shipment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.shipment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Shipment element end-->
+
+<!-- DocumentReference list element start-->
+	<subflow-state id="editDocumentReferenceList" flow="documentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.documentReference"
+					target="documentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentReference"
+					target="flowScope.documentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentReference list element end-->
+		
+<!-- DocumentDistribution list element start-->
+	<subflow-state id="editDocumentDistributionList" flow="documentdistributiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.documentDistribution"
+					target="documentDistributionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentDistribution"
+					target="flowScope.documentDistributionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentDistribution list element end-->
+		
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.packingList.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+	<view-state id="displayPackingList" view="/views/bizdocs/PackingListTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:packinglisttype-flow" />
+
+	<import resource="packinglisttype-bean.xml" />
+
+</flow>

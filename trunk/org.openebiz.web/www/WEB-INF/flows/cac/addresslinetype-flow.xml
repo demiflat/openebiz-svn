@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="addressLine" target="flowScope.addressLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/AddressLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAddressLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="addressLine" result-scope="flow" />
+		</transition>
+		<transition on="editLine" to="editLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- Line element start-->	
+	<subflow-state id="editLine" flow="linetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.addressLine.line"
+					target="line" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="line"
+					target="flowScope.line" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Line element end-->
+	
+
+	<view-state id="displayAddressLine" view="/views/cac/AddressLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.addressLine" target="addressLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="addresslinetype-bean.xml" />
+
+</flow>

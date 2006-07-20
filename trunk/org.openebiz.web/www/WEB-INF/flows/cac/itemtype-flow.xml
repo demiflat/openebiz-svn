@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="item" target="flowScope.item" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ItemTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayItem">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="item" result-scope="flow" />
+		</transition>
+		<transition on="editDescription" to="editDescription">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackQuantity" to="editPackQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPackSizeNumeric" to="editPackSizeNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCatalogueIndicator" to="editCatalogueIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editHazardousRiskIndicator" to="editHazardousRiskIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalInformation" to="editAdditionalInformation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editKeywordList" to="editKeywordList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editBrandNameList" to="editBrandNameList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editModelNameList" to="editModelNameList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editBuyersItemIdentification" to="editBuyersItemIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSellersItemIdentification" to="editSellersItemIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editManufacturersItemIdentification" to="editManufacturersItemIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editStandardItemIdentification" to="editStandardItemIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCatalogueItemIdentification" to="editCatalogueItemIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalItemIdentificationList" to="editAdditionalItemIdentificationList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editCatalogueDocumentReference" to="editCatalogueDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLotIdentification" to="editLotIdentification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginCountry" to="editOriginCountry">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCommodityClassification" to="editCommodityClassification">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionConditionsList" to="editTransactionConditionsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editHazardousItemList" to="editHazardousItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editClassifiedTaxCategoryList" to="editClassifiedTaxCategoryList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAdditionalItemPropertyList" to="editAdditionalItemPropertyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editManufacturerPartyList" to="editManufacturerPartyList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editInformationContentProviderParty" to="editInformationContentProviderParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginAddressList" to="editOriginAddressList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editItemInstanceList" to="editItemInstanceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- Description element start-->	
+	<subflow-state id="editDescription" flow="descriptiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.description"
+					target="description" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.description" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description element end-->
+	
+<!-- PackQuantity element start-->	
+	<subflow-state id="editPackQuantity" flow="packquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.packQuantity"
+					target="packQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packQuantity"
+					target="flowScope.packQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackQuantity element end-->
+	
+<!-- PackSizeNumeric element start-->	
+	<subflow-state id="editPackSizeNumeric" flow="packsizenumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.packSizeNumeric"
+					target="packSizeNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="packSizeNumeric"
+					target="flowScope.packSizeNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PackSizeNumeric element end-->
+	
+<!-- CatalogueIndicator element start-->	
+	<subflow-state id="editCatalogueIndicator" flow="catalogueindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.catalogueIndicator"
+					target="catalogueIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueIndicator"
+					target="flowScope.catalogueIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CatalogueIndicator element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- HazardousRiskIndicator element start-->	
+	<subflow-state id="editHazardousRiskIndicator" flow="hazardousriskindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.hazardousRiskIndicator"
+					target="hazardousRiskIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardousRiskIndicator"
+					target="flowScope.hazardousRiskIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardousRiskIndicator element end-->
+	
+<!-- AdditionalInformation element start-->	
+	<subflow-state id="editAdditionalInformation" flow="additionalinformationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.additionalInformation"
+					target="additionalInformation" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalInformation"
+					target="flowScope.additionalInformation" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalInformation element end-->
+	
+<!-- Keyword list element start-->	
+	<subflow-state id="editKeywordList" flow="keywordtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.keyword"
+					target="keywordList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="keyword"
+					target="flowScope.keywordList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Keyword list element end-->
+	
+<!-- BrandName list element start-->	
+	<subflow-state id="editBrandNameList" flow="brandnametypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.brandName"
+					target="brandNameList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="brandName"
+					target="flowScope.brandNameList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BrandName list element end-->
+	
+<!-- ModelName list element start-->	
+	<subflow-state id="editModelNameList" flow="modelnametypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.modelName"
+					target="modelNameList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="modelName"
+					target="flowScope.modelNameList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ModelName list element end-->
+	
+<!-- BuyersItemIdentification element start-->	
+	<subflow-state id="editBuyersItemIdentification" flow="itemidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.buyersItemIdentification"
+					target="itemIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="buyersItemIdentification"
+					target="flowScope.itemIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BuyersItemIdentification element end-->
+	
+<!-- SellersItemIdentification element start-->	
+	<subflow-state id="editSellersItemIdentification" flow="itemidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.sellersItemIdentification"
+					target="itemIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellersItemIdentification"
+					target="flowScope.itemIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellersItemIdentification element end-->
+	
+<!-- ManufacturersItemIdentification element start-->	
+	<subflow-state id="editManufacturersItemIdentification" flow="itemidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.manufacturersItemIdentification"
+					target="itemIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="manufacturersItemIdentification"
+					target="flowScope.itemIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ManufacturersItemIdentification element end-->
+	
+<!-- StandardItemIdentification element start-->	
+	<subflow-state id="editStandardItemIdentification" flow="itemidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.standardItemIdentification"
+					target="itemIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="standardItemIdentification"
+					target="flowScope.itemIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- StandardItemIdentification element end-->
+	
+<!-- CatalogueItemIdentification element start-->	
+	<subflow-state id="editCatalogueItemIdentification" flow="itemidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.catalogueItemIdentification"
+					target="itemIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueItemIdentification"
+					target="flowScope.itemIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CatalogueItemIdentification element end-->
+	
+<!-- AdditionalItemIdentification list element start-->	
+	<subflow-state id="editAdditionalItemIdentificationList" flow="additionalitemidentificationtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.additionalItemIdentification"
+					target="additionalItemIdentificationList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalItemIdentification"
+					target="flowScope.additionalItemIdentificationList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalItemIdentification list element end-->
+	
+<!-- CatalogueDocumentReference element start-->	
+	<subflow-state id="editCatalogueDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.catalogueDocumentReference"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueDocumentReference"
+					target="flowScope.documentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CatalogueDocumentReference element end-->
+	
+<!-- LotIdentification element start-->	
+	<subflow-state id="editLotIdentification" flow="lotidentificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.lotIdentification"
+					target="lotIdentification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lotIdentification"
+					target="flowScope.lotIdentification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LotIdentification element end-->
+	
+<!-- OriginCountry element start-->	
+	<subflow-state id="editOriginCountry" flow="countrytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.originCountry"
+					target="country" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originCountry"
+					target="flowScope.country" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginCountry element end-->
+	
+<!-- CommodityClassification element start-->	
+	<subflow-state id="editCommodityClassification" flow="commodityclassificationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.commodityClassification"
+					target="commodityClassification" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="commodityClassification"
+					target="flowScope.commodityClassification" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CommodityClassification element end-->
+	
+<!-- TransactionConditions list element start-->	
+	<subflow-state id="editTransactionConditionsList" flow="transactionconditionstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.transactionConditions"
+					target="transactionConditionsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionConditions"
+					target="flowScope.transactionConditionsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionConditions list element end-->
+	
+<!-- HazardousItem list element start-->	
+	<subflow-state id="editHazardousItemList" flow="hazardousitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.hazardousItem"
+					target="hazardousItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="hazardousItem"
+					target="flowScope.hazardousItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- HazardousItem list element end-->
+	
+<!-- ClassifiedTaxCategory list element start-->	
+	<subflow-state id="editClassifiedTaxCategoryList" flow="classifiedtaxcategorytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.classifiedTaxCategory"
+					target="classifiedTaxCategoryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="classifiedTaxCategory"
+					target="flowScope.classifiedTaxCategoryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ClassifiedTaxCategory list element end-->
+	
+<!-- AdditionalItemProperty list element start-->	
+	<subflow-state id="editAdditionalItemPropertyList" flow="additionalitempropertytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.additionalItemProperty"
+					target="additionalItemPropertyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalItemProperty"
+					target="flowScope.additionalItemPropertyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalItemProperty list element end-->
+	
+<!-- ManufacturerParty list element start-->	
+	<subflow-state id="editManufacturerPartyList" flow="manufacturerpartytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.manufacturerParty"
+					target="manufacturerPartyList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="manufacturerParty"
+					target="flowScope.manufacturerPartyList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ManufacturerParty list element end-->
+	
+<!-- InformationContentProviderParty element start-->	
+	<subflow-state id="editInformationContentProviderParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.informationContentProviderParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="informationContentProviderParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InformationContentProviderParty element end-->
+	
+<!-- OriginAddress list element start-->	
+	<subflow-state id="editOriginAddressList" flow="originaddresstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.originAddress"
+					target="originAddressList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originAddress"
+					target="flowScope.originAddressList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginAddress list element end-->
+	
+<!-- ItemInstance list element start-->	
+	<subflow-state id="editItemInstanceList" flow="iteminstancetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item.itemInstance"
+					target="itemInstanceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="itemInstance"
+					target="flowScope.itemInstanceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ItemInstance list element end-->
+	
+
+	<view-state id="displayItem" view="/views/cac/ItemTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.item" target="item" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="itemtype-bean.xml" />
+
+</flow>

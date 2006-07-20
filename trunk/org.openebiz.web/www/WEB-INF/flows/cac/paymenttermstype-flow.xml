@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="paymentTerms" target="flowScope.paymentTerms" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PaymentTermsTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPaymentTerms">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="paymentTerms" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReferenceEventCode" to="editReferenceEventCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSettlementDiscountPercent" to="editSettlementDiscountPercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPenaltySurchargePercent" to="editPenaltySurchargePercent">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAmount" to="editAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSettlementPeriod" to="editSettlementPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPenaltyPeriod" to="editPenaltyPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentMeans" to="editPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- ReferenceEventCode element start-->	
+	<subflow-state id="editReferenceEventCode" flow="referenceeventcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.referenceEventCode"
+					target="referenceEventCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="referenceEventCode"
+					target="flowScope.referenceEventCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReferenceEventCode element end-->
+	
+<!-- SettlementDiscountPercent element start-->	
+	<subflow-state id="editSettlementDiscountPercent" flow="settlementdiscountpercenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.settlementDiscountPercent"
+					target="settlementDiscountPercent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="settlementDiscountPercent"
+					target="flowScope.settlementDiscountPercent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SettlementDiscountPercent element end-->
+	
+<!-- PenaltySurchargePercent element start-->	
+	<subflow-state id="editPenaltySurchargePercent" flow="penaltysurchargepercenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.penaltySurchargePercent"
+					target="penaltySurchargePercent" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="penaltySurchargePercent"
+					target="flowScope.penaltySurchargePercent" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PenaltySurchargePercent element end-->
+	
+<!-- Amount element start-->	
+	<subflow-state id="editAmount" flow="amounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.amount"
+					target="amount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="amount"
+					target="flowScope.amount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Amount element end-->
+	
+<!-- SettlementPeriod element start-->	
+	<subflow-state id="editSettlementPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.settlementPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="settlementPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SettlementPeriod element end-->
+	
+<!-- PenaltyPeriod element start-->	
+	<subflow-state id="editPenaltyPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.penaltyPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="penaltyPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PenaltyPeriod element end-->
+	
+<!-- PaymentMeans element start-->	
+	<subflow-state id="editPaymentMeans" flow="paymentmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.paymentTerms.paymentMeans"
+					target="paymentMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeans" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans element end-->
+	
+
+	<view-state id="displayPaymentTerms" view="/views/cac/PaymentTermsTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.paymentTerms" target="paymentTerms" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="paymenttermstype-bean.xml" />
+
+</flow>

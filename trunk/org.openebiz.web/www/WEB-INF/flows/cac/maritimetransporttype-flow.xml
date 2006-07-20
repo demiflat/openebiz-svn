@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="maritimeTransport" target="flowScope.maritimeTransport" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/MaritimeTransportTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayMaritimeTransport">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="maritimeTransport" result-scope="flow" />
+		</transition>
+		<transition on="editVesselID" to="editVesselID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editVesselName" to="editVesselName">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- VesselID element start-->	
+	<subflow-state id="editVesselID" flow="vesselidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.maritimeTransport.vesselID"
+					target="vesselID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="vesselID"
+					target="flowScope.vesselID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VesselID element end-->
+	
+<!-- VesselName element start-->	
+	<subflow-state id="editVesselName" flow="vesselnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.maritimeTransport.vesselName"
+					target="vesselName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="vesselName"
+					target="flowScope.vesselName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VesselName element end-->
+	
+
+	<view-state id="displayMaritimeTransport" view="/views/cac/MaritimeTransportTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.maritimeTransport" target="maritimeTransport" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="maritimetransporttype-bean.xml" />
+
+</flow>

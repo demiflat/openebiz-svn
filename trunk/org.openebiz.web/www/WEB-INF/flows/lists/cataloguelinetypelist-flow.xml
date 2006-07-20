@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.CatalogueLineType"/>
+
+	<input-mapper>
+		<mapping source="catalogueLineList" target="flowScope.catalogueLineList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/CatalogueLineTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCatalogueLineTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="catalogueLine" result-scope="flow" />
+		</transition>
+		<transition on="clearCatalogueLine" to="clearCatalogueLine">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addCatalogueLine" to="addCatalogueLine">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addCatalogueLine" flow="cataloguelinetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="catalogueLine" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="catalogueLine"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.catalogueLineList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearCatalogueLine">
+		<action bean="listUtils"
+			method="clearList(${flowScope.catalogueLineList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayCatalogueLineTypeList" view="/views/lists/CatalogueLineTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.catalogueLineList" target="catalogueLineList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="cataloguelinetypelist-bean.xml" />
+
+</flow>

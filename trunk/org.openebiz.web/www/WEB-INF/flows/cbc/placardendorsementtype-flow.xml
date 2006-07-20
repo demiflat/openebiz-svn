@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="placardEndorsement" target="flowScope.placardEndorsement" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/PlacardEndorsementTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPlacardEndorsement">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="placardEndorsement" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayPlacardEndorsement" view="/views/cbc/PlacardEndorsementTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.placardEndorsement" target="placardEndorsement" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="placardendorsementtype-bean.xml" />
+
+</flow>

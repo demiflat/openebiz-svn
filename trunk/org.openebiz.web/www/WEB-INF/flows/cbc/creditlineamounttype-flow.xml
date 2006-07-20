@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="creditLineAmount" target="flowScope.creditLineAmount" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/CreditLineAmountTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCreditLineAmount">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="creditLineAmount" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayCreditLineAmount" view="/views/cbc/CreditLineAmountTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.creditLineAmount" target="creditLineAmount" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="creditlineamounttype-bean.xml" />
+
+</flow>

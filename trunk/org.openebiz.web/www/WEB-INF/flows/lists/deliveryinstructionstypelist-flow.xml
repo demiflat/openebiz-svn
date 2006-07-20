@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="deliveryInstructionsList" target="flowScope.deliveryInstructionsList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DeliveryInstructionsTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDeliveryInstructionsTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="deliveryInstructions" result-scope="flow" />
+		</transition>
+		<transition on="clearDeliveryInstructions" to="clearDeliveryInstructions">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDeliveryInstructions" to="addDeliveryInstructions">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Delivery Instructions -->
+
+	<view-state id="displayDeliveryInstructionsTypeList" view="/views/lists/DeliveryInstructionsTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.deliveryInstructionsList" target="deliveryInstructionsList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="deliveryinstructionstypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="address" target="flowScope.address" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/AddressTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayAddress">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="address" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPostbox" to="editPostbox">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFloor" to="editFloor">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRoom" to="editRoom">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editStreetName" to="editStreetName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalStreetName" to="editAdditionalStreetName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBuildingName" to="editBuildingName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editBuildingNumber" to="editBuildingNumber">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInhouseMail" to="editInhouseMail">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDepartment" to="editDepartment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCityName" to="editCityName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPostalZone" to="editPostalZone">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCountrySubentity" to="editCountrySubentity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCountrySubentityCode" to="editCountrySubentityCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegion" to="editRegion">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDistrict" to="editDistrict">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTimezoneOffset" to="editTimezoneOffset">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAddressLineList" to="editAddressLineList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editCountry" to="editCountry">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLocationCoordinate" to="editLocationCoordinate">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Postbox element start-->	
+	<subflow-state id="editPostbox" flow="postboxtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.postbox"
+					target="postbox" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="postbox"
+					target="flowScope.postbox" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Postbox element end-->
+	
+<!-- Floor element start-->	
+	<subflow-state id="editFloor" flow="floortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.floor"
+					target="floor" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="floor"
+					target="flowScope.floor" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Floor element end-->
+	
+<!-- Room element start-->	
+	<subflow-state id="editRoom" flow="roomtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.room"
+					target="room" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="room"
+					target="flowScope.room" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Room element end-->
+	
+<!-- StreetName element start-->	
+	<subflow-state id="editStreetName" flow="streetnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.streetName"
+					target="streetName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="streetName"
+					target="flowScope.streetName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- StreetName element end-->
+	
+<!-- AdditionalStreetName element start-->	
+	<subflow-state id="editAdditionalStreetName" flow="additionalstreetnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.additionalStreetName"
+					target="additionalStreetName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalStreetName"
+					target="flowScope.additionalStreetName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalStreetName element end-->
+	
+<!-- BuildingName element start-->	
+	<subflow-state id="editBuildingName" flow="buildingnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.buildingName"
+					target="buildingName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="buildingName"
+					target="flowScope.buildingName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BuildingName element end-->
+	
+<!-- BuildingNumber element start-->	
+	<subflow-state id="editBuildingNumber" flow="buildingnumbertype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.buildingNumber"
+					target="buildingNumber" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="buildingNumber"
+					target="flowScope.buildingNumber" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- BuildingNumber element end-->
+	
+<!-- InhouseMail element start-->	
+	<subflow-state id="editInhouseMail" flow="inhousemailtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.inhouseMail"
+					target="inhouseMail" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="inhouseMail"
+					target="flowScope.inhouseMail" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InhouseMail element end-->
+	
+<!-- Department element start-->	
+	<subflow-state id="editDepartment" flow="departmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.department"
+					target="department" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="department"
+					target="flowScope.department" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Department element end-->
+	
+<!-- CityName element start-->	
+	<subflow-state id="editCityName" flow="citynametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.cityName"
+					target="cityName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="cityName"
+					target="flowScope.cityName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CityName element end-->
+	
+<!-- PostalZone element start-->	
+	<subflow-state id="editPostalZone" flow="postalzonetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.postalZone"
+					target="postalZone" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="postalZone"
+					target="flowScope.postalZone" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PostalZone element end-->
+	
+<!-- CountrySubentity element start-->	
+	<subflow-state id="editCountrySubentity" flow="countrysubentitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.countrySubentity"
+					target="countrySubentity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="countrySubentity"
+					target="flowScope.countrySubentity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CountrySubentity element end-->
+	
+<!-- CountrySubentityCode element start-->	
+	<subflow-state id="editCountrySubentityCode" flow="countrysubentitycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.countrySubentityCode"
+					target="countrySubentityCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="countrySubentityCode"
+					target="flowScope.countrySubentityCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CountrySubentityCode element end-->
+	
+<!-- Region element start-->	
+	<subflow-state id="editRegion" flow="regiontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.region"
+					target="region" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="region"
+					target="flowScope.region" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Region element end-->
+	
+<!-- District element start-->	
+	<subflow-state id="editDistrict" flow="districttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.district"
+					target="district" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="district"
+					target="flowScope.district" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- District element end-->
+	
+<!-- TimezoneOffset element start-->	
+	<subflow-state id="editTimezoneOffset" flow="timezoneoffsettype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.timezoneOffset"
+					target="timezoneOffset" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="timezoneOffset"
+					target="flowScope.timezoneOffset" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TimezoneOffset element end-->
+	
+<!-- AddressLine list element start-->	
+	<subflow-state id="editAddressLineList" flow="addresslinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.addressLine"
+					target="addressLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="addressLine"
+					target="flowScope.addressLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AddressLine list element end-->
+	
+<!-- Country element start-->	
+	<subflow-state id="editCountry" flow="countrytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.country"
+					target="country" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="country"
+					target="flowScope.country" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Country element end-->
+	
+<!-- LocationCoordinate element start-->	
+	<subflow-state id="editLocationCoordinate" flow="locationcoordinatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.address.locationCoordinate"
+					target="locationCoordinate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="locationCoordinate"
+					target="flowScope.locationCoordinate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LocationCoordinate element end-->
+	
+
+	<view-state id="displayAddress" view="/views/cac/AddressTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.address" target="address" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="addresstype-bean.xml" />
+
+</flow>

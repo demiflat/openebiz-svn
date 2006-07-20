@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/QuotationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayQuotation">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="quotation" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCopyIndicator" to="editCopyIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionCurrencyCode" to="editTransactionCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPricingCurrencyCode" to="editPricingCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editValidityPeriod" to="editValidityPeriod">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRequestForQuotationDocumentReference" to="editRequestForQuotationDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalDocumentReferenceList" to="editAdditionalDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editContractList" to="editContractList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignatureList" to="editSignatureList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSellerSupplierParty" to="editSellerSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginatorCustomerParty" to="editOriginatorCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeliveryList" to="editDeliveryList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDeliveryTerms" to="editDeliveryTerms">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentMeans" to="editPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTransactionConditions" to="editTransactionConditions">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAllowanceChargeList" to="editAllowanceChargeList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editDestinationCountry" to="editDestinationCountry">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editLegalTotal" to="editLegalTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuotationLineList" to="editQuotationLineList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- CopyIndicator element start-->
+	<subflow-state id="editCopyIndicator" flow="copyindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.copyIndicator"
+					target="copyIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="copyIndicator"
+					target="flowScope.copyIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CopyIndicator element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- Note element start-->
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+
+<!-- TransactionCurrencyCode element start-->
+	<subflow-state id="editTransactionCurrencyCode" flow="transactioncurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.transactionCurrencyCode"
+					target="transactionCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionCurrencyCode"
+					target="flowScope.transactionCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionCurrencyCode element end-->
+
+<!-- PricingCurrencyCode element start-->
+	<subflow-state id="editPricingCurrencyCode" flow="pricingcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.pricingCurrencyCode"
+					target="pricingCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="pricingCurrencyCode"
+					target="flowScope.pricingCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PricingCurrencyCode element end-->
+
+<!-- ValidityPeriod element start-->
+	<subflow-state id="editValidityPeriod" flow="periodtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.validityPeriod"
+					target="period" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="validityPeriod"
+					target="flowScope.period" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ValidityPeriod element end-->
+
+<!-- RequestForQuotationDocumentReference element start-->
+	<subflow-state id="editRequestForQuotationDocumentReference" flow="documentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.requestForQuotationDocumentReference"
+					target="documentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="requestForQuotationDocumentReference"
+					target="flowScope.documentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RequestForQuotationDocumentReference element end-->
+
+<!-- AdditionalDocumentReference list element start-->
+	<subflow-state id="editAdditionalDocumentReferenceList" flow="additionaldocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.additionalDocumentReference"
+					target="additionalDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalDocumentReference"
+					target="flowScope.additionalDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalDocumentReference list element end-->
+		
+<!-- Contract list element start-->
+	<subflow-state id="editContractList" flow="contracttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.contract"
+					target="contractList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contract"
+					target="flowScope.contractList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Contract list element end-->
+		
+<!-- Signature list element start-->
+	<subflow-state id="editSignatureList" flow="signaturetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.signature"
+					target="signatureList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signatureList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature list element end-->
+		
+<!-- SellerSupplierParty element start-->
+	<subflow-state id="editSellerSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.sellerSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerSupplierParty element end-->
+
+<!-- OriginatorCustomerParty element start-->
+	<subflow-state id="editOriginatorCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.originatorCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originatorCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginatorCustomerParty element end-->
+
+<!-- Delivery list element start-->
+	<subflow-state id="editDeliveryList" flow="deliverytypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.delivery"
+					target="deliveryList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="delivery"
+					target="flowScope.deliveryList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Delivery list element end-->
+		
+<!-- DeliveryTerms element start-->
+	<subflow-state id="editDeliveryTerms" flow="deliverytermstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.deliveryTerms"
+					target="deliveryTerms" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryTerms"
+					target="flowScope.deliveryTerms" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryTerms element end-->
+
+<!-- PaymentMeans element start-->
+	<subflow-state id="editPaymentMeans" flow="paymentmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.paymentMeans"
+					target="paymentMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeans" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans element end-->
+
+<!-- TransactionConditions element start-->
+	<subflow-state id="editTransactionConditions" flow="transactionconditionstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.transactionConditions"
+					target="transactionConditions" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionConditions"
+					target="flowScope.transactionConditions" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransactionConditions element end-->
+
+<!-- AllowanceCharge list element start-->
+	<subflow-state id="editAllowanceChargeList" flow="allowancechargetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.allowanceCharge"
+					target="allowanceChargeList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="allowanceCharge"
+					target="flowScope.allowanceChargeList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AllowanceCharge list element end-->
+		
+<!-- DestinationCountry element start-->
+	<subflow-state id="editDestinationCountry" flow="countrytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.destinationCountry"
+					target="country" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="destinationCountry"
+					target="flowScope.country" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DestinationCountry element end-->
+
+<!-- TaxTotal list element start-->
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+		
+<!-- LegalTotal element start-->
+	<subflow-state id="editLegalTotal" flow="legaltotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.legalTotal"
+					target="legalTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalTotal"
+					target="flowScope.legalTotal" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LegalTotal element end-->
+
+<!-- QuotationLine list element start-->
+	<subflow-state id="editQuotationLineList" flow="quotationlinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotation.quotationLine"
+					target="quotationLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quotationLine"
+					target="flowScope.quotationLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- QuotationLine list element end-->
+		
+	<view-state id="displayQuotation" view="/views/bizdocs/QuotationTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:quotationtype-flow" />
+
+	<import resource="quotationtype-bean.xml" />
+
+</flow>

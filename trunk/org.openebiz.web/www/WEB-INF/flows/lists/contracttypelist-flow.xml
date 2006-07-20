@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ContractType"/>
+
+	<input-mapper>
+		<mapping source="contractList" target="flowScope.contractList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/ContractTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayContractTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="contract" result-scope="flow" />
+		</transition>
+		<transition on="clearContract" to="clearContract">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addContract" to="addContract">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addContract" flow="contracttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="contract" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contract"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.contractList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearContract">
+		<action bean="listUtils"
+			method="clearList(${flowScope.contractList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayContractTypeList" view="/views/lists/ContractTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.contractList" target="contractList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="contracttypelist-bean.xml" />
+
+</flow>

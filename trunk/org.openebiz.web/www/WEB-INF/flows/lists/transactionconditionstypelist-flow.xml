@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.TransactionConditionsType"/>
+
+	<input-mapper>
+		<mapping source="transactionConditionsList" target="flowScope.transactionConditionsList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/TransactionConditionsTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTransactionConditionsTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="transactionConditions" result-scope="flow" />
+		</transition>
+		<transition on="clearTransactionConditions" to="clearTransactionConditions">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addTransactionConditions" to="addTransactionConditions">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addTransactionConditions" flow="transactionconditionstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="transactionConditions" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transactionConditions"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.transactionConditionsList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearTransactionConditions">
+		<action bean="listUtils"
+			method="clearList(${flowScope.transactionConditionsList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayTransactionConditionsTypeList" view="/views/lists/TransactionConditionsTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.transactionConditionsList" target="transactionConditionsList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="transactionconditionstypelist-bean.xml" />
+
+</flow>

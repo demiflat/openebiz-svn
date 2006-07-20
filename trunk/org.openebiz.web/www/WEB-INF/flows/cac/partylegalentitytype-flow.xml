@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="partyLegalEntity" target="flowScope.partyLegalEntity" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PartyLegalEntityTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPartyLegalEntity">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="partyLegalEntity" result-scope="flow" />
+		</transition>
+		<transition on="editRegistrationName" to="editRegistrationName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCompanyID" to="editCompanyID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationAddress" to="editRegistrationAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCorporateRegistrationScheme" to="editCorporateRegistrationScheme">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- RegistrationName element start-->	
+	<subflow-state id="editRegistrationName" flow="registrationnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyLegalEntity.registrationName"
+					target="registrationName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationName"
+					target="flowScope.registrationName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationName element end-->
+	
+<!-- CompanyID element start-->	
+	<subflow-state id="editCompanyID" flow="companyidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyLegalEntity.companyID"
+					target="companyID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="companyID"
+					target="flowScope.companyID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CompanyID element end-->
+	
+<!-- RegistrationAddress element start-->	
+	<subflow-state id="editRegistrationAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyLegalEntity.registrationAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationAddress element end-->
+	
+<!-- CorporateRegistrationScheme element start-->	
+	<subflow-state id="editCorporateRegistrationScheme" flow="corporateregistrationschemetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyLegalEntity.corporateRegistrationScheme"
+					target="corporateRegistrationScheme" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="corporateRegistrationScheme"
+					target="flowScope.corporateRegistrationScheme" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CorporateRegistrationScheme element end-->
+	
+
+	<view-state id="displayPartyLegalEntity" view="/views/cac/PartyLegalEntityTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.partyLegalEntity" target="partyLegalEntity" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="partylegalentitytype-bean.xml" />
+
+</flow>

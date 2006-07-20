@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.TaxSubTotalType"/>
+
+	<input-mapper>
+		<mapping source="taxSubTotalList" target="flowScope.taxSubTotalList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/TaxSubTotalTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxSubTotalTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxSubTotal" result-scope="flow" />
+		</transition>
+		<transition on="clearTaxSubTotal" to="clearTaxSubTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addTaxSubTotal" to="addTaxSubTotal">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addTaxSubTotal" flow="taxsubtotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="taxSubTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxSubTotal"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.taxSubTotalList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearTaxSubTotal">
+		<action bean="listUtils"
+			method="clearList(${flowScope.taxSubTotalList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayTaxSubTotalTypeList" view="/views/lists/TaxSubTotalTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxSubTotalList" target="taxSubTotalList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxsubtotaltypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="netWeightMeasure" target="flowScope.netWeightMeasure" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/NetWeightMeasureTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayNetWeightMeasure">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="netWeightMeasure" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayNetWeightMeasure" view="/views/cbc/NetWeightMeasureTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.netWeightMeasure" target="netWeightMeasure" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="netweightmeasuretype-bean.xml" />
+
+</flow>

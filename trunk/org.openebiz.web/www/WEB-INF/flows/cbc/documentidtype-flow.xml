@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="documentID" target="flowScope.documentID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/DocumentIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDocumentID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="documentID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayDocumentID" view="/views/cbc/DocumentIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.documentID" target="documentID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="documentidtype-bean.xml" />
+
+</flow>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="warrantyInformationList" target="flowScope.warrantyInformationList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/WarrantyInformationTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayWarrantyInformationTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="warrantyInformation" result-scope="flow" />
+		</transition>
+		<transition on="clearWarrantyInformation" to="clearWarrantyInformation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addWarrantyInformation" to="addWarrantyInformation">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Warranty Information -->
+
+	<view-state id="displayWarrantyInformationTypeList" view="/views/lists/WarrantyInformationTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.warrantyInformationList" target="warrantyInformationList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="warrantyinformationtypelist-bean.xml" />
+
+</flow>

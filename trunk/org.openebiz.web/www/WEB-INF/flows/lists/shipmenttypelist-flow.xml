@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.ShipmentType"/>
+
+	<input-mapper>
+		<mapping source="shipmentList" target="flowScope.shipmentList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/ShipmentTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayShipmentTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="shipment" result-scope="flow" />
+		</transition>
+		<transition on="clearShipment" to="clearShipment">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addShipment" to="addShipment">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addShipment" flow="shipmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="shipment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.shipmentList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearShipment">
+		<action bean="listUtils"
+			method="clearList(${flowScope.shipmentList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayShipmentTypeList" view="/views/lists/ShipmentTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.shipmentList" target="shipmentList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="shipmenttypelist-bean.xml" />
+
+</flow>

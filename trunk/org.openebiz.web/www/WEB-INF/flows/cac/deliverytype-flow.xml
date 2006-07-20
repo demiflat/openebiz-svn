@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="delivery" target="flowScope.delivery" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DeliveryTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDelivery">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="delivery" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMinimumQuantity" to="editMinimumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumQuantity" to="editMaximumQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRequestedDeliveryDateTime" to="editRequestedDeliveryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPromisedDeliveryDateTime" to="editPromisedDeliveryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEstimatedDeliveryDateTime" to="editEstimatedDeliveryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editActualDeliveryDateTime" to="editActualDeliveryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLatestDeliveryDateTime" to="editLatestDeliveryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDeliveryAddress" to="editDeliveryAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderLineReferenceList" to="editOrderLineReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editContact" to="editContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOriginatorParty" to="editOriginatorParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDespatch" to="editDespatch">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+<!-- MinimumQuantity element start-->	
+	<subflow-state id="editMinimumQuantity" flow="minimumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.minimumQuantity"
+					target="minimumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumQuantity"
+					target="flowScope.minimumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumQuantity element end-->
+	
+<!-- MaximumQuantity element start-->	
+	<subflow-state id="editMaximumQuantity" flow="maximumquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.maximumQuantity"
+					target="maximumQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumQuantity"
+					target="flowScope.maximumQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumQuantity element end-->
+	
+<!-- RequestedDeliveryDateTime element start-->	
+	<subflow-state id="editRequestedDeliveryDateTime" flow="requesteddeliverydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.requestedDeliveryDateTime"
+					target="requestedDeliveryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="requestedDeliveryDateTime"
+					target="flowScope.requestedDeliveryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RequestedDeliveryDateTime element end-->
+	
+<!-- PromisedDeliveryDateTime element start-->	
+	<subflow-state id="editPromisedDeliveryDateTime" flow="promiseddeliverydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.promisedDeliveryDateTime"
+					target="promisedDeliveryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="promisedDeliveryDateTime"
+					target="flowScope.promisedDeliveryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PromisedDeliveryDateTime element end-->
+	
+<!-- EstimatedDeliveryDateTime element start-->	
+	<subflow-state id="editEstimatedDeliveryDateTime" flow="estimateddeliverydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.estimatedDeliveryDateTime"
+					target="estimatedDeliveryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="estimatedDeliveryDateTime"
+					target="flowScope.estimatedDeliveryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EstimatedDeliveryDateTime element end-->
+	
+<!-- ActualDeliveryDateTime element start-->	
+	<subflow-state id="editActualDeliveryDateTime" flow="actualdeliverydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.actualDeliveryDateTime"
+					target="actualDeliveryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="actualDeliveryDateTime"
+					target="flowScope.actualDeliveryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ActualDeliveryDateTime element end-->
+	
+<!-- LatestDeliveryDateTime element start-->	
+	<subflow-state id="editLatestDeliveryDateTime" flow="latestdeliverydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.latestDeliveryDateTime"
+					target="latestDeliveryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="latestDeliveryDateTime"
+					target="flowScope.latestDeliveryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LatestDeliveryDateTime element end-->
+	
+<!-- DeliveryAddress element start-->	
+	<subflow-state id="editDeliveryAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.deliveryAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="deliveryAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DeliveryAddress element end-->
+	
+<!-- OrderLineReference list element start-->	
+	<subflow-state id="editOrderLineReferenceList" flow="orderlinereferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.orderLineReference"
+					target="orderLineReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderLineReference"
+					target="flowScope.orderLineReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderLineReference list element end-->
+	
+<!-- Contact element start-->	
+	<subflow-state id="editContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.contact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Contact element end-->
+	
+<!-- OriginatorParty element start-->	
+	<subflow-state id="editOriginatorParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.originatorParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="originatorParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OriginatorParty element end-->
+	
+<!-- Despatch element start-->	
+	<subflow-state id="editDespatch" flow="despatchtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.delivery.despatch"
+					target="despatch" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatch"
+					target="flowScope.despatch" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Despatch element end-->
+	
+
+	<view-state id="displayDelivery" view="/views/cac/DeliveryTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.delivery" target="delivery" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="deliverytype-bean.xml" />
+
+</flow>

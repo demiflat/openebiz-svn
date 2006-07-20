@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="documentReference" target="flowScope.documentReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DocumentReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDocumentReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="documentReference" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCopyIndicator" to="editCopyIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQualifier" to="editQualifier">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editXPathList" to="editXPathList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editAttachment" to="editAttachment">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- CopyIndicator element start-->	
+	<subflow-state id="editCopyIndicator" flow="copyindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.copyIndicator"
+					target="copyIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="copyIndicator"
+					target="flowScope.copyIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CopyIndicator element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- IssueDate element start-->	
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+	
+<!-- Qualifier element start-->	
+	<subflow-state id="editQualifier" flow="qualifiertype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.qualifier"
+					target="qualifier" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="qualifier"
+					target="flowScope.qualifier" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Qualifier element end-->
+	
+<!-- XPath list element start-->	
+	<subflow-state id="editXPathList" flow="xpathtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.XPath"
+					target="xPathList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="XPath"
+					target="flowScope.xPathList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- XPath list element end-->
+	
+<!-- Attachment element start-->	
+	<subflow-state id="editAttachment" flow="attachmenttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.documentReference.attachment"
+					target="attachment" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="attachment"
+					target="flowScope.attachment" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Attachment element end-->
+	
+
+	<view-state id="displayDocumentReference" view="/views/cac/DocumentReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.documentReference" target="documentReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="documentreferencetype-bean.xml" />
+
+</flow>

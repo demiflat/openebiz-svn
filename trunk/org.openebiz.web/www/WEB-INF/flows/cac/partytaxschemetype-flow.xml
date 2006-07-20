@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="partyTaxScheme" target="flowScope.partyTaxScheme" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/PartyTaxSchemeTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPartyTaxScheme">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="partyTaxScheme" result-scope="flow" />
+		</transition>
+		<transition on="editRegistrationName" to="editRegistrationName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCompanyID" to="editCompanyID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxLevelCode" to="editTaxLevelCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExemptionReason" to="editExemptionReason">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRegistrationAddress" to="editRegistrationAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxScheme" to="editTaxScheme">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- RegistrationName element start-->	
+	<subflow-state id="editRegistrationName" flow="registrationnametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.registrationName"
+					target="registrationName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationName"
+					target="flowScope.registrationName" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationName element end-->
+	
+<!-- CompanyID element start-->	
+	<subflow-state id="editCompanyID" flow="companyidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.companyID"
+					target="companyID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="companyID"
+					target="flowScope.companyID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CompanyID element end-->
+	
+<!-- TaxLevelCode element start-->	
+	<subflow-state id="editTaxLevelCode" flow="taxlevelcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.taxLevelCode"
+					target="taxLevelCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxLevelCode"
+					target="flowScope.taxLevelCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxLevelCode element end-->
+	
+<!-- ExemptionReason element start-->	
+	<subflow-state id="editExemptionReason" flow="exemptionreasontype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.exemptionReason"
+					target="exemptionReason" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="exemptionReason"
+					target="flowScope.exemptionReason" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExemptionReason element end-->
+	
+<!-- RegistrationAddress element start-->	
+	<subflow-state id="editRegistrationAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.registrationAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="registrationAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RegistrationAddress element end-->
+	
+<!-- TaxScheme element start-->	
+	<subflow-state id="editTaxScheme" flow="taxschemetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.partyTaxScheme.taxScheme"
+					target="taxScheme" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxScheme"
+					target="flowScope.taxScheme" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxScheme element end-->
+	
+
+	<view-state id="displayPartyTaxScheme" view="/views/cac/PartyTaxSchemeTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.partyTaxScheme" target="partyTaxScheme" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="partytaxschemetype-bean.xml" />
+
+</flow>

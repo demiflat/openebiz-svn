@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="xPathList" target="flowScope.xPathList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/XPathTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayXPathTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="xPath" result-scope="flow" />
+		</transition>
+		<transition on="clearXPath" to="clearXPath">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addXPath" to="addXPath">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case XPath -->
+
+	<view-state id="displayXPathTypeList" view="/views/lists/XPathTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.xPathList" target="xPathList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="xpathtypelist-bean.xml" />
+
+</flow>

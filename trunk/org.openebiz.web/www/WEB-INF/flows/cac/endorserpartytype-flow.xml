@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="endorserParty" target="flowScope.endorserParty" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/EndorserPartyTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayEndorserParty">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="endorserParty" result-scope="flow" />
+		</transition>
+		<transition on="editRoleCode" to="editRoleCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSequenceNumeric" to="editSequenceNumeric">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editParty" to="editParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSignatoryContact" to="editSignatoryContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- RoleCode element start-->	
+	<subflow-state id="editRoleCode" flow="rolecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.endorserParty.roleCode"
+					target="roleCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="roleCode"
+					target="flowScope.roleCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RoleCode element end-->
+	
+<!-- SequenceNumeric element start-->	
+	<subflow-state id="editSequenceNumeric" flow="sequencenumerictype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.endorserParty.sequenceNumeric"
+					target="sequenceNumeric" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sequenceNumeric"
+					target="flowScope.sequenceNumeric" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SequenceNumeric element end-->
+	
+<!-- Party element start-->	
+	<subflow-state id="editParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.endorserParty.party"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="party"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Party element end-->
+	
+<!-- SignatoryContact element start-->	
+	<subflow-state id="editSignatoryContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.endorserParty.signatoryContact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signatoryContact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SignatoryContact element end-->
+	
+
+	<view-state id="displayEndorserParty" view="/views/cac/EndorserPartyTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.endorserParty" target="endorserParty" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="endorserpartytype-bean.xml" />
+
+</flow>

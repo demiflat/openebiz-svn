@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.RelatedItemType"/>
+
+	<input-mapper>
+		<mapping source="requiredRelatedItemList" target="flowScope.requiredRelatedItemList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/RequiredRelatedItemTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRequiredRelatedItemTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="requiredRelatedItem" result-scope="flow" />
+		</transition>
+		<transition on="clearRequiredRelatedItem" to="clearRequiredRelatedItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addRequiredRelatedItem" to="addRequiredRelatedItem">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addRequiredRelatedItem" flow="relateditemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="relatedItem" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="relatedItem"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.requiredRelatedItemList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearRequiredRelatedItem">
+		<action bean="listUtils"
+			method="clearList(${flowScope.requiredRelatedItemList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayRequiredRelatedItemTypeList" view="/views/lists/RequiredRelatedItemTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.requiredRelatedItemList" target="requiredRelatedItemList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="requiredrelateditemtypelist-bean.xml" />
+
+</flow>

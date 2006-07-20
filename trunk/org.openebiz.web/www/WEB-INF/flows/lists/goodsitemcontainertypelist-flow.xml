@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.GoodsItemContainerType"/>
+
+	<input-mapper>
+		<mapping source="goodsItemContainerList" target="flowScope.goodsItemContainerList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/GoodsItemContainerTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayGoodsItemContainerTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="goodsItemContainer" result-scope="flow" />
+		</transition>
+		<transition on="clearGoodsItemContainer" to="clearGoodsItemContainer">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addGoodsItemContainer" to="addGoodsItemContainer">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addGoodsItemContainer" flow="goodsitemcontainertype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="goodsItemContainer" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="goodsItemContainer"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.goodsItemContainerList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearGoodsItemContainer">
+		<action bean="listUtils"
+			method="clearList(${flowScope.goodsItemContainerList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayGoodsItemContainerTypeList" view="/views/lists/GoodsItemContainerTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.goodsItemContainerList" target="goodsItemContainerList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="goodsitemcontainertypelist-bean.xml" />
+
+</flow>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="catalogueReference" target="flowScope.catalogueReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/CatalogueReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayCatalogueReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="catalogueReference" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRevisionDateTime" to="editRevisionDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNoteList" to="editNoteList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editDescriptionList" to="editDescriptionList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editVersionID" to="editVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPreviousVersionID" to="editPreviousVersionID">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- IssueDate element start-->	
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+	
+<!-- IssueTime element start-->	
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+	
+<!-- RevisionDateTime element start-->	
+	<subflow-state id="editRevisionDateTime" flow="revisiondatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.revisionDateTime"
+					target="revisionDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="revisionDateTime"
+					target="flowScope.revisionDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RevisionDateTime element end-->
+	
+<!-- Note list element start-->	
+	<subflow-state id="editNoteList" flow="notetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.note"
+					target="noteList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.noteList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note list element end-->
+	
+<!-- Description list element start-->	
+	<subflow-state id="editDescriptionList" flow="descriptiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.description"
+					target="descriptionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="description"
+					target="flowScope.descriptionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Description list element end-->
+	
+<!-- VersionID element start-->	
+	<subflow-state id="editVersionID" flow="versionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.versionID"
+					target="versionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="versionID"
+					target="flowScope.versionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- VersionID element end-->
+	
+<!-- PreviousVersionID element start-->	
+	<subflow-state id="editPreviousVersionID" flow="previousversionidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.catalogueReference.previousVersionID"
+					target="previousVersionID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="previousVersionID"
+					target="flowScope.previousVersionID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PreviousVersionID element end-->
+	
+
+	<view-state id="displayCatalogueReference" view="/views/cac/CatalogueReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.catalogueReference" target="catalogueReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="cataloguereferencetype-bean.xml" />
+
+</flow>

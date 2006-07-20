@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.PaymentMeansType"/>
+
+	<input-mapper>
+		<mapping source="paymentMeansList" target="flowScope.paymentMeansList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/PaymentMeansTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPaymentMeansTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="paymentMeans" result-scope="flow" />
+		</transition>
+		<transition on="clearPaymentMeans" to="clearPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addPaymentMeans" to="addPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addPaymentMeans" flow="paymentmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="paymentMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.paymentMeansList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearPaymentMeans">
+		<action bean="listUtils"
+			method="clearList(${flowScope.paymentMeansList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayPaymentMeansTypeList" view="/views/lists/PaymentMeansTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.paymentMeansList" target="paymentMeansList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="paymentmeanstypelist-bean.xml" />
+
+</flow>

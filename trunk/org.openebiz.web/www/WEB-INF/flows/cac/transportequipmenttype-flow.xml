@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="transportEquipment" target="flowScope.transportEquipment" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/TransportEquipmentTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTransportEquipment">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="transportEquipment" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editProviderTypeCode" to="editProviderTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOwnerTypeCode" to="editOwnerTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSizeTypeCode" to="editSizeTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDispositionCode" to="editDispositionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editFullnessIndicationCode" to="editFullnessIndicationCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRefrigerationOnIndicator" to="editRefrigerationOnIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInformation" to="editInformation">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReturnabilityIndicator" to="editReturnabilityIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLegalStatusIndicator" to="editLegalStatusIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMeasurementDimensionList" to="editMeasurementDimensionList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editTransportEquipmentSealList" to="editTransportEquipmentSealList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editMinimumTemperature" to="editMinimumTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editMaximumTemperature" to="editMaximumTemperature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editProviderParty" to="editProviderParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLoadingProofParty" to="editLoadingProofParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLoadingLocation" to="editLoadingLocation">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- ProviderTypeCode element start-->	
+	<subflow-state id="editProviderTypeCode" flow="providertypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.providerTypeCode"
+					target="providerTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="providerTypeCode"
+					target="flowScope.providerTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ProviderTypeCode element end-->
+	
+<!-- OwnerTypeCode element start-->	
+	<subflow-state id="editOwnerTypeCode" flow="ownertypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.ownerTypeCode"
+					target="ownerTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ownerTypeCode"
+					target="flowScope.ownerTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OwnerTypeCode element end-->
+	
+<!-- SizeTypeCode element start-->	
+	<subflow-state id="editSizeTypeCode" flow="sizetypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.sizeTypeCode"
+					target="sizeTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sizeTypeCode"
+					target="flowScope.sizeTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SizeTypeCode element end-->
+	
+<!-- DispositionCode element start-->	
+	<subflow-state id="editDispositionCode" flow="dispositioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.dispositionCode"
+					target="dispositionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="dispositionCode"
+					target="flowScope.dispositionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DispositionCode element end-->
+	
+<!-- FullnessIndicationCode element start-->	
+	<subflow-state id="editFullnessIndicationCode" flow="fullnessindicationcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.fullnessIndicationCode"
+					target="fullnessIndicationCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="fullnessIndicationCode"
+					target="flowScope.fullnessIndicationCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- FullnessIndicationCode element end-->
+	
+<!-- RefrigerationOnIndicator element start-->	
+	<subflow-state id="editRefrigerationOnIndicator" flow="refrigerationonindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.refrigerationOnIndicator"
+					target="refrigerationOnIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="refrigerationOnIndicator"
+					target="flowScope.refrigerationOnIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RefrigerationOnIndicator element end-->
+	
+<!-- Information element start-->	
+	<subflow-state id="editInformation" flow="informationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.information"
+					target="information" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="information"
+					target="flowScope.information" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Information element end-->
+	
+<!-- ReturnabilityIndicator element start-->	
+	<subflow-state id="editReturnabilityIndicator" flow="returnabilityindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.returnabilityIndicator"
+					target="returnabilityIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="returnabilityIndicator"
+					target="flowScope.returnabilityIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReturnabilityIndicator element end-->
+	
+<!-- LegalStatusIndicator element start-->	
+	<subflow-state id="editLegalStatusIndicator" flow="legalstatusindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.legalStatusIndicator"
+					target="legalStatusIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="legalStatusIndicator"
+					target="flowScope.legalStatusIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LegalStatusIndicator element end-->
+	
+<!-- MeasurementDimension list element start-->	
+	<subflow-state id="editMeasurementDimensionList" flow="measurementdimensiontypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.measurementDimension"
+					target="measurementDimensionList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="measurementDimension"
+					target="flowScope.measurementDimensionList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MeasurementDimension list element end-->
+	
+<!-- TransportEquipmentSeal list element start-->	
+	<subflow-state id="editTransportEquipmentSealList" flow="transportequipmentsealtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.transportEquipmentSeal"
+					target="transportEquipmentSealList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="transportEquipmentSeal"
+					target="flowScope.transportEquipmentSealList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TransportEquipmentSeal list element end-->
+	
+<!-- MinimumTemperature element start-->	
+	<subflow-state id="editMinimumTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.minimumTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="minimumTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MinimumTemperature element end-->
+	
+<!-- MaximumTemperature element start-->	
+	<subflow-state id="editMaximumTemperature" flow="temperaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.maximumTemperature"
+					target="temperature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="maximumTemperature"
+					target="flowScope.temperature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- MaximumTemperature element end-->
+	
+<!-- ProviderParty element start-->	
+	<subflow-state id="editProviderParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.providerParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="providerParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ProviderParty element end-->
+	
+<!-- LoadingProofParty element start-->	
+	<subflow-state id="editLoadingProofParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.loadingProofParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="loadingProofParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LoadingProofParty element end-->
+	
+<!-- LoadingLocation element start-->	
+	<subflow-state id="editLoadingLocation" flow="locationtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.transportEquipment.loadingLocation"
+					target="location" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="loadingLocation"
+					target="flowScope.location" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LoadingLocation element end-->
+	
+
+	<view-state id="displayTransportEquipment" view="/views/cac/TransportEquipmentTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.transportEquipment" target="transportEquipment" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="transportequipmenttype-bean.xml" />
+
+</flow>

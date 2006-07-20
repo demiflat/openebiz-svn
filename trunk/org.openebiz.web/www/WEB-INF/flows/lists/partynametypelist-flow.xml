@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.PartyNameType"/>
+
+	<input-mapper>
+		<mapping source="partyNameList" target="flowScope.partyNameList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/PartyNameTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPartyNameTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="partyName" result-scope="flow" />
+		</transition>
+		<transition on="clearPartyName" to="clearPartyName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addPartyName" to="addPartyName">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addPartyName" flow="partynametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="partyName" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="partyName"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.partyNameList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearPartyName">
+		<action bean="listUtils"
+			method="clearList(${flowScope.partyNameList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayPartyNameTypeList" view="/views/lists/PartyNameTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.partyNameList" target="partyNameList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="partynametypelist-bean.xml" />
+
+</flow>

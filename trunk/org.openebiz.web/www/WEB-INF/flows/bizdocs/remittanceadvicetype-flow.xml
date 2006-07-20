@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<view-state id="displayForm" view="/forms/bizdocs/RemittanceAdviceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayRemittanceAdvice">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="remittanceAdvice" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCopyIndicator" to="editCopyIndicator">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueDate" to="editIssueDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editIssueTime" to="editIssueTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentCurrencyCode" to="editDocumentCurrencyCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalDebitAmount" to="editTotalDebitAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalCreditAmount" to="editTotalCreditAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalPaymentAmount" to="editTotalPaymentAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editInvoicePeriodList" to="editInvoicePeriodList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editAccountingDocumentReference" to="editAccountingDocumentReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAdditionalDocumentReferenceList" to="editAdditionalDocumentReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editSignature" to="editSignature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDebtorCustomerParty" to="editDebtorCustomerParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editCreditorSupplierParty" to="editCreditorSupplierParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPayeeParty" to="editPayeeParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPaymentMeans" to="editPaymentMeans">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxTotalList" to="editTaxTotalList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+		<transition on="editRemittanceAdviceLineList" to="editRemittanceAdviceLineList">
+			<action bean="formAction" method="bind" />
+		</transition>		
+	</view-state>
+
+<!-- ID element start-->
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+
+<!-- CopyIndicator element start-->
+	<subflow-state id="editCopyIndicator" flow="copyindicatortype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.copyIndicator"
+					target="copyIndicator" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="copyIndicator"
+					target="flowScope.copyIndicator" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CopyIndicator element end-->
+
+<!-- GUID element start-->
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+
+<!-- IssueDate element start-->
+	<subflow-state id="editIssueDate" flow="issuedatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.issueDate"
+					target="issueDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueDate"
+					target="flowScope.issueDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueDate element end-->
+
+<!-- IssueTime element start-->
+	<subflow-state id="editIssueTime" flow="issuetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.issueTime"
+					target="issueTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="issueTime"
+					target="flowScope.issueTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- IssueTime element end-->
+
+<!-- Note element start-->
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+
+<!-- DocumentCurrencyCode element start-->
+	<subflow-state id="editDocumentCurrencyCode" flow="documentcurrencycodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.documentCurrencyCode"
+					target="documentCurrencyCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentCurrencyCode"
+					target="flowScope.documentCurrencyCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentCurrencyCode element end-->
+
+<!-- TotalDebitAmount element start-->
+	<subflow-state id="editTotalDebitAmount" flow="totaldebitamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.totalDebitAmount"
+					target="totalDebitAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalDebitAmount"
+					target="flowScope.totalDebitAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalDebitAmount element end-->
+
+<!-- TotalCreditAmount element start-->
+	<subflow-state id="editTotalCreditAmount" flow="totalcreditamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.totalCreditAmount"
+					target="totalCreditAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalCreditAmount"
+					target="flowScope.totalCreditAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalCreditAmount element end-->
+
+<!-- TotalPaymentAmount element start-->
+	<subflow-state id="editTotalPaymentAmount" flow="totalpaymentamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.totalPaymentAmount"
+					target="totalPaymentAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalPaymentAmount"
+					target="flowScope.totalPaymentAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalPaymentAmount element end-->
+
+<!-- InvoicePeriod list element start-->
+	<subflow-state id="editInvoicePeriodList" flow="invoiceperiodtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.invoicePeriod"
+					target="invoicePeriodList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="invoicePeriod"
+					target="flowScope.invoicePeriodList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- InvoicePeriod list element end-->
+		
+<!-- AccountingDocumentReference element start-->
+	<subflow-state id="editAccountingDocumentReference" flow="accountingdocumentreferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.accountingDocumentReference"
+					target="accountingDocumentReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="accountingDocumentReference"
+					target="flowScope.accountingDocumentReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AccountingDocumentReference element end-->
+
+<!-- AdditionalDocumentReference list element start-->
+	<subflow-state id="editAdditionalDocumentReferenceList" flow="additionaldocumentreferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.additionalDocumentReference"
+					target="additionalDocumentReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="additionalDocumentReference"
+					target="flowScope.additionalDocumentReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- AdditionalDocumentReference list element end-->
+		
+<!-- Signature element start-->
+	<subflow-state id="editSignature" flow="signaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.signature"
+					target="signature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.signature" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Signature element end-->
+
+<!-- DebtorCustomerParty element start-->
+	<subflow-state id="editDebtorCustomerParty" flow="customerpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.debtorCustomerParty"
+					target="customerParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="debtorCustomerParty"
+					target="flowScope.customerParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DebtorCustomerParty element end-->
+
+<!-- CreditorSupplierParty element start-->
+	<subflow-state id="editCreditorSupplierParty" flow="supplierpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.creditorSupplierParty"
+					target="supplierParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="creditorSupplierParty"
+					target="flowScope.supplierParty" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- CreditorSupplierParty element end-->
+
+<!-- PayeeParty element start-->
+	<subflow-state id="editPayeeParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.payeeParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="payeeParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PayeeParty element end-->
+
+<!-- PaymentMeans element start-->
+	<subflow-state id="editPaymentMeans" flow="paymentmeanstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.paymentMeans"
+					target="paymentMeans" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="paymentMeans"
+					target="flowScope.paymentMeans" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PaymentMeans element end-->
+
+<!-- TaxTotal list element start-->
+	<subflow-state id="editTaxTotalList" flow="taxtotaltypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.taxTotal"
+					target="taxTotalList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.taxTotalList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxTotal list element end-->
+		
+<!-- RemittanceAdviceLine list element start-->
+	<subflow-state id="editRemittanceAdviceLineList" flow="remittanceadvicelinetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.remittanceAdvice.remittanceAdviceLine"
+					target="remittanceAdviceLineList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="remittanceAdviceLine"
+					target="flowScope.remittanceAdviceLineList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RemittanceAdviceLine list element end-->
+		
+	<view-state id="displayRemittanceAdvice" view="/views/bizdocs/RemittanceAdviceTypeView">
+		<transition on="edit" to="displayForm" />
+		<transition on="save" to="saveDoc" />		
+	</view-state>
+
+	<action-state id="saveDoc">
+		<action bean="formAction" method="saveDocument"></action>
+		<transition on="success" to="finish" />
+	</action-state>
+
+	<end-state id="finish" view="flowRedirect:remittanceadvicetype-flow" />
+
+	<import resource="remittanceadvicetype-bean.xml" />
+
+</flow>

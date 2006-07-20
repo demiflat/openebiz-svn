@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="printQualifier" target="flowScope.printQualifier" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/PrintQualifierTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPrintQualifier">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="printQualifier" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayPrintQualifier" view="/views/cbc/PrintQualifierTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.printQualifier" target="printQualifier" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="printqualifiertype-bean.xml" />
+
+</flow>

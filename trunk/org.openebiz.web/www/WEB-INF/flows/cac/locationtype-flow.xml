@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="location" target="flowScope.location" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LocationTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLocation">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="location" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editName" to="editName">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDirectionsList" to="editDirectionsList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editLocationTypeCode" to="editLocationTypeCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editAddress" to="editAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.location.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Name element start-->	
+	<subflow-state id="editName" flow="nametype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.location.name"
+					target="name" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="name"
+					target="flowScope.name" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Name element end-->
+	
+<!-- Directions list element start-->	
+	<subflow-state id="editDirectionsList" flow="directionstypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.location.directions"
+					target="directionsList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="directions"
+					target="flowScope.directionsList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Directions list element end-->
+	
+<!-- LocationTypeCode element start-->	
+	<subflow-state id="editLocationTypeCode" flow="locationtypecodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.location.locationTypeCode"
+					target="locationTypeCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="locationTypeCode"
+					target="flowScope.locationTypeCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LocationTypeCode element end-->
+	
+<!-- Address element start-->	
+	<subflow-state id="editAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.location.address"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="address"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Address element end-->
+	
+
+	<view-state id="displayLocation" view="/views/cac/LocationTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.location" target="location" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="locationtype-bean.xml" />
+
+</flow>

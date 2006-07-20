@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="shippingOrderID" target="flowScope.shippingOrderID" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/ShippingOrderIDTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayShippingOrderID">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="shippingOrderID" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayShippingOrderID" view="/views/cbc/ShippingOrderIDTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.shippingOrderID" target="shippingOrderID" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="shippingorderidtype-bean.xml" />
+
+</flow>

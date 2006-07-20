@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="despatch" target="flowScope.despatch" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/DespatchTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDespatch">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="despatch" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRequestedDespatchDateTime" to="editRequestedDespatchDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editEstimatedDespatchDateTime" to="editEstimatedDespatchDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editActualDespatchDateTime" to="editActualDespatchDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDespatchAddress" to="editDespatchAddress">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDespatchParty" to="editDespatchParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editContact" to="editContact">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- RequestedDespatchDateTime element start-->	
+	<subflow-state id="editRequestedDespatchDateTime" flow="requesteddespatchdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.requestedDespatchDateTime"
+					target="requestedDespatchDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="requestedDespatchDateTime"
+					target="flowScope.requestedDespatchDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RequestedDespatchDateTime element end-->
+	
+<!-- EstimatedDespatchDateTime element start-->	
+	<subflow-state id="editEstimatedDespatchDateTime" flow="estimateddespatchdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.estimatedDespatchDateTime"
+					target="estimatedDespatchDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="estimatedDespatchDateTime"
+					target="flowScope.estimatedDespatchDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- EstimatedDespatchDateTime element end-->
+	
+<!-- ActualDespatchDateTime element start-->	
+	<subflow-state id="editActualDespatchDateTime" flow="actualdespatchdatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.actualDespatchDateTime"
+					target="actualDespatchDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="actualDespatchDateTime"
+					target="flowScope.actualDespatchDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ActualDespatchDateTime element end-->
+	
+<!-- DespatchAddress element start-->	
+	<subflow-state id="editDespatchAddress" flow="addresstype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.despatchAddress"
+					target="address" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatchAddress"
+					target="flowScope.address" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DespatchAddress element end-->
+	
+<!-- DespatchParty element start-->	
+	<subflow-state id="editDespatchParty" flow="partytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.despatchParty"
+					target="party" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatchParty"
+					target="flowScope.party" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DespatchParty element end-->
+	
+<!-- Contact element start-->	
+	<subflow-state id="editContact" flow="contacttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.despatch.contact"
+					target="contact" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="contact"
+					target="flowScope.contact" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Contact element end-->
+	
+
+	<view-state id="displayDespatch" view="/views/cac/DespatchTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.despatch" target="despatch" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="despatchtype-bean.xml" />
+
+</flow>

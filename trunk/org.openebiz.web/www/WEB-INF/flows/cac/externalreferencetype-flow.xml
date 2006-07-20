@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="externalReference" target="flowScope.externalReference" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ExternalReferenceTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayExternalReference">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="externalReference" result-scope="flow" />
+		</transition>
+		<transition on="editURI" to="editURI">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDocumentHash" to="editDocumentHash">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editExpiryDateTime" to="editExpiryDateTime">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- URI element start-->	
+	<subflow-state id="editURI" flow="uritype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.externalReference.URI"
+					target="URI" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="URI"
+					target="flowScope.URI" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- URI element end-->
+	
+<!-- DocumentHash element start-->	
+	<subflow-state id="editDocumentHash" flow="documenthashtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.externalReference.documentHash"
+					target="documentHash" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentHash"
+					target="flowScope.documentHash" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DocumentHash element end-->
+	
+<!-- ExpiryDateTime element start-->	
+	<subflow-state id="editExpiryDateTime" flow="expirydatetimetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.externalReference.expiryDateTime"
+					target="expiryDateTime" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="expiryDateTime"
+					target="flowScope.expiryDateTime" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ExpiryDateTime element end-->
+	
+
+	<view-state id="displayExternalReference" view="/views/cac/ExternalReferenceTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.externalReference" target="externalReference" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="externalreferencetype-bean.xml" />
+
+</flow>

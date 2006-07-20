@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.SignatureType"/>
+
+	<input-mapper>
+		<mapping source="signatureList" target="flowScope.signatureList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/SignatureTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displaySignatureTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="signature" result-scope="flow" />
+		</transition>
+		<transition on="clearSignature" to="clearSignature">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addSignature" to="addSignature">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addSignature" flow="signaturetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="signature" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="signature"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.signatureList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearSignature">
+		<action bean="listUtils"
+			method="clearList(${flowScope.signatureList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displaySignatureTypeList" view="/views/lists/SignatureTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.signatureList" target="signatureList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="signaturetypelist-bean.xml" />
+
+</flow>

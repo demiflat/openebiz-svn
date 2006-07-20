@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.TaxTotalType"/>
+
+	<input-mapper>
+		<mapping source="taxTotalList" target="flowScope.taxTotalList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/TaxTotalTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayTaxTotalTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="taxTotal" result-scope="flow" />
+		</transition>
+		<transition on="clearTaxTotal" to="clearTaxTotal">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addTaxTotal" to="addTaxTotal">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addTaxTotal" flow="taxtotaltype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="taxTotal" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxTotal"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.taxTotalList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearTaxTotal">
+		<action bean="listUtils"
+			method="clearList(${flowScope.taxTotalList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayTaxTotalTypeList" view="/views/lists/TaxTotalTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.taxTotalList" target="taxTotalList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="taxtotaltypelist-bean.xml" />
+
+</flow>

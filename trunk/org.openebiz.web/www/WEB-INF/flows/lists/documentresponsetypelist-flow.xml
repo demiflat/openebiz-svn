@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.DocumentResponseType"/>
+
+	<input-mapper>
+		<mapping source="documentResponseList" target="flowScope.documentResponseList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/DocumentResponseTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayDocumentResponseTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="documentResponse" result-scope="flow" />
+		</transition>
+		<transition on="clearDocumentResponse" to="clearDocumentResponse">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addDocumentResponse" to="addDocumentResponse">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addDocumentResponse" flow="documentresponsetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="documentResponse" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="documentResponse"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.documentResponseList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearDocumentResponse">
+		<action bean="listUtils"
+			method="clearList(${flowScope.documentResponseList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayDocumentResponseTypeList" view="/views/lists/DocumentResponseTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.documentResponseList" target="documentResponseList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="documentresponsetypelist-bean.xml" />
+
+</flow>

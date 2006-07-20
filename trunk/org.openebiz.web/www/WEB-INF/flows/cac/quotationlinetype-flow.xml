@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="quotationLine" target="flowScope.quotationLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/QuotationLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayQuotationLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="quotationLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editQuantity" to="editQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineExtensionAmount" to="editLineExtensionAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTotalTaxAmount" to="editTotalTaxAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineItem" to="editLineItem">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editSellerProposedLineItemList" to="editSellerProposedLineItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- Quantity element start-->	
+	<subflow-state id="editQuantity" flow="quantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.quantity"
+					target="quantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="quantity"
+					target="flowScope.quantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Quantity element end-->
+	
+<!-- LineExtensionAmount element start-->	
+	<subflow-state id="editLineExtensionAmount" flow="lineextensionamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.lineExtensionAmount"
+					target="lineExtensionAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineExtensionAmount"
+					target="flowScope.lineExtensionAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineExtensionAmount element end-->
+	
+<!-- TotalTaxAmount element start-->	
+	<subflow-state id="editTotalTaxAmount" flow="totaltaxamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.totalTaxAmount"
+					target="totalTaxAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="totalTaxAmount"
+					target="flowScope.totalTaxAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TotalTaxAmount element end-->
+	
+<!-- LineItem element start-->	
+	<subflow-state id="editLineItem" flow="lineitemtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.lineItem"
+					target="lineItem" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineItem"
+					target="flowScope.lineItem" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineItem element end-->
+	
+<!-- SellerProposedLineItem list element start-->	
+	<subflow-state id="editSellerProposedLineItemList" flow="sellerproposedlineitemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.quotationLine.sellerProposedLineItem"
+					target="sellerProposedLineItemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="sellerProposedLineItem"
+					target="flowScope.sellerProposedLineItemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- SellerProposedLineItem list element end-->
+	
+
+	<view-state id="displayQuotationLine" view="/views/cac/QuotationLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.quotationLine" target="quotationLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="quotationlinetype-bean.xml" />
+
+</flow>

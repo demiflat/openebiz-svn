@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<var name="item" class="com.bossart.enterprise.core.common.cac.EndorserPartyType"/>
+
+	<input-mapper>
+		<mapping source="endorserPartyList" target="flowScope.endorserPartyList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/EndorserPartyTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayEndorserPartyTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="endorserParty" result-scope="flow" />
+		</transition>
+		<transition on="clearEndorserParty" to="clearEndorserParty">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addEndorserParty" to="addEndorserParty">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+	<subflow-state id="addEndorserParty" flow="endorserpartytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.item"
+					target="endorserParty" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="endorserParty"
+					target="flowScope.item" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="addUtil" />
+	</subflow-state>
+
+	<action-state id="addUtil">
+		<action bean="listUtils"
+			method="addToList(${flowScope.endorserPartyList}, ${flowScope.item})">
+		</action>
+		<transition to="resetAttributes"></transition>
+	</action-state>
+
+	<action-state id="resetAttributes">
+		<action bean="formAction" method="resetAttributes"></action>
+		<transition to="displayForm"></transition>
+	</action-state>	
+	
+	<action-state id="clearEndorserParty">
+		<action bean="listUtils"
+			method="clearList(${flowScope.endorserPartyList})">
+		</action>
+		<transition to="displayForm"></transition>
+	</action-state>		
+
+	<view-state id="displayEndorserPartyTypeList" view="/views/lists/EndorserPartyTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.endorserPartyList" target="endorserPartyList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="endorserpartytypelist-bean.xml" />
+
+</flow>

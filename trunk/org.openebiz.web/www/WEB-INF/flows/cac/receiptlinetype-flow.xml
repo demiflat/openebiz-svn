@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="receiptLine" target="flowScope.receiptLine" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/ReceiptLineTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayReceiptLine">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="receiptLine" result-scope="flow" />
+		</transition>
+		<transition on="editID" to="editID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editGUID" to="editGUID">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editNote" to="editNote">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReceivedQuantity" to="editReceivedQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShortQuantity" to="editShortQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editShortageActionCode" to="editShortageActionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRejectedQuantity" to="editRejectedQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRejectReasonCode" to="editRejectReasonCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editRejectActionCode" to="editRejectActionCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOverSupplyQuantity" to="editOverSupplyQuantity">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editReceivedDate" to="editReceivedDate">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTimingComplaintCode" to="editTimingComplaintCode">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editOrderLineReference" to="editOrderLineReference">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editDespatchLineReferenceList" to="editDespatchLineReferenceList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editItemList" to="editItemList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+		<transition on="editShipmentList" to="editShipmentList">
+			<action bean="formAction" method="bind" />
+		</transition>	
+	</view-state>
+
+<!-- ID element start-->	
+	<subflow-state id="editID" flow="idtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.ID"
+					target="ID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="ID"
+					target="flowScope.ID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ID element end-->
+	
+<!-- GUID element start-->	
+	<subflow-state id="editGUID" flow="guidtype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.GUID"
+					target="GUID" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="GUID"
+					target="flowScope.GUID" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- GUID element end-->
+	
+<!-- Note element start-->	
+	<subflow-state id="editNote" flow="notetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.note"
+					target="note" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="note"
+					target="flowScope.note" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Note element end-->
+	
+<!-- ReceivedQuantity element start-->	
+	<subflow-state id="editReceivedQuantity" flow="receivedquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.receivedQuantity"
+					target="receivedQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receivedQuantity"
+					target="flowScope.receivedQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReceivedQuantity element end-->
+	
+<!-- ShortQuantity element start-->	
+	<subflow-state id="editShortQuantity" flow="shortquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.shortQuantity"
+					target="shortQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shortQuantity"
+					target="flowScope.shortQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ShortQuantity element end-->
+	
+<!-- ShortageActionCode element start-->	
+	<subflow-state id="editShortageActionCode" flow="shortageactioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.shortageActionCode"
+					target="shortageActionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shortageActionCode"
+					target="flowScope.shortageActionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ShortageActionCode element end-->
+	
+<!-- RejectedQuantity element start-->	
+	<subflow-state id="editRejectedQuantity" flow="rejectedquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.rejectedQuantity"
+					target="rejectedQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="rejectedQuantity"
+					target="flowScope.rejectedQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RejectedQuantity element end-->
+	
+<!-- RejectReasonCode element start-->	
+	<subflow-state id="editRejectReasonCode" flow="rejectreasoncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.rejectReasonCode"
+					target="rejectReasonCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="rejectReasonCode"
+					target="flowScope.rejectReasonCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RejectReasonCode element end-->
+	
+<!-- RejectActionCode element start-->	
+	<subflow-state id="editRejectActionCode" flow="rejectactioncodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.rejectActionCode"
+					target="rejectActionCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="rejectActionCode"
+					target="flowScope.rejectActionCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- RejectActionCode element end-->
+	
+<!-- OverSupplyQuantity element start-->	
+	<subflow-state id="editOverSupplyQuantity" flow="oversupplyquantitytype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.overSupplyQuantity"
+					target="overSupplyQuantity" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="overSupplyQuantity"
+					target="flowScope.overSupplyQuantity" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OverSupplyQuantity element end-->
+	
+<!-- ReceivedDate element start-->	
+	<subflow-state id="editReceivedDate" flow="receiveddatetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.receivedDate"
+					target="receivedDate" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="receivedDate"
+					target="flowScope.receivedDate" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ReceivedDate element end-->
+	
+<!-- TimingComplaintCode element start-->	
+	<subflow-state id="editTimingComplaintCode" flow="timingcomplaintcodetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.timingComplaintCode"
+					target="timingComplaintCode" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="timingComplaintCode"
+					target="flowScope.timingComplaintCode" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TimingComplaintCode element end-->
+	
+<!-- OrderLineReference element start-->	
+	<subflow-state id="editOrderLineReference" flow="orderlinereferencetype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.orderLineReference"
+					target="orderLineReference" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="orderLineReference"
+					target="flowScope.orderLineReference" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- OrderLineReference element end-->
+	
+<!-- DespatchLineReference list element start-->	
+	<subflow-state id="editDespatchLineReferenceList" flow="despatchlinereferencetypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.despatchLineReference"
+					target="despatchLineReferenceList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="despatchLineReference"
+					target="flowScope.despatchLineReferenceList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- DespatchLineReference list element end-->
+	
+<!-- Item list element start-->	
+	<subflow-state id="editItemList" flow="itemtypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.item"
+					target="itemList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="item"
+					target="flowScope.itemList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Item list element end-->
+	
+<!-- Shipment list element start-->	
+	<subflow-state id="editShipmentList" flow="shipmenttypelist-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.receiptLine.shipment"
+					target="shipmentList" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="shipment"
+					target="flowScope.shipmentList" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- Shipment list element end-->
+	
+
+	<view-state id="displayReceiptLine" view="/views/cac/ReceiptLineTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.receiptLine" target="receiptLine" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="receiptlinetype-bean.xml" />
+
+</flow>

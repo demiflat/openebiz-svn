@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="legalTotal" target="flowScope.legalTotal" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cac/LegalTotalTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayLegalTotal">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="legalTotal" result-scope="flow" />
+		</transition>
+		<transition on="editLineExtensionAmount" to="editLineExtensionAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxExclusiveAmount" to="editTaxExclusiveAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editTaxInclusiveAmount" to="editTaxInclusiveAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editPrepaidAmount" to="editPrepaidAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editLineExtensionRoundingAmount" to="editLineExtensionRoundingAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="editToBePaidAmount" to="editToBePaidAmount">
+			<action bean="formAction" method="bind" />
+		</transition>
+	</view-state>
+
+<!-- LineExtensionAmount element start-->	
+	<subflow-state id="editLineExtensionAmount" flow="lineextensionamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.lineExtensionAmount"
+					target="lineExtensionAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineExtensionAmount"
+					target="flowScope.lineExtensionAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineExtensionAmount element end-->
+	
+<!-- TaxExclusiveAmount element start-->	
+	<subflow-state id="editTaxExclusiveAmount" flow="taxexclusiveamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.taxExclusiveAmount"
+					target="taxExclusiveAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxExclusiveAmount"
+					target="flowScope.taxExclusiveAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxExclusiveAmount element end-->
+	
+<!-- TaxInclusiveAmount element start-->	
+	<subflow-state id="editTaxInclusiveAmount" flow="taxinclusiveamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.taxInclusiveAmount"
+					target="taxInclusiveAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="taxInclusiveAmount"
+					target="flowScope.taxInclusiveAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- TaxInclusiveAmount element end-->
+	
+<!-- PrepaidAmount element start-->	
+	<subflow-state id="editPrepaidAmount" flow="prepaidamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.prepaidAmount"
+					target="prepaidAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="prepaidAmount"
+					target="flowScope.prepaidAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- PrepaidAmount element end-->
+	
+<!-- LineExtensionRoundingAmount element start-->	
+	<subflow-state id="editLineExtensionRoundingAmount" flow="lineextensionroundingamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.lineExtensionRoundingAmount"
+					target="lineExtensionRoundingAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="lineExtensionRoundingAmount"
+					target="flowScope.lineExtensionRoundingAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- LineExtensionRoundingAmount element end-->
+	
+<!-- ToBePaidAmount element start-->	
+	<subflow-state id="editToBePaidAmount" flow="tobepaidamounttype-flow">
+		<attribute-mapper>
+			<input-mapper>
+				<mapping source="flowScope.legalTotal.toBePaidAmount"
+					target="toBePaidAmount" />
+			</input-mapper>
+			<output-mapper>
+				<mapping source="toBePaidAmount"
+					target="flowScope.toBePaidAmount" />
+			</output-mapper>
+		</attribute-mapper>
+		<transition on="finish" to="displayForm" />
+	</subflow-state>
+<!-- ToBePaidAmount element end-->
+	
+
+	<view-state id="displayLegalTotal" view="/views/cac/LegalTotalTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.legalTotal" target="legalTotal" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="legaltotaltype-bean.xml" />
+
+</flow>

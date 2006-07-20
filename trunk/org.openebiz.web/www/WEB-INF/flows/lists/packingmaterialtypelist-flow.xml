@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+
+	<input-mapper>
+		<mapping source="packingMaterialList" target="flowScope.packingMaterialList" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/lists/PackingMaterialTypeListForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayPackingMaterialTypeList">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="packingMaterial" result-scope="flow" />
+		</transition>
+		<transition on="clearPackingMaterial" to="clearPackingMaterial">
+			<action bean="formAction" method="bind" />
+		</transition>
+		<transition on="addPackingMaterial" to="addPackingMaterial">
+			<action bean="formAction" method="bind" />
+		</transition>						
+	</view-state>
+
+<!-- cbc case Packing Material -->
+
+	<view-state id="displayPackingMaterialTypeList" view="/views/lists/PackingMaterialTypeListView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.packingMaterialList" target="packingMaterialList" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="packingmaterialtypelist-bean.xml" />
+
+</flow>

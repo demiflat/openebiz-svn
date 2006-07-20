@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE flow PUBLIC "-//SPRING//DTD WEBFLOW 1.0//EN"
+	"http://www.springframework.org/dtd/spring-webflow-1.0.dtd">
+
+<flow start-state="displayForm">
+
+	<input-mapper>
+		<mapping source="baseAmount" target="flowScope.baseAmount" />
+	</input-mapper>
+
+	<view-state id="displayForm" view="/forms/cbc/BaseAmountTypeForm">
+		<entry-actions>
+			<action bean="formAction" method="setupForm" />
+		</entry-actions>
+		<transition on="submit" to="displayBaseAmount">
+			<action bean="formAction" method="bindAndValidate"
+				result-name="baseAmount" result-scope="flow" />
+		</transition>
+	</view-state>
+
+	<view-state id="displayBaseAmount" view="/views/cbc/BaseAmountTypeView">
+		<transition on="end" to="finish" />
+	</view-state>
+
+	<end-state id="finish">
+		<output-mapper>
+			<mapping source="flowScope.baseAmount" target="baseAmount" />
+		</output-mapper>
+	</end-state>
+
+	<import resource="baseamounttype-bean.xml" />
+
+</flow>
