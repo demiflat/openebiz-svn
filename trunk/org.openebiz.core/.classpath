@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="src" kind="src"/>
+	<classpathentry path="JRE_LIB" kind="var" sourcepath="JRE_SRC"/>
+	<classpathentry path="/org.jodatime.core" combineaccessrules="false" kind="src"/>
+	<classpathentry path="/org.apache.jakarta.commons" combineaccessrules="false" kind="src"/>
+	<classpathentry path="/org.springframework.webflow.core" combineaccessrules="false" kind="src"/>
+	<classpathentry path="bin" kind="output"/>
+</classpath>
