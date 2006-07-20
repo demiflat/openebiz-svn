@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		lazy-init="true">
+		<property name="url">
+			<value>${db.url}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${db.jdbc.driver}</value>
+		</property>
+		<property name="username">
+			<value>${db.username}</value>
+		</property>
+		<property name="password">
+			<value>${db.password}</value>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+		lazy-init="true">
+		<property name="dataSource">
+			<ref local="enterpriseDataSource" />
+		</property>
+		<property name="useTransactionAwareDataSource">
+			<value>true</value>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>
+					org/openebiz/core/businessdocs/AttachedDocumentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/BillOfLadingType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/CatalogueType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/CertificateOfOriginType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/CreditNoteType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/DebitNoteType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/ForwardingInstructionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/FreightInvoiceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/InvoiceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/OrderType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/PackingListType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/QuotationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/ReceiptAdviceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/RemittanceAdviceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/RequestForQuotationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/SelfBilledCreditNoteType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/SelfBilledInvoiceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/StatementType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/businessdocs/WaybillType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AccountingDocumentReferenceLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AccountingDocumentReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AddressLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AddressType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AirTransportType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AllowanceChargeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/AttachmentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/BasePriceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/BranchType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CardAccountType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CatalogueLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CatalogueReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CertificateOfOriginApplicationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ClassificationCategoryType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ClassificationSchemeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CommodityClassificationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CommunicationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ConsignmentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ContactType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ContractType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CorporateRegistrationSchemeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CountryType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CreditAccountType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CreditNoteLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/CustomerPartyType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DebitNoteLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DeliveryTermsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DeliveryType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DeliveryUnitType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DespatchLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DespatchType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DimensionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DocumentDistributionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DocumentReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/DocumentResponseType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/EndorsementType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/EndorserPartyType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ExchangeRateType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ExternalReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/FinancialAccountType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/FinancialInstitutionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/GoodsItemContainerType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/GoodsItemType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/HazardousGoodsTransitType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/HazardousItemType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/InvoiceLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemComparisonType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemIdentificationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemInstanceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemLocationQuantityType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemPropertyGroupType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemPropertyType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ItemType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LanguageType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LegalTotalType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LineItemType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LineReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LineResponseType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LocationCoordinateType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LocationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/LotIdentificationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/MaritimeTransportType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/OrderLineReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/OrderLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/OrderReferenceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/OrderedShipmentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PackageType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PartyIdentificationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PartyLegalEntityType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PartyNameType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PartyTaxSchemeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PartyType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PaymentMeansType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PaymentTermsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PaymentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PeriodType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PersonType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PhysicalAttributeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PortType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/PriceListType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/QuotationLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/RailTransportType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ReceiptLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/RelatedItemType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/RemittanceAdviceLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/RequestForQuotationLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ResponseType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/RoadTransportType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/SecondaryHazardType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ShipmentStageType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/ShipmentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/SignatureType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/StatementLineType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/StowageType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/SupplierPartyType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TaxCategoryType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TaxSchemeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TaxSubTotalType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TaxTotalType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TemperatureType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TradingTermsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransactionConditionsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransportEquipmentSealType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransportEquipmentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransportHandlingUnitType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransportMeansType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cac/TransportationServiceType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/BrandNameType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/DamageRemarksType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/DeliveryInstructionsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/DescriptionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/DirectionsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/InformationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/KeywordType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/LocationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/ModelNameType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/NoteType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/OtherInstructionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/PackingMaterialType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/PriceChangeReasonType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/PriceTypeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/RegistrationNationalityType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/RemarksType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/ShippingMarksType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/SpecialInstructionsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/SummaryDescriptionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/TariffDescriptionType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/TradingRestrictionsType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/WarrantyInformationType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/cbc/XPathType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/currency/CurrencyCodeContentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/language/LanguageCodeContentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/mimetype/BinaryObjectMimeCodeContentType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/BinaryObjectType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/CodeType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/GraphicType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/IdentifierType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/PictureType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/SoundType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/udt/VideoType.hbm.xml
+				</value>
+				<value>
+					org/openebiz/core/common/unit/UnitCodeContentType.hbm.xml
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="attachedDocumentTypeDAO"
+		class="org.openebiz.dao.businessdocs.AttachedDocumentTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="billOfLadingTypeDAO"
+		class="org.openebiz.dao.businessdocs.BillOfLadingTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="catalogueTypeDAO"
+		class="org.openebiz.dao.businessdocs.CatalogueTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="certificateOfOriginTypeDAO"
+		class="org.openebiz.dao.businessdocs.CertificateOfOriginTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="creditNoteTypeDAO"
+		class="org.openebiz.dao.businessdocs.CreditNoteTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="debitNoteTypeDAO"
+		class="org.openebiz.dao.businessdocs.DebitNoteTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="forwardingInstructionTypeDAO"
+		class="org.openebiz.dao.businessdocs.ForwardingInstructionTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="freightInvoiceTypeDAO"
+		class="org.openebiz.dao.businessdocs.FreightInvoiceTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="invoiceTypeDAO"
+		class="org.openebiz.dao.businessdocs.InvoiceTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="orderTypeDAO"
+		class="org.openebiz.dao.businessdocs.OrderTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="packingListTypeDAO"
+		class="org.openebiz.dao.businessdocs.PackingListTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="quotationTypeDAO"
+		class="org.openebiz.dao.businessdocs.QuotationTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="receiptAdviceTypeDAO"
+		class="org.openebiz.dao.businessdocs.ReceiptAdviceTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="remittanceAdviceTypeDAO"
+		class="org.openebiz.dao.businessdocs.RemittanceAdviceTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="requestForQuotationTypeDAO"
+		class="org.openebiz.dao.businessdocs.RequestForQuotationTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="selfBilledCreditNoteTypeDAO"
+		class="org.openebiz.dao.businessdocs.SelfBilledCreditNoteTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="selfBilledInvoiceTypeDAO"
+		class="org.openebiz.dao.businessdocs.SelfBilledInvoiceTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="statementTypeDAO"
+		class="org.openebiz.dao.businessdocs.StatementTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="waybillTypeDAO"
+		class="org.openebiz.dao.businessdocs.WaybillTypeDAOImpl"
+		lazy-init="true">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+</beans>

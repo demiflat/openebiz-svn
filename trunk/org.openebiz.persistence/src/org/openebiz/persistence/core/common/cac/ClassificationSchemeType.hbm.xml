@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ClassificationSchemeType" dynamic-update="true" dynamic-insert="true" table="classification_scheme_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="statusCode" entity-name="org.openebiz.core.common.cbc.StatusCodeType" cascade="save-update" not-null="false"
+        column="status_code_type_internal_id" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="description" entity-name="org.openebiz.core.common.cbc.DescriptionType" cascade="save-update" not-null="false"
+        column="description_type_internal_id" />
+        <many-to-one name="agencyID" entity-name="org.openebiz.core.common.cbc.AgencyIDType" cascade="save-update" not-null="false" column="agencyidtype_internal_id" />
+        <many-to-one name="versionID" entity-name="org.openebiz.core.common.cbc.VersionIDType" cascade="save-update" not-null="false"
+        column="versionidtype_internal_id" />
+        <many-to-one name="schemeURI" entity-name="org.openebiz.core.common.cbc.SchemeURIType" cascade="save-update" not-null="false"
+        column="schemeuritype_internal_id" />
+        <many-to-one name="languageID" entity-name="org.openebiz.core.common.cbc.LanguageIDType" cascade="save-update" not-null="false"
+        column="languageidtype_internal_id" />
+        <many-to-one name="uRI" entity-name="org.openebiz.core.common.cbc.URIType" cascade="save-update" not-null="false" column="uritype_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="lastRevisionDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.LastRevisionDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="last_revision_date_time_value" />
+        </component>
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="agencyName" update="true" insert="true" class="org.openebiz.core.common.cbc.AgencyNameType">
+            <property name="value" type="string" column="agency_name_value" />
+            <property name="languageID" type="string" column="agency_name_languageid" />
+        </component>
+        <list access="field" name="classificationCategory" cascade="save-update">
+            <key column="classification_category_fk" />
+            <list-index column="classification_category_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ClassificationCategoryType" />
+        </list>
+    </class>
+</hibernate-mapping>

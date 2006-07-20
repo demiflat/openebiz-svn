@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="RelatedItemType" dynamic-update="true" dynamic-insert="true" table="related_item_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="quantity" update="true" insert="true" class="org.openebiz.core.common.cbc.QuantityType">
+            <property name="internalId" type="long" column="quantity_internal_id" />
+            <property name="version" type="integer" column="quantity_version" />
+            <property name="value" type="big_decimal" column="quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <list access="field" name="description" cascade="save-update">
+            <key column="description_fk" />
+            <list-index column="description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+        </list>
+    </class>
+</hibernate-mapping>

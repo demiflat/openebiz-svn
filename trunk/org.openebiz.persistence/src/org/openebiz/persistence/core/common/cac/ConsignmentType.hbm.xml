@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ConsignmentType" dynamic-update="true" dynamic-insert="true" table="consignment_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="tariffCode" entity-name="org.openebiz.core.common.cbc.TariffCodeType" cascade="save-update" not-null="false"
+        column="tariff_code_type_internal_id" />
+        <many-to-one name="consigneeParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <many-to-one name="exporterParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_1" />
+        <many-to-one name="consignorParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_2" />
+        <many-to-one name="importerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_3" />
+        <many-to-one name="carrierParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id_4" />
+        <many-to-one name="freightForwarderParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_5" />
+        <many-to-one name="notifyParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id_6" />
+        <many-to-one name="originalDespatchParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_7" />
+        <many-to-one name="finalDeliveryParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_8" />
+        <many-to-one name="originalDepartureCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id" />
+        <many-to-one name="finalDestinationCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id_1" />
+        <many-to-one name="originalDespatchTransportationService" entity-name="org.openebiz.core.common.cac.TransportationServiceType" cascade="save-update"
+        not-null="false" column="transportation_service_type_internal_id" />
+        <many-to-one name="finalDeliveryTransportationService" entity-name="org.openebiz.core.common.cac.TransportationServiceType" cascade="save-update"
+        not-null="false" column="transportation_service_type_internal_id_1" />
+        <many-to-one name="deliveryTerms" entity-name="org.openebiz.core.common.cac.DeliveryTermsType" cascade="save-update" not-null="false"
+        column="delivery_terms_type_internal_id" />
+        <many-to-one name="paymentTerms" entity-name="org.openebiz.core.common.cac.PaymentTermsType" cascade="save-update" not-null="false"
+        column="payment_terms_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="totalInvoiceAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalInvoiceAmountType">
+            <property name="value" type="big_decimal" column="total_invoice_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="declaredCustomsValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.DeclaredCustomsValueAmountType">
+            <property name="value" type="big_decimal" column="declared_customs_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_1" />
+        </component>
+        <component name="insurancePremiumAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.InsurancePremiumAmountType">
+            <property name="value" type="big_decimal" column="insurance_premium_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_2" />
+        </component>
+        <component name="grossWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.GrossWeightMeasureType">
+            <property name="value" type="big_decimal" column="gross_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="netWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetWeightMeasureType">
+            <property name="value" type="big_decimal" column="net_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="netNetWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetNetWeightMeasureType">
+            <property name="value" type="big_decimal" column="net_net_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <component name="chargeableWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.ChargeableWeightMeasureType">
+            <property name="value" type="big_decimal" column="chargeable_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_3" />
+        </component>
+        <component name="grossVolumeMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.GrossVolumeMeasureType">
+            <property name="value" type="big_decimal" column="gross_volume_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_4" />
+        </component>
+        <component name="netVolumeMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetVolumeMeasureType">
+            <property name="value" type="big_decimal" column="net_volume_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_5" />
+        </component>
+        <component name="loadingLengthMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LoadingLengthMeasureType">
+            <property name="value" type="big_decimal" column="loading_length_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_6" />
+        </component>
+        <component name="hazardousRiskIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.HazardousRiskIndicatorType">
+            <property name="value" type="boolean" column="hazardous_risk_indicator_value" />
+        </component>
+        <list access="field" name="summaryDescription" cascade="save-update">
+            <key column="summary_description_fk" />
+            <list-index column="summary_description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.SummaryDescriptionType" />
+        </list>
+        <list access="field" name="tariffDescription" cascade="save-update">
+            <key column="tariff_description_fk" />
+            <list-index column="tariff_description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.TariffDescriptionType" />
+        </list>
+        <list access="field" name="remarks" cascade="save-update">
+            <key column="remarks_fk" />
+            <list-index column="remarks_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.RemarksType" />
+        </list>
+        <list access="field" name="transitCountry" cascade="save-update">
+            <key column="transit_country_fk" />
+            <list-index column="transit_country_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.CountryType" />
+        </list>
+        <list access="field" name="freightAllowanceCharge" cascade="save-update">
+            <key column="freight_allowance_charge_fk" />
+            <list-index column="freight_allowance_charge_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AllowanceChargeType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.udt">
+    <class name="PictureType" dynamic-update="true" dynamic-insert="true" table="picture_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="value" type="binary">
+            <column name="value" sql-type="image" />
+        </property>
+        <property name="encodingCode" type="string" column="encoding_code" />
+        <property name="filename" type="string" column="filename" />
+        <property name="format" type="string" column="format" />
+        <property name="uri" type="string" column="uri" />
+        <many-to-one name="mimeCode" entity-name="org.openebiz.core.common.mimetype.BinaryObjectMimeCodeContentType" cascade="none"
+        foreign-key="PictureType_BinaryObjectMimeCodeContentType_internalId" not-null="false" column="binary_object_mime_code_content_type_internal_id" />
+    </class>
+</hibernate-mapping>

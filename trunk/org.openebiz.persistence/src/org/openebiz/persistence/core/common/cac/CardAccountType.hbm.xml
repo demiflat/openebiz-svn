@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="CardAccountType" dynamic-update="true" dynamic-insert="true" table="card_account_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="primaryAccountNumberID" entity-name="org.openebiz.core.common.cbc.PrimaryAccountNumberIDType" cascade="save-update" not-null="false"
+        column="primary_account_numberidtype_internal_id" />
+        <many-to-one name="networkID" entity-name="org.openebiz.core.common.cbc.NetworkIDType" cascade="save-update" not-null="false"
+        column="networkidtype_internal_id" />
+        <many-to-one name="cardTypeCode" entity-name="org.openebiz.core.common.cbc.CardTypeCodeType" cascade="save-update" not-null="false"
+        column="card_type_code_type_internal_id" />
+        <many-to-one name="issuerID" entity-name="org.openebiz.core.common.cbc.IssuerIDType" cascade="save-update" not-null="false" column="issueridtype_internal_id" />
+        <many-to-one name="issueNumberID" entity-name="org.openebiz.core.common.cbc.IssueNumberIDType" cascade="save-update" not-null="false"
+        column="issue_numberidtype_internal_id" />
+        <many-to-one name="chipCode" entity-name="org.openebiz.core.common.cbc.ChipCodeType" cascade="save-update" not-null="false"
+        column="chip_code_type_internal_id" />
+        <many-to-one name="chipApplicationID" entity-name="org.openebiz.core.common.cbc.ChipApplicationIDType" cascade="save-update" not-null="false"
+        column="chip_applicationidtype_internal_id" />
+        <many-to-one name="cV2ID" entity-name="org.openebiz.core.common.cbc.CV2IDType" cascade="save-update" not-null="false" column="cv2idtype_internal_id" />
+        <component name="validityStartDate" update="true" insert="true" class="org.openebiz.core.common.cbc.ValidityStartDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="validity_start_date_value" />
+        </component>
+        <component name="expiryDate" update="true" insert="true" class="org.openebiz.core.common.cbc.ExpiryDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="expiry_date_value" />
+        </component>
+        <component name="holderName" update="true" insert="true" class="org.openebiz.core.common.cbc.HolderNameType">
+            <property name="value" type="string" column="holder_name_value" />
+            <property name="languageID" type="string" column="holder_name_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

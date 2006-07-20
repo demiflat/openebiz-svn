@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="DocumentResponseType" dynamic-update="true" dynamic-insert="true" table="document_response_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="response" entity-name="org.openebiz.core.common.cac.ResponseType" cascade="save-update" not-null="false" column="response_type_internal_id" />
+        <many-to-one name="documentReference" entity-name="org.openebiz.core.common.cac.DocumentReferenceType" cascade="save-update" not-null="false"
+        column="document_reference_type_internal_id" />
+        <many-to-one name="issuerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <many-to-one name="recipientParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_1" />
+        <list access="field" name="lineResponse" cascade="save-update">
+            <key column="line_response_fk" />
+            <list-index column="line_response_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineResponseType" />
+        </list>
+    </class>
+</hibernate-mapping>

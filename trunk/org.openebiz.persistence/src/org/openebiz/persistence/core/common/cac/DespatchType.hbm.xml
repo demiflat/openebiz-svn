@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="DespatchType" dynamic-update="true" dynamic-insert="true" table="despatch_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="despatchAddress" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false"
+        column="address_type_internal_id" />
+        <many-to-one name="despatchParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <many-to-one name="contact" entity-name="org.openebiz.core.common.cac.ContactType" cascade="save-update" not-null="false" column="contact_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="requestedDespatchDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.RequestedDespatchDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="requested_despatch_date_time_value" />
+        </component>
+        <component name="estimatedDespatchDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.EstimatedDespatchDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="estimated_despatch_date_time_value" />
+        </component>
+        <component name="actualDespatchDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.ActualDespatchDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="actual_despatch_date_time_value" />
+        </component>
+    </class>
+</hibernate-mapping>

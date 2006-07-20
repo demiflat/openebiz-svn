@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="LotIdentificationType" dynamic-update="true" dynamic-insert="true" table="lot_identification_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="lotNumberID" entity-name="org.openebiz.core.common.cbc.LotNumberIDType" cascade="save-update" not-null="false"
+        column="lot_numberidtype_internal_id" />
+        <component name="expiryDate" update="true" insert="true" class="org.openebiz.core.common.cbc.ExpiryDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="expiry_date_value" />
+        </component>
+        <list access="field" name="additionalItemProperty" cascade="save-update">
+            <key column="additional_item_property_fk" />
+            <list-index column="additional_item_property_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemPropertyType" />
+        </list>
+    </class>
+</hibernate-mapping>

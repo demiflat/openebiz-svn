@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TransportMeansType" dynamic-update="true" dynamic-insert="true" table="transport_means_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="journeyID" entity-name="org.openebiz.core.common.cbc.JourneyIDType" cascade="save-update" not-null="false"
+        column="journeyidtype_internal_id" />
+        <many-to-one name="registrationNationalityID" entity-name="org.openebiz.core.common.cbc.RegistrationNationalityIDType" cascade="save-update" not-null="false"
+        column="registration_nationalityidtype_internal_id" />
+        <many-to-one name="directionCode" entity-name="org.openebiz.core.common.cbc.DirectionCodeType" cascade="save-update" not-null="false"
+        column="direction_code_type_internal_id" />
+        <many-to-one name="stowage" entity-name="org.openebiz.core.common.cac.StowageType" cascade="save-update" not-null="false" column="stowage_type_internal_id" />
+        <many-to-one name="airTransport" entity-name="org.openebiz.core.common.cac.AirTransportType" cascade="save-update" not-null="false"
+        column="air_transport_type_internal_id" />
+        <many-to-one name="roadTransport" entity-name="org.openebiz.core.common.cac.RoadTransportType" cascade="save-update" not-null="false"
+        column="road_transport_type_internal_id" />
+        <many-to-one name="railTransport" entity-name="org.openebiz.core.common.cac.RailTransportType" cascade="save-update" not-null="false"
+        column="rail_transport_type_internal_id" />
+        <many-to-one name="maritimeTransport" entity-name="org.openebiz.core.common.cac.MaritimeTransportType" cascade="save-update" not-null="false"
+        column="maritime_transport_type_internal_id" />
+        <many-to-one name="ownerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <list access="field" name="registrationNationality" cascade="save-update">
+            <key column="registration_nationality_fk" />
+            <list-index column="registration_nationality_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.RegistrationNationalityType" />
+        </list>
+    </class>
+</hibernate-mapping>

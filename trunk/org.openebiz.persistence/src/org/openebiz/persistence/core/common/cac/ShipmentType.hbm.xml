@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ShipmentType" dynamic-update="true" dynamic-insert="true" table="shipment_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="priorityLevelCode" entity-name="org.openebiz.core.common.cbc.PriorityLevelCodeType" cascade="save-update" not-null="false"
+        column="priority_level_code_type_internal_id" />
+        <many-to-one name="handlingCode" entity-name="org.openebiz.core.common.cbc.HandlingCodeType" cascade="save-update" not-null="false"
+        column="handling_code_type_internal_id" />
+        <many-to-one name="information" entity-name="org.openebiz.core.common.cbc.InformationType" cascade="save-update" not-null="false"
+        column="information_type_internal_id" />
+        <many-to-one name="consignment" entity-name="org.openebiz.core.common.cac.ConsignmentType" cascade="save-update" not-null="false"
+        column="consignment_type_internal_id" />
+        <many-to-one name="transportContract" entity-name="org.openebiz.core.common.cac.ContractType" cascade="save-update" not-null="false"
+        column="contract_type_internal_id" />
+        <many-to-one name="delivery" entity-name="org.openebiz.core.common.cac.DeliveryType" cascade="save-update" not-null="false" column="delivery_type_internal_id" />
+        <many-to-one name="originAddress" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false"
+        column="address_type_internal_id" />
+        <many-to-one name="firstArrivalPort" entity-name="org.openebiz.core.common.cac.PortType" cascade="save-update" not-null="false" column="port_type_internal_id" />
+        <many-to-one name="lastExitPort" entity-name="org.openebiz.core.common.cac.PortType" cascade="save-update" not-null="false" column="port_type_internal_id_1" />
+        <many-to-one name="exportCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="handlingInstructions" update="true" insert="true" class="org.openebiz.core.common.cbc.HandlingInstructionsType">
+            <property name="value" type="string" column="handling_instructions_value" />
+            <property name="languageID" type="string" column="handling_instructions_languageid" />
+        </component>
+        <component name="grossWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.GrossWeightMeasureType">
+            <property name="value" type="big_decimal" column="gross_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="netWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetWeightMeasureType">
+            <property name="value" type="big_decimal" column="net_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="netNetWeightMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetNetWeightMeasureType">
+            <property name="value" type="big_decimal" column="net_net_weight_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <component name="grossVolumeMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.GrossVolumeMeasureType">
+            <property name="value" type="big_decimal" column="gross_volume_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_3" />
+        </component>
+        <component name="netVolumeMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.NetVolumeMeasureType">
+            <property name="value" type="big_decimal" column="net_volume_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_4" />
+        </component>
+        <component name="totalGoodsItemQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalGoodsItemQuantityType">
+            <property name="internalId" type="long" column="total_goods_item_quantity_internal_id" />
+            <property name="version" type="integer" column="total_goods_item_quantity_version" />
+            <property name="value" type="big_decimal" column="total_goods_item_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_5" />
+        </component>
+        <component name="totalTransportHandlingUnitQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalTransportHandlingUnitQuantityType">
+            <property name="internalId" type="long" column="total_transport_handling_unit_quantity_internal_id" />
+            <property name="version" type="integer" column="total_transport_handling_unit_quantity_version" />
+            <property name="value" type="big_decimal" column="total_transport_handling_unit_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_6" />
+        </component>
+        <component name="insuranceValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.InsuranceValueAmountType">
+            <property name="value" type="big_decimal" column="insurance_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="declaredCustomsValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.DeclaredCustomsValueAmountType">
+            <property name="value" type="big_decimal" column="declared_customs_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_1" />
+        </component>
+        <component name="declaredForCarriageValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.DeclaredForCarriageValueAmountType">
+            <property name="value" type="big_decimal" column="declared_for_carriage_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_2" />
+        </component>
+        <component name="declaredStatisticsValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.DeclaredStatisticsValueAmountType">
+            <property name="value" type="big_decimal" column="declared_statistics_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_3" />
+        </component>
+        <component name="freeOnBoardValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.FreeOnBoardValueAmountType">
+            <property name="value" type="big_decimal" column="free_on_board_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id_4" />
+        </component>
+        <list access="field" name="specialInstructions" cascade="save-update">
+            <key column="special_instructions_fk" />
+            <list-index column="special_instructions_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.SpecialInstructionsType" />
+        </list>
+        <list access="field" name="deliveryInstructions" cascade="save-update">
+            <key column="delivery_instructions_fk" />
+            <list-index column="delivery_instructions_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DeliveryInstructionsType" />
+        </list>
+        <list access="field" name="goodsItem" cascade="save-update">
+            <key column="goods_item_fk" />
+            <list-index column="goods_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.GoodsItemType" />
+        </list>
+        <list access="field" name="shipmentStage" cascade="save-update">
+            <key column="shipment_stage_fk" />
+            <list-index column="shipment_stage_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ShipmentStageType" />
+        </list>
+        <list access="field" name="transportHandlingUnit" cascade="save-update">
+            <key column="transport_handling_unit_fk" />
+            <list-index column="transport_handling_unit_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TransportHandlingUnitType" />
+        </list>
+        <list access="field" name="freightAllowanceCharge" cascade="save-update">
+            <key column="freight_allowance_charge_fk" />
+            <list-index column="freight_allowance_charge_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AllowanceChargeType" />
+        </list>
+    </class>
+</hibernate-mapping>

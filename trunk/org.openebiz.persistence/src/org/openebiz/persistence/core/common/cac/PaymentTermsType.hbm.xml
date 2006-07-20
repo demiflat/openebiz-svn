@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PaymentTermsType" dynamic-update="true" dynamic-insert="true" table="payment_terms_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="referenceEventCode" entity-name="org.openebiz.core.common.cbc.ReferenceEventCodeType" cascade="save-update" not-null="false"
+        column="reference_event_code_type_fk" />
+        <many-to-one name="paymentMeans" entity-name="org.openebiz.core.common.cac.PaymentMeansType" cascade="save-update" not-null="false"
+        column="payment_means_type_fk" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_fk" />
+        <component name="settlementDiscountPercent" update="true" insert="true" class="org.openebiz.core.common.cbc.SettlementDiscountPercentType">
+            <property name="value" type="big_decimal" column="settlement_discount_percent_value" />
+        </component>
+        <component name="penaltySurchargePercent" update="true" insert="true" class="org.openebiz.core.common.cbc.PenaltySurchargePercentType">
+            <property name="value" type="big_decimal" column="penalty_surcharge_percent_value" />
+        </component>
+        <component name="amount" update="true" insert="true" class="org.openebiz.core.common.cbc.AmountType">
+            <property name="value" type="big_decimal" column="amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="amount_currency_code_content_type_fk" />
+        </component>
+        <component name="settlementPeriod" update="true" insert="true" class="org.openebiz.core.common.cac.PeriodType">
+            <property name="internalId" type="long" column="settlement_period_internal_id" />
+            <property name="version" type="integer" column="settlement_period_version" />
+            <component name="startDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.StartDateTimeType">
+                <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="settlement_period_start_date_time_value" />
+            </component>
+            <component name="endDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.EndDateTimeType">
+                <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="settlement_period_end_date_time_value" />
+            </component>
+            <component name="durationMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.DurationMeasureType">
+                <property name="value" type="big_decimal" column="settlement_period_duration_measure_value" />
+                <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+                column="settlement_period_duration_measure_unit_code_content_type_fk" />
+            </component>
+            <list access="field" name="descriptionCode" cascade="save-update">
+                <key column="description_code_internal_id" />
+                <list-index column="settlement_period_description_code_idx" />
+                <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+            </list>
+        </component>
+        <component name="penaltyPeriod" update="true" insert="true" class="org.openebiz.core.common.cac.PeriodType">
+            <property name="internalId" type="long" column="penalty_period_internal_id" />
+            <property name="version" type="integer" column="penalty_period_version" />
+            <component name="startDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.StartDateTimeType">
+                <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="penalty_period_start_date_time_value" />
+            </component>
+            <component name="endDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.EndDateTimeType">
+                <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="penalty_period_end_date_time_value" />
+            </component>
+            <component name="durationMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.DurationMeasureType">
+                <property name="value" type="big_decimal" column="penalty_period_duration_measure_value" />
+                <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+                column="penalty_period_duration_measure_unit_code_content_type_fk" />
+            </component>
+            <list access="field" name="descriptionCode" cascade="save-update">
+                <key column="description_code_fk" />
+                <list-index column="penalty_period_description_code_idx" />
+                <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+            </list>
+        </component>
+    </class>
+</hibernate-mapping>

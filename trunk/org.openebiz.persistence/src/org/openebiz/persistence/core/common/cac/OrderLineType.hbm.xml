@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="OrderLineType" dynamic-update="true" dynamic-insert="true" table="order_line_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="substitutionStatusCode" entity-name="org.openebiz.core.common.cbc.SubstitutionStatusCodeType" cascade="save-update" not-null="false"
+        column="substitution_status_code_type_internal_id" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="lineItem" entity-name="org.openebiz.core.common.cac.LineItemType" cascade="save-update" not-null="false"
+        column="line_item_type_internal_id" />
+        <many-to-one name="quotationLineReference" entity-name="org.openebiz.core.common.cac.LineReferenceType" cascade="save-update" not-null="false"
+        column="line_reference_type_internal_id" />
+        <list access="field" name="sellerProposedLineItem" cascade="save-update">
+            <key column="seller_proposed_line_item_fk" />
+            <list-index column="seller_proposed_line_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineItemType" />
+        </list>
+        <list access="field" name="sellerSubstitutedLineItem" cascade="save-update">
+            <key column="seller_substituted_line_item_fk" />
+            <list-index column="seller_substituted_line_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineItemType" />
+        </list>
+        <list access="field" name="buyerProposedLineItem" cascade="save-update">
+            <key column="buyer_proposed_line_fk" />
+            <list-index column="buyer_proposed_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineItemType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="AddressType" dynamic-update="true" dynamic-insert="true" table="address_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="countrySubentityCode" entity-name="org.openebiz.core.common.cbc.CountrySubentityCodeType" cascade="save-update" not-null="false"
+        column="country_subentity_code_type_internal_id" />
+        <many-to-one name="country" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false" column="country_type_internal_id" />
+        <many-to-one name="locationCoordinate" entity-name="org.openebiz.core.common.cac.LocationCoordinateType" cascade="save-update" not-null="false"
+        column="location_coordinate_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="postbox" update="true" insert="true" class="org.openebiz.core.common.cbc.PostboxType">
+            <property name="value" type="string" column="postbox_value" />
+            <property name="languageID" type="string" column="postbox_languageid" />
+        </component>
+        <component name="floor" update="true" insert="true" class="org.openebiz.core.common.cbc.FloorType">
+            <property name="value" type="string" column="floor_value" />
+            <property name="languageID" type="string" column="floor_languageid" />
+        </component>
+        <component name="room" update="true" insert="true" class="org.openebiz.core.common.cbc.RoomType">
+            <property name="value" type="string" column="room_value" />
+            <property name="languageID" type="string" column="room_languageid" />
+        </component>
+        <component name="streetName" update="true" insert="true" class="org.openebiz.core.common.cbc.StreetNameType">
+            <property name="value" type="string" column="street_name_value" />
+            <property name="languageID" type="string" column="street_name_languageid" />
+        </component>
+        <component name="additionalStreetName" update="true" insert="true" class="org.openebiz.core.common.cbc.AdditionalStreetNameType">
+            <property name="value" type="string" column="additional_street_name_value" />
+            <property name="languageID" type="string" column="additional_street_name_languageid" />
+        </component>
+        <component name="buildingName" update="true" insert="true" class="org.openebiz.core.common.cbc.BuildingNameType">
+            <property name="value" type="string" column="building_name_value" />
+            <property name="languageID" type="string" column="building_name_languageid" />
+        </component>
+        <component name="buildingNumber" update="true" insert="true" class="org.openebiz.core.common.cbc.BuildingNumberType">
+            <property name="value" type="string" column="building_number_value" />
+            <property name="languageID" type="string" column="building_number_languageid" />
+        </component>
+        <component name="inhouseMail" update="true" insert="true" class="org.openebiz.core.common.cbc.InhouseMailType">
+            <property name="value" type="string" column="inhouse_mail_value" />
+            <property name="languageID" type="string" column="inhouse_mail_languageid" />
+        </component>
+        <component name="department" update="true" insert="true" class="org.openebiz.core.common.cbc.DepartmentType">
+            <property name="value" type="string" column="department_value" />
+            <property name="languageID" type="string" column="department_languageid" />
+        </component>
+        <component name="cityName" update="true" insert="true" class="org.openebiz.core.common.cbc.CityNameType">
+            <property name="value" type="string" column="city_name_value" />
+            <property name="languageID" type="string" column="city_name_languageid" />
+        </component>
+        <component name="postalZone" update="true" insert="true" class="org.openebiz.core.common.cbc.PostalZoneType">
+            <property name="value" type="string" column="postal_zone_value" />
+            <property name="languageID" type="string" column="postal_zone_languageid" />
+        </component>
+        <component name="countrySubentity" update="true" insert="true" class="org.openebiz.core.common.cbc.CountrySubentityType">
+            <property name="value" type="string" column="country_subentity_value" />
+            <property name="languageID" type="string" column="country_subentity_languageid" />
+        </component>
+        <component name="region" update="true" insert="true" class="org.openebiz.core.common.cbc.RegionType">
+            <property name="value" type="string" column="region_value" />
+            <property name="languageID" type="string" column="region_languageid" />
+        </component>
+        <component name="district" update="true" insert="true" class="org.openebiz.core.common.cbc.DistrictType">
+            <property name="value" type="string" column="district_value" />
+            <property name="languageID" type="string" column="district_languageid" />
+        </component>
+        <component name="timezoneOffset" update="true" insert="true" class="org.openebiz.core.common.cbc.TimezoneOffsetType">
+            <property name="value" type="string" column="timezone_offset_value" />
+            <property name="languageID" type="string" column="timezone_offset_languageid" />
+        </component>
+        <list access="field" name="addressLine" cascade="save-update">
+            <key column="address_line_fk" />
+            <list-index column="address_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AddressLineType" />
+        </list>
+    </class>
+</hibernate-mapping>

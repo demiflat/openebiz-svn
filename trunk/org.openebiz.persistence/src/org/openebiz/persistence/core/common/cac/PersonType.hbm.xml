@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PersonType" dynamic-update="true" dynamic-insert="true" table="person_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <component name="firstName" update="true" insert="true" class="org.openebiz.core.common.cbc.FirstNameType">
+            <property name="value" type="string" column="first_name_value" />
+            <property name="languageID" type="string" column="first_name_languageid" />
+        </component>
+        <component name="familyName" update="true" insert="true" class="org.openebiz.core.common.cbc.FamilyNameType">
+            <property name="value" type="string" column="family_name_value" />
+            <property name="languageID" type="string" column="family_name_languageid" />
+        </component>
+        <component name="title" update="true" insert="true" class="org.openebiz.core.common.cbc.TitleType">
+            <property name="value" type="string" column="title_value" />
+            <property name="languageID" type="string" column="title_languageid" />
+        </component>
+        <component name="middleName" update="true" insert="true" class="org.openebiz.core.common.cbc.MiddleNameType">
+            <property name="value" type="string" column="middle_name_value" />
+            <property name="languageID" type="string" column="middle_name_languageid" />
+        </component>
+        <component name="nameSuffix" update="true" insert="true" class="org.openebiz.core.common.cbc.NameSuffixType">
+            <property name="value" type="string" column="name_suffix_value" />
+            <property name="languageID" type="string" column="name_suffix_languageid" />
+        </component>
+        <component name="jobTitle" update="true" insert="true" class="org.openebiz.core.common.cbc.JobTitleType">
+            <property name="value" type="string" column="job_title_value" />
+            <property name="languageID" type="string" column="job_title_languageid" />
+        </component>
+        <component name="organizationDepartment" update="true" insert="true" class="org.openebiz.core.common.cbc.OrganizationDepartmentType">
+            <property name="value" type="string" column="organization_department_value" />
+            <property name="languageID" type="string" column="organization_department_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

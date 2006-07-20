@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="QuotationType" dynamic-update="true" dynamic-insert="true" table="quotation_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="transactionCurrencyCode" entity-name="org.openebiz.core.common.cbc.TransactionCurrencyCodeType" cascade="save-update" not-null="false"
+        column="transaction_currency_code_type_internal_id" />
+        <many-to-one name="pricingCurrencyCode" entity-name="org.openebiz.core.common.cbc.PricingCurrencyCodeType" cascade="save-update" not-null="false"
+        column="pricing_currency_code_type_internal_id" />
+        <many-to-one name="validityPeriod" entity-name="org.openebiz.core.common.cac.PeriodType" cascade="save-update" not-null="false"
+        column="period_type_internal_id" />
+        <many-to-one name="requestForQuotationDocumentReference" entity-name="org.openebiz.core.common.cac.DocumentReferenceType" cascade="save-update" not-null="false"
+        column="document_reference_type_internal_id" />
+        <many-to-one name="sellerSupplierParty" entity-name="org.openebiz.core.common.cac.SupplierPartyType" cascade="save-update" not-null="false"
+        column="supplier_party_type_internal_id" />
+        <many-to-one name="originatorCustomerParty" entity-name="org.openebiz.core.common.cac.CustomerPartyType" cascade="save-update" not-null="false"
+        column="customer_party_type_internal_id" />
+        <many-to-one name="deliveryTerms" entity-name="org.openebiz.core.common.cac.DeliveryTermsType" cascade="save-update" not-null="false"
+        column="delivery_terms_type_internal_id" />
+        <many-to-one name="paymentMeans" entity-name="org.openebiz.core.common.cac.PaymentMeansType" cascade="save-update" not-null="false"
+        column="payment_means_type_internal_id" />
+        <many-to-one name="transactionConditions" entity-name="org.openebiz.core.common.cac.TransactionConditionsType" cascade="save-update" not-null="false"
+        column="transaction_conditions_type_internal_id" />
+        <many-to-one name="destinationCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id" />
+        <many-to-one name="legalTotal" entity-name="org.openebiz.core.common.cac.LegalTotalType" cascade="save-update" not-null="false"
+        column="legal_total_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="copyIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.CopyIndicatorType">
+            <property name="value" type="boolean" column="copy_indicator_value" />
+        </component>
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <list access="field" name="additionalDocumentReference" cascade="save-update">
+            <key column="additional_document_reference_fk" />
+            <list-index column="additional_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="allowanceCharge" cascade="save-update">
+            <key column="allowance_charge_fk" />
+            <list-index column="allowance_charge_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AllowanceChargeType" />
+        </list>
+        <list access="field" name="contract" cascade="save-update">
+            <key column="contract_fk" />
+            <list-index column="contract_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ContractType" />
+        </list>
+        <list access="field" name="delivery" cascade="save-update">
+            <key column="delivery_fk" />
+            <list-index column="delivery_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DeliveryType" />
+        </list>
+        <list access="field" name="quotationLine" cascade="save-update">
+            <key column="quotation_line_fk" />
+            <list-index column="quotation_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.QuotationLineType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+        <list access="field" name="taxTotal" cascade="save-update">
+            <key column="tax_total_fk" />
+            <list-index column="tax_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxTotalType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="DespatchLineType" dynamic-update="true" dynamic-insert="true" table="despatch_line_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="lineStatusCode" entity-name="org.openebiz.core.common.cbc.LineStatusCodeType" cascade="save-update" not-null="false"
+        column="line_status_code_type_internal_id" />
+        <many-to-one name="item" entity-name="org.openebiz.core.common.cac.ItemType" cascade="save-update" not-null="false" column="item_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id_1" />
+        <component name="deliveredQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.DeliveredQuantityType">
+            <property name="internalId" type="long" column="delivered_quantity_internal_id" />
+            <property name="version" type="integer" column="delivered_quantity_version" />
+            <property name="value" type="big_decimal" column="delivered_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="backorderQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.BackOrderQuantityType">
+            <property name="internalId" type="long" column="backorder_quantity_internal_id" />
+            <property name="version" type="integer" column="backorder_quantity_version" />
+            <property name="value" type="big_decimal" column="backorder_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="backorderReason" update="true" insert="true" class="org.openebiz.core.common.cbc.BackOrderReasonType">
+            <property name="value" type="string" column="backorder_reason_value" />
+            <property name="languageID" type="string" column="backorder_reason_languageid" />
+        </component>
+        <component name="outstandingQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.OutstandingQuantityType">
+            <property name="internalId" type="long" column="outstanding_quantity_internal_id" />
+            <property name="version" type="integer" column="outstanding_quantity_version" />
+            <property name="value" type="big_decimal" column="outstanding_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <component name="outstandingReason" update="true" insert="true" class="org.openebiz.core.common.cbc.OutstandingReasonType">
+            <property name="value" type="string" column="outstanding_reason_value" />
+            <property name="languageID" type="string" column="outstanding_reason_languageid" />
+        </component>
+        <component name="overSupplyQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.OverSupplyQuantityType">
+            <property name="internalId" type="long" column="over_supply_quantity_internal_id" />
+            <property name="version" type="integer" column="over_supply_quantity_version" />
+            <property name="value" type="big_decimal" column="over_supply_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_3" />
+        </component>
+        <list access="field" name="orderLineReference" cascade="save-update">
+            <key column="order_line_reference_fk" />
+            <list-index column="order_line_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.OrderLineReferenceType" />
+        </list>
+        <list access="field" name="shipment" cascade="save-update">
+            <key column="shipment_fk" />
+            <list-index column="shipment_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ShipmentType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PartyType" dynamic-update="true" dynamic-insert="true" table="party_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="logoReferenceID" entity-name="org.openebiz.core.common.cbc.LogoReferenceIDType" cascade="save-update" not-null="false"
+        column="logo_referenceidtype_internal_id" />
+        <many-to-one name="language" entity-name="org.openebiz.core.common.cac.LanguageType" cascade="save-update" not-null="false" column="language_type_internal_id" />
+        <many-to-one name="address" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false" column="address_type_internal_id" />
+        <many-to-one name="contact" entity-name="org.openebiz.core.common.cac.ContactType" cascade="save-update" not-null="false" column="contact_type_internal_id" />
+        <many-to-one name="person" entity-name="org.openebiz.core.common.cac.PersonType" cascade="save-update" not-null="false" column="person_type_internal_id" />
+        <many-to-one name="agentParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="agent_party_internal_id" />
+        <component name="markCareIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.MarkCareIndicatorType">
+            <property name="value" type="boolean" column="mark_care_indicator_value" />
+        </component>
+        <component name="markAttentionIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.MarkAttentionIndicatorType">
+            <property name="value" type="boolean" column="mark_attention_indicator_value" />
+        </component>
+        <list access="field" name="partyIdentification" cascade="save-update">
+            <key column="party_identification_fk" />
+            <list-index column="party_identification_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PartyIdentificationType" />
+        </list>
+        <list access="field" name="partyName" cascade="save-update">
+            <key column="party_name_fk" />
+            <list-index column="party_name_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PartyNameType" />
+        </list>
+        <list access="field" name="partyTaxScheme" cascade="save-update">
+            <key column="party_tax_scheme_fk" />
+            <list-index column="party_tax_scheme_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PartyTaxSchemeType" />
+        </list>
+        <list access="field" name="partyLegalEntity" cascade="save-update">
+            <key column="party_legal_entity_fk" />
+            <list-index column="party_legal_entity_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PartyLegalEntityType" />
+        </list>
+    </class>
+</hibernate-mapping>

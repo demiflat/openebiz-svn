@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="DeliveryTermsType" dynamic-update="true" dynamic-insert="true" table="delivery_terms_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="lossRiskResponsibilityCode" entity-name="org.openebiz.core.common.cbc.LossRiskResponsibilityCodeType" cascade="save-update" not-null="false"
+        column="loss_risk_responsibility_code_type_internal_id" />
+        <many-to-one name="allowanceCharge" entity-name="org.openebiz.core.common.cac.AllowanceChargeType" cascade="save-update" not-null="false"
+        column="allowance_charge_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="relevantLocationConditions" update="true" insert="true" class="org.openebiz.core.common.cbc.RelevantLocationConditionsType">
+            <property name="value" type="string" column="relevant_location_conditions_value" />
+            <property name="languageID" type="string" column="relevant_location_conditions_languageid" />
+        </component>
+        <component name="specialTerms" update="true" insert="true" class="org.openebiz.core.common.cbc.SpecialTermsType">
+            <property name="value" type="string" column="special_terms_value" />
+            <property name="languageID" type="string" column="special_terms_languageid" />
+        </component>
+        <component name="lossRisk" update="true" insert="true" class="org.openebiz.core.common.cbc.LossRiskType">
+            <property name="value" type="string" column="loss_risk_value" />
+            <property name="languageID" type="string" column="loss_risk_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

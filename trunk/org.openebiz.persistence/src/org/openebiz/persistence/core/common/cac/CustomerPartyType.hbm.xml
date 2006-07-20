@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="CustomerPartyType" dynamic-update="true" dynamic-insert="true" table="customer_party_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="customerAssignedAccountID" entity-name="org.openebiz.core.common.cbc.CustomerAssignedAccountIDType" cascade="save-update" not-null="false"
+        column="customer_assigned_accountidtype_internal_id" />
+        <many-to-one name="supplierAssignedAccountID" entity-name="org.openebiz.core.common.cbc.SupplierAssignedAccountIDType" cascade="save-update" not-null="false"
+        column="supplier_assigned_accountidtype_internal_id" />
+        <many-to-one name="party" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <list access="field" name="additionalAccountID" cascade="save-update">
+            <key column="additional_accountid_fk" />
+            <list-index column="additional_accountid_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.AdditionalAccountIDType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="FinancialAccountType" dynamic-update="true" dynamic-insert="true" table="financial_account_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="accountTypeCode" entity-name="org.openebiz.core.common.cbc.AccountTypeCodeType" cascade="save-update" not-null="false"
+        column="account_type_code_type_internal_id" />
+        <many-to-one name="currencyCode" entity-name="org.openebiz.core.common.cbc.CurrencyCodeType" cascade="save-update" not-null="false"
+        column="currency_code_type_internal_id" />
+        <many-to-one name="financialInstitutionBranch" entity-name="org.openebiz.core.common.cac.BranchType" cascade="save-update" not-null="false"
+        column="branch_type_internal_id" />
+        <many-to-one name="country" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false" column="country_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="CatalogueLineType" dynamic-update="true" dynamic-insert="true" table="catalogue_line_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="actionCode" entity-name="org.openebiz.core.common.cbc.ActionCodeType" cascade="save-update" not-null="false"
+        column="action_code_type_internal_id" />
+        <many-to-one name="lifeCycleStatusCode" entity-name="org.openebiz.core.common.cbc.LifeCycleStatusCodeType" cascade="save-update" not-null="false"
+        column="life_cycle_status_code_type_internal_id" />
+        <many-to-one name="orderingUnitMeasureID" entity-name="org.openebiz.core.common.cbc.OrderingUnitMeasureIDType" cascade="save-update" not-null="false"
+        column="ordering_unit_measureidtype_internal_id" />
+        <many-to-one name="packLevelCode" entity-name="org.openebiz.core.common.cbc.PackLevelCodeType" cascade="save-update" not-null="false"
+        column="pack_level_code_type_internal_id" />
+        <many-to-one name="informationValidityPeriod" entity-name="org.openebiz.core.common.cac.PeriodType" cascade="save-update" not-null="false"
+        column="period_type_internal_id" />
+        <many-to-one name="item" entity-name="org.openebiz.core.common.cac.ItemType" cascade="save-update" not-null="false" column="item_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id_1" />
+        <component name="contractSubdivision" update="true" insert="true" class="org.openebiz.core.common.cbc.ContractSubdivisionType">
+            <property name="value" type="string" column="contract_subdivision_value" />
+            <property name="languageID" type="string" column="contract_subdivision_languageid" />
+        </component>
+        <component name="orderableIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.OrderableIndicatorType">
+            <property name="value" type="boolean" column="orderable_indicator_value" />
+        </component>
+        <component name="contentUnitQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.ContentUnitQuantityType">
+            <property name="internalId" type="long" column="content_unit_quantity_internal_id" />
+            <property name="version" type="integer" column="content_unit_quantity_version" />
+            <property name="value" type="big_decimal" column="content_unit_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="orderQuantityIncrementNumeric" update="true" insert="true" class="org.openebiz.core.common.cbc.OrderQuantityIncrementNumericType">
+            <property name="value" type="big_decimal" column="order_quantity_increment_numeric_value" />
+        </component>
+        <component name="minimumOrderQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.MinimumOrderQuantityType">
+            <property name="internalId" type="long" column="minimum_order_quantity_internal_id" />
+            <property name="version" type="integer" column="minimum_order_quantity_version" />
+            <property name="value" type="big_decimal" column="minimum_order_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="maximumOrderQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.MaximumOrderQuantityType">
+            <property name="internalId" type="long" column="maximum_order_quantity_internal_id" />
+            <property name="version" type="integer" column="maximum_order_quantity_version" />
+            <property name="value" type="big_decimal" column="maximum_order_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AddressType" />
+        </list>
+        <list access="field" name="warrantyInformation" cascade="save-update">
+            <key column="warranty_information_fk" />
+            <list-index column="warranty_information_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.WarrantyInformationType" />
+        </list>
+        <list access="field" name="validityPeriod" cascade="save-update">
+            <key column="validity_period_fk" />
+            <list-index column="validity_period_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PeriodType" />
+        </list>
+        <list access="field" name="itemComparison" cascade="save-update">
+            <key column="item_comparison_fk" />
+            <list-index column="item_comparison_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemComparisonType" />
+        </list>
+        <list access="field" name="componentRelatedItem" cascade="save-update">
+            <key column="component_related_item_fk" />
+            <list-index column="component_related_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RelatedItemType" />
+        </list>
+        <list access="field" name="accessoryRelatedItem" cascade="save-update">
+            <key column="accessory_related_item_fk" />
+            <list-index column="accessory_related_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RelatedItemType" />
+        </list>
+        <list access="field" name="requiredRelatedItem" cascade="save-update">
+            <key column="required_related_item_fk" />
+            <list-index column="required_related_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RelatedItemType" />
+        </list>
+        <list access="field" name="replacementRelatedItem" cascade="save-update">
+            <key column="replacement_related_item_fk" />
+            <list-index column="replacement_related_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RelatedItemType" />
+        </list>
+        <list access="field" name="complementaryRelatedItem" cascade="save-update">
+            <key column="complementary_related_item_fk" />
+            <list-index column="complementary_related_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RelatedItemType" />
+        </list>
+        <list access="field" name="requiredItemLocationQuantity" cascade="save-update">
+            <key column="required_item_location_quantity_fk" />
+            <list-index column="required_item_location_quantity_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemLocationQuantityType" />
+        </list>
+    </class>
+</hibernate-mapping>

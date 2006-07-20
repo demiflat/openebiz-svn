@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="HazardousItemType" dynamic-update="true" dynamic-insert="true" table="hazardous_item_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="emergencyProceduresCode" entity-name="org.openebiz.core.common.cbc.EmergencyProceduresCodeType" cascade="save-update" not-null="false"
+        column="emergency_procedures_code_type_internal_id" />
+        <many-to-one name="medicalFirstAidGuideCode" entity-name="org.openebiz.core.common.cbc.MedicalFirstAidGuideCodeType" cascade="save-update" not-null="false"
+        column="medical_first_aid_guide_code_type_internal_id" />
+        <many-to-one name="categoryCode" entity-name="org.openebiz.core.common.cbc.CategoryCodeType" cascade="save-update" not-null="false"
+        column="category_code_type_internal_id" />
+        <many-to-one name="upperOrangeHazardPlacardID" entity-name="org.openebiz.core.common.cbc.UpperOrangeHazardPlacardIDType" cascade="save-update" not-null="false"
+        column="upper_orange_hazard_placardidtype_internal_id" />
+        <many-to-one name="lowerOrangeHazardPlacardID" entity-name="org.openebiz.core.common.cbc.LowerOrangeHazardPlacardIDType" cascade="save-update" not-null="false"
+        column="lower_orange_hazard_placardidtype_internal_id" />
+        <many-to-one name="markingID" entity-name="org.openebiz.core.common.cbc.MarkingIDType" cascade="save-update" not-null="false"
+        column="markingidtype_internal_id" />
+        <many-to-one name="hazardClassID" entity-name="org.openebiz.core.common.cbc.HazardClassIDType" cascade="save-update" not-null="false"
+        column="hazard_classidtype_internal_id" />
+        <many-to-one name="contactParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <many-to-one name="emergencyTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id" />
+        <many-to-one name="flashpointTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id_1" />
+        <many-to-one name="uNDGCode" entity-name="org.openebiz.core.common.cbc.UNDGCodeType" cascade="save-update" not-null="false" column="undgcode_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="placardNotation" update="true" insert="true" class="org.openebiz.core.common.cbc.PlacardNotationType">
+            <property name="value" type="string" column="placard_notation_value" />
+            <property name="languageID" type="string" column="placard_notation_languageid" />
+        </component>
+        <component name="placardEndorsement" update="true" insert="true" class="org.openebiz.core.common.cbc.PlacardEndorsementType">
+            <property name="value" type="string" column="placard_endorsement_value" />
+            <property name="languageID" type="string" column="placard_endorsement_languageid" />
+        </component>
+        <component name="additionalInformation" update="true" insert="true" class="org.openebiz.core.common.cbc.AdditionalInformationType">
+            <property name="value" type="string" column="additional_information_value" />
+            <property name="languageID" type="string" column="additional_information_languageid" />
+        </component>
+        <component name="technicalName" update="true" insert="true" class="org.openebiz.core.common.cbc.TechnicalNameType">
+            <property name="value" type="string" column="technical_name_value" />
+            <property name="languageID" type="string" column="technical_name_languageid" />
+        </component>
+        <component name="categoryName" update="true" insert="true" class="org.openebiz.core.common.cbc.CategoryNameType">
+            <property name="value" type="string" column="category_name_value" />
+            <property name="languageID" type="string" column="category_name_languageid" />
+        </component>
+        <list access="field" name="secondaryHazard" cascade="save-update">
+            <key column="secondary_hazard_fk" />
+            <list-index column="secondary_hazard_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SecondaryHazardType" />
+        </list>
+        <list access="field" name="hazardousGoodsTransit" cascade="save-update">
+            <key column="hazardous_goods_transit_fk" />
+            <list-index column="hazardous_goods_transit_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.HazardousGoodsTransitType" />
+        </list>
+        <list access="field" name="additionalTemperature" cascade="save-update">
+            <key column="additional_temperature_fk" />
+            <list-index column="additional_temperature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TemperatureType" />
+        </list>
+    </class>
+</hibernate-mapping>

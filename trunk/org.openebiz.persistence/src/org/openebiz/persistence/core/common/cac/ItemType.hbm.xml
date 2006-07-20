@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ItemType" dynamic-update="true" dynamic-insert="true" table="item_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="description" entity-name="org.openebiz.core.common.cbc.DescriptionType" cascade="save-update" not-null="false"
+        column="description_type_internal_id" />
+        <many-to-one name="buyersItemIdentification" entity-name="org.openebiz.core.common.cac.ItemIdentificationType" cascade="save-update" not-null="false"
+        column="item_identification_type_internal_id" />
+        <many-to-one name="sellersItemIdentification" entity-name="org.openebiz.core.common.cac.ItemIdentificationType" cascade="save-update" not-null="false"
+        column="item_identification_type_internal_id_1" />
+        <many-to-one name="manufacturersItemIdentification" entity-name="org.openebiz.core.common.cac.ItemIdentificationType" cascade="save-update" not-null="false"
+        column="item_identification_type_internal_id_2" />
+        <many-to-one name="standardItemIdentification" entity-name="org.openebiz.core.common.cac.ItemIdentificationType" cascade="save-update" not-null="false"
+        column="item_identification_type_internal_id_3" />
+        <many-to-one name="catalogueItemIdentification" entity-name="org.openebiz.core.common.cac.ItemIdentificationType" cascade="save-update" not-null="false"
+        column="item_identification_type_internal_id_4" />
+        <many-to-one name="catalogueDocumentReference" entity-name="org.openebiz.core.common.cac.DocumentReferenceType" cascade="save-update" not-null="false"
+        column="document_reference_type_internal_id" />
+        <many-to-one name="lotIdentification" entity-name="org.openebiz.core.common.cac.LotIdentificationType" cascade="save-update" not-null="false"
+        column="lot_identification_type_internal_id" />
+        <many-to-one name="originCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id" />
+        <many-to-one name="commodityClassification" entity-name="org.openebiz.core.common.cac.CommodityClassificationType" cascade="save-update" not-null="false"
+        column="commodity_classification_type_internal_id" />
+        <many-to-one name="informationContentProviderParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id" />
+        <component name="packQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.PackQuantityType">
+            <property name="internalId" type="long" column="pack_quantity_internal_id" />
+            <property name="version" type="integer" column="pack_quantity_version" />
+            <property name="value" type="big_decimal" column="pack_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="packSizeNumeric" update="true" insert="true" class="org.openebiz.core.common.cbc.PackSizeNumericType">
+            <property name="value" type="big_decimal" column="pack_size_numeric_value" />
+        </component>
+        <component name="catalogueIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.CatalogueIndicatorType">
+            <property name="value" type="boolean" column="catalogue_indicator_value" />
+        </component>
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="hazardousRiskIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.HazardousRiskIndicatorType">
+            <property name="value" type="boolean" column="hazardous_risk_indicator_value" />
+        </component>
+        <component name="additionalInformation" update="true" insert="true" class="org.openebiz.core.common.cbc.AdditionalInformationType">
+            <property name="value" type="string" column="additional_information_value" />
+            <property name="languageID" type="string" column="additional_information_languageid" />
+        </component>
+        <list access="field" name="keyword" cascade="save-update">
+            <key column="keyword_fk" />
+            <list-index column="keyword_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.KeywordType" />
+        </list>
+        <list access="field" name="brandName" cascade="save-update">
+            <key column="brand_name_fk" />
+            <list-index column="brand_name_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.BrandNameType" />
+        </list>
+        <list access="field" name="modelName" cascade="save-update">
+            <key column="model_name_fk" />
+            <list-index column="model_name_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.ModelNameType" />
+        </list>
+        <list access="field" name="additionalItemIdentification" cascade="save-update">
+            <key column="additional_item_identification_fk" />
+            <list-index column="additional_item_identification_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemIdentificationType" />
+        </list>
+        <list access="field" name="additionalItemProperty" cascade="save-update">
+            <key column="additional_item_property_fk" />
+            <list-index column="additional_item_property_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemPropertyType" />
+        </list>
+        <list access="field" name="classifiedTaxCategory" cascade="save-update">
+            <key column="classified_tax_category_fk" />
+            <list-index column="classified_tax_category_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxCategoryType" />
+        </list>
+        <list access="field" name="hazardousItem" cascade="save-update">
+            <key column="hazardous_item_fk" />
+            <list-index column="hazardous_item_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.HazardousItemType" />
+        </list>
+        <list access="field" name="itemInstance" cascade="save-update">
+            <key column="item_instance_fk" />
+            <list-index column="item_instance_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemInstanceType" />
+        </list>
+        <list access="field" name="manufacturerParty" cascade="save-update">
+            <key column="manufacturer_party_fk" />
+            <list-index column="manufacturer_party_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PartyType" />
+        </list>
+        <list access="field" name="originAddress" cascade="save-update">
+            <key column="origin_address_fk" />
+            <list-index column="origin_address_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AddressType" />
+        </list>
+        <list access="field" name="transactionConditions" cascade="save-update">
+            <key column="transaction_conditions_fk" />
+            <list-index column="transaction_conditions_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TransactionConditionsType" />
+        </list>
+    </class>
+</hibernate-mapping>

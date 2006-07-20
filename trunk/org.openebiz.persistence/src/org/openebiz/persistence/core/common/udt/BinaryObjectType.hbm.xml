@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.common.udt">
+    <class name="BinaryObjectType" dynamic-update="true" dynamic-insert="true" table="binary_object_type" discriminator-value="BinaryObjectType">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <discriminator column="class" type="string" not-null="true" />
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="value" type="binary">
+<!-- image is sql server specific -->
+            <column name="value" sql-type="image" />
+        </property>
+        <property name="characterSetCode" type="string" column="character_set_code" />
+        <property name="encodingCode" type="string" column="encoding_code" />
+        <property name="filename" type="string" column="filename" />
+        <property name="format" type="string" column="format" />
+        <property name="uri" type="string" column="uri" />
+        <many-to-one name="mimeCode" entity-name="org.openebiz.core.common.mimetype.BinaryObjectMimeCodeContentType" cascade="save-update"
+        foreign-key="BinaryObjectType_BinaryObjectMimeCodeContentType_internalId" not-null="false" column="binary_object_mime_code_content_type_internal_id" />
+    </class>
+    <subclass name="org.openebiz.core.common.cbc.EmbeddedDocumentBinaryObjectType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="EmbeddedDocumentBinaryObjectType" extends="org.openebiz.core.common.udt.BinaryObjectType" />
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TransportationServiceType" dynamic-update="true" dynamic-insert="true" table="transportation_service_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="serviceCode" entity-name="org.openebiz.core.common.cbc.ServiceCodeType" cascade="save-update" not-null="false"
+        column="service_code_type_internal_id" />
+        <many-to-one name="tariffClassCode" entity-name="org.openebiz.core.common.cbc.TariffClassCodeType" cascade="save-update" not-null="false"
+        column="tariff_class_code_type_internal_id" />
+        <many-to-one name="freightRateClassCode" entity-name="org.openebiz.core.common.cbc.FreightRateClassCodeType" cascade="save-update" not-null="false"
+        column="freight_rate_class_code_type_internal_id" />
+        <component name="priority" update="true" insert="true" class="org.openebiz.core.common.cbc.PriorityType">
+            <property name="value" type="string" column="priority_value" />
+            <property name="languageID" type="string" column="priority_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

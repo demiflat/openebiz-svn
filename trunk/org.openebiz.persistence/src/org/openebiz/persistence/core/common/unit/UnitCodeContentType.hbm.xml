@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.common.unit" default-access="field">
+    <class name="UnitCodeContentType" mutable="false" table="unit_code_content_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="literal" type="string" column="literal" />
+        <property name="name" type="string" column="name" />
+    </class>
+</hibernate-mapping>

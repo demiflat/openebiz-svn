@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="AttachmentType" dynamic-update="true" dynamic-insert="true" table="attachment_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="embeddedDocumentBinaryObject" entity-name="org.openebiz.core.common.cbc.EmbeddedDocumentBinaryObjectType" cascade="save-update"
+        not-null="false" column="embedded_document_binary_object_type_internal_id" />
+        <many-to-one name="externalReference" entity-name="org.openebiz.core.common.cac.ExternalReferenceType" cascade="save-update" not-null="false"
+        column="external_reference_type_internal_id" />
+        <component name="mIMEReference" update="true" insert="true" class="org.openebiz.core.common.cbc.MIMEReferenceType">
+            <property name="value" type="string" column="mimereference_value" />
+            <property name="languageID" type="string" column="mimereference_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

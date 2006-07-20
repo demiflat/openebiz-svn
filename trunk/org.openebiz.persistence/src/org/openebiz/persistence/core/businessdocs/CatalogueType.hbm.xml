@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="CatalogueType" dynamic-update="true" dynamic-insert="true" table="catalogue_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="versionID" entity-name="org.openebiz.core.common.cbc.VersionIDType" cascade="save-update" not-null="false"
+        column="versionidtype_internal_id" />
+        <many-to-one name="previousVersionID" entity-name="org.openebiz.core.common.cbc.PreviousVersionIDType" cascade="save-update" not-null="false"
+        column="previous_versionidtype_internal_id" />
+        <many-to-one name="sellerSupplierParty" entity-name="org.openebiz.core.common.cac.SupplierPartyType" cascade="save-update" not-null="false"
+        column="supplier_party_type_internal_id" />
+        <many-to-one name="catalogueManagingParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="revisionDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.RevisionDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="revision_date_time_value" />
+        </component>
+        <list access="field" name="catalogueLine" cascade="save-update">
+            <key column="catalogue_line_fk" />
+            <list-index column="catalogue_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.CatalogueLineType" />
+        </list>
+        <list access="field" name="description" cascade="save-update">
+            <key column="description_fk" />
+            <list-index column="description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+        </list>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.NoteType" />
+        </list>
+        <list access="field" name="referencedContract" cascade="save-update">
+            <key column="referenced_contract_fk" />
+            <list-index column="referenced_contract_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ContractType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+        <list access="field" name="tradingTerms" cascade="save-update">
+            <key column="trading_terms_fk" />
+            <list-index column="trading_terms_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TradingTermsType" />
+        </list>
+        <list access="field" name="validityPeriod" cascade="save-update">
+            <key column="validity_period_fk" />
+            <list-index column="validity_period_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PeriodType" />
+        </list>
+    </class>
+</hibernate-mapping>

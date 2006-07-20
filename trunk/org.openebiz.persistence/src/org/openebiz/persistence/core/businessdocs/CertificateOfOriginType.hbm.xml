@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="CertificateOfOriginType" dynamic-update="true" dynamic-insert="true" table="certificate_of_origin_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="versionID" entity-name="org.openebiz.core.common.cbc.VersionIDType" cascade="save-update" not-null="false"
+        column="versionidtype_internal_id" />
+        <many-to-one name="exporterParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="exporter_party_type_internal_id" />
+        <many-to-one name="importerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="importer_party_type_internal_id" />
+        <many-to-one name="certificateOfOriginApplication" entity-name="org.openebiz.core.common.cac.CertificateOfOriginApplicationType" cascade="save-update"
+        not-null="false" column="certificate_of_origin_application_type_internal_id" />
+        <many-to-one name="issuerEndorsement" entity-name="org.openebiz.core.common.cac.EndorsementType" cascade="save-update" not-null="false"
+        column="endorsement_type_internal_id" />
+        <many-to-one name="embassyEndorsement" entity-name="org.openebiz.core.common.cac.EndorsementType" cascade="save-update" not-null="false"
+        column="embassy_endorsement_type_internal_id" />
+        <many-to-one name="insuranceEndorsement" entity-name="org.openebiz.core.common.cac.EndorsementType" cascade="save-update" not-null="false"
+        column="insurance_endorsement_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <list access="field" name="description" cascade="save-update">
+            <key column="description_fk" />
+            <list-index column="description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+        </list>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.NoteType" />
+        </list>
+        <list access="field" name="endorserParty" cascade="save-update">
+            <key column="endorser_party_fk" />
+            <list-index column="endorser_party_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.EndorserPartyType" />
+        </list>
+    </class>
+</hibernate-mapping>

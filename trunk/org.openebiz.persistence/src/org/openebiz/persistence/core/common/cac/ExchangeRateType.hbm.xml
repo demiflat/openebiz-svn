@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ExchangeRateType" dynamic-update="true" dynamic-insert="true" table="exchange_rate_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="sourceCurrencyCode" entity-name="org.openebiz.core.common.cbc.SourceCurrencyCodeType" cascade="save-update" not-null="false"
+        column="source_currency_code_type_internal_id" />
+        <many-to-one name="targetCurrencyCode" entity-name="org.openebiz.core.common.cbc.TargetCurrencyCodeType" cascade="save-update" not-null="false"
+        column="target_currency_code_type_internal_id" />
+        <many-to-one name="exchangeMarketID" entity-name="org.openebiz.core.common.cbc.ExchangeMarketIDType" cascade="save-update" not-null="false"
+        column="exchange_marketidtype_internal_id" />
+        <many-to-one name="operatorCode" entity-name="org.openebiz.core.common.cbc.OperatorCodeType" cascade="save-update" not-null="false"
+        column="operator_code_type_internal_id" />
+        <many-to-one name="foreignExchangeContract" entity-name="org.openebiz.core.common.cac.ContractType" cascade="save-update" not-null="false"
+        column="contract_type_internal_id" />
+        <component name="sourceCurrencyBaseRate" update="true" insert="true" class="org.openebiz.core.common.cbc.SourceCurrencyBaseRateType">
+            <property name="value" type="big_decimal" column="source_currency_base_rate_value" />
+        </component>
+        <component name="targetCurrencyBaseRate" update="true" insert="true" class="org.openebiz.core.common.cbc.TargetCurrencyBaseRateType">
+            <property name="value" type="big_decimal" column="target_currency_base_rate_value" />
+        </component>
+        <component name="calculationRate" update="true" insert="true" class="org.openebiz.core.common.cbc.CalculationRateType">
+            <property name="value" type="big_decimal" column="calculation_rate_value" />
+        </component>
+        <component name="date" update="true" insert="true" class="org.openebiz.core.common.cbc.DateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="date_value" />
+        </component>
+    </class>
+</hibernate-mapping>

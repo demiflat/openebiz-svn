@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac" auto-import="false">
+    <class name="LocationType" dynamic-update="true" dynamic-insert="true" table="location_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="locationTypeCode" entity-name="org.openebiz.core.common.cbc.LocationTypeCodeType" cascade="save-update" not-null="false"
+        column="location_type_code_type_internal_id" />
+        <many-to-one name="address" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false" column="address_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <list access="field" name="directions" cascade="save-update">
+            <key column="directions_fk" />
+            <list-index column="directions_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DirectionsType" />
+        </list>
+    </class>
+</hibernate-mapping>

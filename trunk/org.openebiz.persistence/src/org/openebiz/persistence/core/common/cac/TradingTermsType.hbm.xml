@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TradingTermsType" dynamic-update="true" dynamic-insert="true" table="trading_terms_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="applicableAddress" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false"
+        column="address_type_internal_id" />
+        <component name="reference" update="true" insert="true" class="org.openebiz.core.common.cbc.ReferenceType">
+            <property name="value" type="string" column="reference_value" />
+            <property name="languageID" type="string" column="reference_languageid" />
+        </component>
+        <list access="field" name="information" cascade="save-update">
+            <key column="information_fk" />
+            <list-index column="information_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.InformationType" />
+        </list>
+    </class>
+</hibernate-mapping>

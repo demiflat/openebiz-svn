@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.common.udt" auto-import="false">
+    <class name="CodeType" dynamic-update="true" dynamic-insert="true" abstract="true" table="code_type" discriminator-value="IdentifierType">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <discriminator column="class" type="string" not-null="true" />
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="value" type="string" column="value" />
+<!-- <property name="languageID" type="string" column="languageid" />
+        <property name="listAgencyID" type="string" column="list_agencyid" />
+        <property name="listAgencyName" type="string" column="list_agency_name" />
+        <property name="listID" type="string" column="listid" />
+        <property name="listName" type="string" column="list_name" />
+        <property name="listSchemeURI" type="string" column="list_schemeuri" />
+        <property name="listURI" type="string" column="listuri" />
+        <property name="listVersionID" type="string" column="list_versionid" />
+        <property name="name" type="string" column="name" /> -->        
+    </class>
+    <subclass name="org.openebiz.core.common.sdt.AcknowledgementResponseCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="AcknowledgementResponseCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.AllowanceChargeReasonCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="AllowanceChargeReasonCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.ChannelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ChannelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.ChipCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ChipCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.CountryIdentificationCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="CountryIdentificationCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.CurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CurrencyCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.DocumentStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DocumentStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.LatitudeDirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LatitudeDirectionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.LineStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LineStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.LongitudeDirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LongitudeDirectionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.OperatorCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="OperatorCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.PaymentMeansCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PaymentMeansCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.sdt.SubstitutionStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SubstitutionStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.AccountingCostCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="AccountingCostCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.AccountTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="AccountTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ActionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ActionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.AuthorizationCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="AuthorizationCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CardTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CardTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CargoTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CargoTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CategoryCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CategoryCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ChannelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ChannelCodeType"
+    extends="org.openebiz.core.common.sdt.ChannelCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ChipCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ChipCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CommodityCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CommodityCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ContractTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ContractTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CoordinateSystemCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CoordinateSystemCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CorporateRegistrationTypeCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="CorporateRegistrationTypeCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CostCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CostCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CountrySubentityCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CountrySubentityCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.CustomsStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="CustomsStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DescriptionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DescriptionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DespatchAdviceTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DespatchAdviceTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DirectionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DispositionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DispositionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DocumentCurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DocumentCurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DocumentQualifierCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DocumentQualifierCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.DocumentStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="DocumentStatusCodeType"
+    extends="org.openebiz.core.common.sdt.DocumentStatusCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.EmergencyProceduresCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="EmergencyProceduresCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.EventCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="EventCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.FreightRateClassCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="FreightRateClassCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.FullnessIndicationCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="FullnessIndicationCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.HandlingCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="HandlingCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.IdentificationCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="IdentificationCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.InhalationToxicityZoneCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="InhalationToxicityZoneCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.InspectionMethodCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="InspectionMethodCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.InvoiceTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="InvoiceTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ItemClassificationCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ItemClassificationCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LatitudeDirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LatitudeDirectionCodeType"
+    extends="org.openebiz.core.common.sdt.LatitudeDirectionCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LifeCycleStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LifeCycleStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LineStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LineStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LocaleCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LocaleCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LocationTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LocationTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LongitudeDirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="LongitudeDirectionCodeType"
+    extends="org.openebiz.core.common.sdt.LongitudeDirectionCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.LossRiskResponsibilityCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="LossRiskResponsibilityCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.MedicalFirstAidGuideCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="MedicalFirstAidGuideCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.NatureCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="NatureCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.OperatorCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="OperatorCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.OwnerTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="OwnerTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PackLevelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PackLevelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PackageLevelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PackageLevelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PackagingTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PackagingTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PackingCriteriaCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PackingCriteriaCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ParentDocumentQualifierCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="ParentDocumentQualifierCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PaymentChannelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PaymentChannelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PaymentMeansCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PaymentMeansCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PositionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PositionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PreferenceCriterionCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="PreferenceCriterionCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PricingCurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PricingCurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.PriorityLevelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="PriorityLevelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ProviderTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ProviderTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ReasonCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ReasonCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ReferenceEventCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ReferenceEventCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.RegulationCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="RegulationCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.RejectActionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="RejectActionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.RejectReasonCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="RejectReasonCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.RequestedInvoiceCurrencyCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="RequestedInvoiceCurrencyCodeType" extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ResponseCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ResponseCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.RoleCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="RoleCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.SealIssuerTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SealIssuerTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.SealStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SealStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ServiceCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ServiceCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.ShortageActionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="ShortageActionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.SizeTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SizeTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.SourceCurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SourceCurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.StatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="StatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.SubstitutionStatusCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="SubstitutionStatusCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TargetCurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TargetCurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TariffClassCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TariffClassCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TariffCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TariffCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TaxCurrencyCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TaxCurrencyCodeType"
+    extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TaxLevelCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TaxLevelCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TaxTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TaxTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TimingComplaintCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TimingComplaintCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransactionCurrencyCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="TransactionCurrencyCodeType" extends="org.openebiz.core.common.sdt.CurrencyCodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransitDirectionCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TransitDirectionCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransportAuthorizationCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="TransportAuthorizationCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransportEmergencyCardCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="TransportEmergencyCardCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransportHandlingUnitTypeCodeType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="TransportHandlingUnitTypeCodeType" extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransportMeansTypeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TransportMeansTypeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.TransportModeCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="TransportModeCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+    <subclass name="org.openebiz.core.common.cbc.UNDGCodeType" dynamic-update="true" dynamic-insert="true" discriminator-value="UNDGCodeType"
+    extends="org.openebiz.core.common.udt.CodeType" />
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="ReceiptAdviceType" dynamic-update="true" dynamic-insert="true" table="receipt_advice_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="documentStatusCode" entity-name="org.openebiz.core.common.cbc.DocumentStatusCodeType" cascade="save-update" not-null="false"
+        column="document_status_code_type_internal_id" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="buyerCustomerParty" entity-name="org.openebiz.core.common.cac.CustomerPartyType" cascade="save-update" not-null="false"
+        column="customer_party_type_internal_id" />
+        <many-to-one name="sellerSupplierParty" entity-name="org.openebiz.core.common.cac.SupplierPartyType" cascade="save-update" not-null="false"
+        column="supplier_party_type_internal_id" />
+        <many-to-one name="shipment" entity-name="org.openebiz.core.common.cac.ShipmentType" cascade="save-update" not-null="false" column="shipment_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="copyIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.CopyIndicatorType">
+            <property name="value" type="boolean" column="copy_indicator_value" />
+        </component>
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <list access="field" name="additionalDocumentReference" cascade="save-update">
+            <key column="additional_document_reference_fk" />
+            <list-index column="additional_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="despatchDocumentReference" cascade="save-update">
+            <key column="despatch_document_reference_fk" />
+            <list-index column="despatch_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="orderReference" cascade="save-update">
+            <key column="order_reference_fk" />
+            <list-index column="order_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.OrderReferenceType" />
+        </list>
+        <list access="field" name="receiptLine" cascade="save-update">
+            <key column="receipt_line_fk" />
+            <list-index column="receipt_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ReceiptLineType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+    </class>
+</hibernate-mapping>

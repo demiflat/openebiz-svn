@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="SecondaryHazardType" dynamic-update="true" dynamic-insert="true" table="secondary_hazard_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="emergencyProceduresCode" entity-name="org.openebiz.core.common.cbc.EmergencyProceduresCodeType" cascade="save-update" not-null="false"
+        column="emergency_procedures_code_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="placardNotation" update="true" insert="true" class="org.openebiz.core.common.cbc.PlacardNotationType">
+            <property name="value" type="string" column="placard_notation_value" />
+            <property name="languageID" type="string" column="placard_notation_languageid" />
+        </component>
+        <component name="placardEndorsement" update="true" insert="true" class="org.openebiz.core.common.cbc.PlacardEndorsementType">
+            <property name="value" type="string" column="placard_endorsement_value" />
+            <property name="languageID" type="string" column="placard_endorsement_languageid" />
+        </component>
+        <component name="extension" update="true" insert="true" class="org.openebiz.core.common.cbc.ExtensionType">
+            <property name="value" type="string" column="extension_value" />
+            <property name="languageID" type="string" column="extension_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

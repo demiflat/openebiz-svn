@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ItemLocationQuantityType" dynamic-update="true" dynamic-insert="true" table="item_location_quantity_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="basePrice" entity-name="org.openebiz.core.common.cac.BasePriceType" cascade="save-update" not-null="false"
+        column="base_price_type_internal_id" />
+        <component name="leadTimeMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LeadTimeMeasureType">
+            <property name="value" type="big_decimal" column="lead_time_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="minimumQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.MinimumQuantityType">
+            <property name="internalId" type="long" column="minimum_quantity_internal_id" />
+            <property name="version" type="integer" column="minimum_quantity_version" />
+            <property name="value" type="big_decimal" column="minimum_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="maximumQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.MaximumQuantityType">
+            <property name="internalId" type="long" column="maximum_quantity_internal_id" />
+            <property name="version" type="integer" column="maximum_quantity_version" />
+            <property name="value" type="big_decimal" column="maximum_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <component name="hazardousRiskIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.HazardousRiskIndicatorType">
+            <property name="value" type="boolean" column="hazardous_risk_indicator_value" />
+        </component>
+        <list access="field" name="tradingRestrictions" cascade="save-update">
+            <key column="trading_restrictions_fk" />
+            <list-index column="trading_restrictions_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.TradingRestrictionsType" />
+        </list>
+        <list access="field" name="applicableTerritoryAddress" cascade="save-update">
+            <key column="applicable_territory_address_fk" />
+            <list-index column="address_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AddressType" />
+        </list>
+        <list access="field" name="deliveryUnit" cascade="save-update">
+            <key column="delivery_unit_fk" />
+            <list-index column="delivery_unit_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DeliveryUnitType" />
+        </list>
+        <list access="field" name="applicableTaxCategory" cascade="save-update">
+            <key column="applicable_tax_category_fk" />
+            <list-index column="applicable_tax_category_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AddressType" />
+        </list>
+    </class>
+</hibernate-mapping>

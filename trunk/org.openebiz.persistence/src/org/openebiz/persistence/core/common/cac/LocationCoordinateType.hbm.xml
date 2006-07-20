@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="LocationCoordinateType" dynamic-update="true" dynamic-insert="true" table="location_coordinate_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="coordinateSystemCode" entity-name="org.openebiz.core.common.cbc.CoordinateSystemCodeType" cascade="save-update" not-null="false"
+        column="coordinate_system_code_type_fk" />
+        <many-to-one name="latitudeDirectionCode" entity-name="org.openebiz.core.common.cbc.LatitudeDirectionCodeType" cascade="save-update" not-null="false"
+        column="latitude_direction_code_type_fk" />
+        <many-to-one name="longitudeDirectionCode" entity-name="org.openebiz.core.common.cbc.LongitudeDirectionCodeType" cascade="save-update" not-null="false"
+        column="longitude_direction_code_type_fk" />
+        <component name="latitudeDegreesMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LatitudeDegreesMeasureType">
+            <property name="value" type="big_decimal" column="latitude_degrees_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="latitude_degrees_measure_value_unit_code_content_type_fk" />
+        </component>
+        <component name="latitudeMinutesMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LatitudeMinutesMeasureType">
+            <property name="value" type="big_decimal" column="latitude_minutes_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="latitude_minutes_measure_value_unit_code_content_type_fk" />
+        </component>
+        <component name="longitudeDegreesMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LongitudeDegreesMeasureType">
+            <property name="value" type="big_decimal" column="longitude_degrees_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="longitude_degrees_measure_value_unit_code_content_type_fk" />
+        </component>
+        <component name="longitudeMinutesMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.LongitudeMinutesMeasureType">
+            <property name="value" type="big_decimal" column="longitude_minutes_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="longitude_minutes_measure_value_unit_code_content_type_fk" />
+        </component>
+    </class>
+</hibernate-mapping>

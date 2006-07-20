@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="AttachedDocumentType" dynamic-update="true" dynamic-insert="true" table="attached_document_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="documentQualifierCode" entity-name="org.openebiz.core.common.cbc.DocumentQualifierCodeType" cascade="save-update" not-null="false"
+        column="document_qualifier_code_type_internal_id" />
+        <many-to-one name="parentDocumentID" entity-name="org.openebiz.core.common.cbc.ParentDocumentIDType" cascade="save-update" not-null="false"
+        column="parent_documentidtype_internal_id" />
+        <many-to-one name="parentDocumentQualifierCode" entity-name="org.openebiz.core.common.cbc.ParentDocumentQualifierCodeType" cascade="save-update" not-null="false"
+        column="parent_document_qualifier_code_type_internal_id" />
+        <many-to-one name="senderParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="sender_party_type_fk" />
+        <many-to-one name="receiverParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="receiver_party_type_fk" />
+        <many-to-one name="attachment" entity-name="org.openebiz.core.common.cac.AttachmentType" cascade="save-update" not-null="false"
+        column="attachment_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="documentQualifier" update="true" insert="true" class="org.openebiz.core.common.cbc.DocumentQualifierType">
+            <property name="value" type="string" column="document_qualifier_value" />
+            <property name="languageID" type="string" column="document_qualifier_languageid" />
+        </component>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.NoteType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+    </class>
+</hibernate-mapping>

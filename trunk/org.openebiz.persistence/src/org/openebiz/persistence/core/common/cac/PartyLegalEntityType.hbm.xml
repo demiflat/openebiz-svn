@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PartyLegalEntityType" dynamic-update="true" dynamic-insert="true" table="party_legal_entity_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="companyID" entity-name="org.openebiz.core.common.cbc.CompanyIDType" cascade="save-update" not-null="false"
+        column="companyidtype_internal_id" />
+        <many-to-one name="registrationAddress" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false"
+        column="address_type_internal_id" />
+        <many-to-one name="corporateRegistrationScheme" entity-name="org.openebiz.core.common.cac.CorporateRegistrationSchemeType" cascade="save-update" not-null="false"
+        column="corporate_registration_scheme_type_internal_id" />
+        <component name="registrationName" update="true" insert="true" class="org.openebiz.core.common.cbc.RegistrationNameType">
+            <property name="value" type="string" column="registration_name_value" />
+            <property name="languageID" type="string" column="registration_name_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

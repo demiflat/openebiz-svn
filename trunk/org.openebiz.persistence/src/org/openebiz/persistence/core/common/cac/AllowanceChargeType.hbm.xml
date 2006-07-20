@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="AllowanceChargeType" dynamic-update="true" dynamic-insert="true" table="allowance_charge_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="reasonCode" entity-name="org.openebiz.core.common.cbc.ReasonCodeType" cascade="save-update" not-null="false"
+        column="reason_code_type_internal_id" />
+        <many-to-one name="accountingCostCode" entity-name="org.openebiz.core.common.cbc.AccountingCostCodeType" cascade="save-update" not-null="false"
+        column="accounting_cost_code_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="chargeIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.ChargeIndicatorType">
+            <property name="value" type="boolean" column="charge_indicator_value" />
+        </component>
+        <component name="multiplierFactorNumeric" update="true" insert="true" class="org.openebiz.core.common.cbc.MultiplierFactorNumericType">
+            <property name="value" type="big_decimal" column="multiplier_factor_numeric_value" />
+        </component>
+        <component name="prepaidIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.PrepaidIndicatorType">
+            <property name="value" type="boolean" column="prepaid_indicator_value" />
+        </component>
+        <component name="sequenceNumeric" update="true" insert="true" class="org.openebiz.core.common.cbc.SequenceNumericType">
+            <property name="value" type="big_decimal" column="sequence_numeric_value" />
+        </component>
+        <component name="amount" update="true" insert="true" class="org.openebiz.core.common.cbc.AmountType">
+            <property name="value" type="big_decimal" column="amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="amount_currency_code_content_type_fk" />
+        </component>
+        <component name="baseAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.BaseAmountType">
+            <property name="value" type="big_decimal" column="base_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="base_amount_currency_code_content_type_fk" />
+        </component>
+        <list access="field" name="taxCategory" cascade="save-update" inverse="true">
+            <key column="tax_categorty_fk" />
+            <list-index column="tax_category_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxCategoryType" />
+        </list>
+        <list access="field" name="paymentMeans" lazy="false" cascade="none">
+            <key column="payment_means_fk" />
+            <list-index column="payment_means_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PaymentMeansType" />
+        </list>
+    </class>
+</hibernate-mapping>

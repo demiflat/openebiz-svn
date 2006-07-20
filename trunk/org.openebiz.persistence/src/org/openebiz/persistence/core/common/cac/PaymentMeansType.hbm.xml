@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PaymentMeansType" dynamic-update="true" dynamic-insert="true" table="payment_means_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="paymentMeansCode" entity-name="org.openebiz.core.common.cbc.PaymentMeansCodeType" cascade="save-update" not-null="false"
+        column="payment_means_code_type_fk" />
+        <many-to-one name="paymentChannelCode" entity-name="org.openebiz.core.common.cbc.PaymentChannelCodeType" cascade="save-update" not-null="false"
+        column="payment_channel_code_type_fk" />
+        <many-to-one name="cardAccount" entity-name="org.openebiz.core.common.cac.CardAccountType" cascade="save-update" not-null="false"
+        column="card_account_type_internal_id" />
+        <many-to-one name="payerFinancialAccount" entity-name="org.openebiz.core.common.cac.FinancialAccountType" cascade="save-update" not-null="false"
+        column="payer_financial_account_type_fk" />
+        <many-to-one name="payeeFinancialAccount" entity-name="org.openebiz.core.common.cac.FinancialAccountType" cascade="save-update" not-null="false"
+        column="payee_financial_account_type_fk" />
+        <many-to-one name="creditAccount" entity-name="org.openebiz.core.common.cac.CreditAccountType" cascade="save-update" not-null="false"
+        column="credit_account_type_fk" />
+        <component name="paymentDueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.PaymentDueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="payment_due_date_value" />
+        </component>
+        <list access="field" name="payment" cascade="save-update">
+            <key column="payment_fk" />
+            <list-index column="payment_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PaymentType" />
+        </list>
+    </class>
+</hibernate-mapping>

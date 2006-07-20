@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TransportHandlingUnitType" dynamic-update="true" dynamic-insert="true" table="transport_handling_unit_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="transportHandlingUnitTypeCode" entity-name="org.openebiz.core.common.cbc.TransportHandlingUnitTypeCodeType" cascade="save-update"
+        not-null="false" column="transport_handling_unit_type_code_type_internal_id" />
+        <many-to-one name="handlingCode" entity-name="org.openebiz.core.common.cbc.HandlingCodeType" cascade="save-update" not-null="false"
+        column="handling_code_type_internal_id" />
+        <many-to-one name="minimumTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id" />
+        <many-to-one name="maximumTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id_1" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="handlingInstructions" update="true" insert="true" class="org.openebiz.core.common.cbc.HandlingInstructionsType">
+            <property name="value" type="string" column="handling_instructions_value" />
+            <property name="languageID" type="string" column="handling_instructions_languageid" />
+        </component>
+        <component name="hazardousRiskIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.HazardousRiskIndicatorType">
+            <property name="value" type="boolean" column="hazardous_risk_indicator_value" />
+        </component>
+        <component name="totalGoodsItemQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalGoodsItemQuantityType">
+            <property name="internalId" type="long" column="total_goods_item_quantity_internal_id" />
+            <property name="version" type="integer" column="total_goods_item_quantity_version" />
+            <property name="value" type="big_decimal" column="total_goods_item_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="totalTransportEquipmentQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalTransportEquipmentQuantityType">
+            <property name="internalId" type="long" column="total_transport_equipment_quantity_internal_id" />
+            <property name="version" type="integer" column="total_transport_equipment_quantity_version" />
+            <property name="value" type="big_decimal" column="total_transport_equipment_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_1" />
+        </component>
+        <component name="totalPackageQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalPackageQuantityType">
+            <property name="internalId" type="long" column="total_package_quantity_internal_id" />
+            <property name="version" type="integer" column="total_package_quantity_version" />
+            <property name="value" type="big_decimal" column="total_package_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id_2" />
+        </component>
+        <list access="field" name="damageRemarks" cascade="save-update">
+            <key column="damage_remarks_fk" />
+            <list-index column="damage_remarks_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DamageRemarksType" />
+        </list>
+        <list access="field" name="shippingMarks" cascade="save-update">
+            <key column="shipping_marks_fk" />
+            <list-index column="shipping_marks_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.ShippingMarksType" />
+        </list>
+        <list access="field" name="despatchLine" cascade="save-update">
+            <key column="despatch_line_fk" />
+            <list-index column="despatch_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DespatchLineType" />
+        </list>
+        <list access="field" name="actualPackage" cascade="save-update">
+            <key column="actual_package_fk" />
+            <list-index column="actual_package_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PackageType" />
+        </list>
+        <list access="field" name="receivedReceiptLine" cascade="save-update">
+            <key column="received_receipt_line_fk" />
+            <list-index column="received_receipt_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ReceiptLineType" />
+        </list>
+        <list access="field" name="transportEquipment" cascade="save-update">
+            <key column="transport_equipment_fk" />
+            <list-index column="transport_equipment_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TransportEquipmentType" />
+        </list>
+        <list access="field" name="hazardousGoodsTransit" cascade="save-update">
+            <key column="hazardous_goods_transit_fk" />
+            <list-index column="hazardous_goods_transit_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.HazardousGoodsTransitType" />
+        </list>
+        <list access="field" name="measurementDimension" cascade="save-update">
+            <key column="measurement_dimension_fk" />
+            <list-index column="measurement_dimension_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DimensionType" />
+        </list>
+    </class>
+</hibernate-mapping>

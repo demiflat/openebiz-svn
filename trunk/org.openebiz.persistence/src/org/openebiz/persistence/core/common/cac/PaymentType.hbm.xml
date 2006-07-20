@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PaymentType" dynamic-update="true" dynamic-insert="true" table="payment_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="instructionID" entity-name="org.openebiz.core.common.cbc.InstructionIDType" cascade="save-update" not-null="false"
+        column="instructionidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="paidAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.PaidAmountType">
+            <property name="value" type="big_decimal" column="paid_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="paid_amount_value_currency_code_content_type_fk" />
+        </component>
+        <component name="receivedDate" update="true" insert="true" class="org.openebiz.core.common.cbc.ReceivedDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="received_date_value" />
+        </component>
+        <component name="paidDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.PaidDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="paid_date_time_value" />
+        </component>
+        <component name="expectedReceiptDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.ExpectedReceiptDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="expected_receipt_date_time_value" />
+        </component>
+    </class>
+</hibernate-mapping>

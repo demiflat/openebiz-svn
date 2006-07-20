@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="InvoiceLineType" dynamic-update="true" dynamic-insert="true" table="invoice_line_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="accountingCostCode" entity-name="org.openebiz.core.common.cbc.AccountingCostCodeType" cascade="save-update" not-null="false"
+        column="accounting_cost_code_type_internal_id" />
+        <many-to-one name="item" entity-name="org.openebiz.core.common.cac.ItemType" cascade="save-update" not-null="false" column="item_type_internal_id" />
+        <many-to-one name="basePrice" entity-name="org.openebiz.core.common.cac.BasePriceType" cascade="save-update" not-null="false"
+        column="base_price_type_internal_id" />
+        <many-to-one name="deliveryTerms" entity-name="org.openebiz.core.common.cac.DeliveryTermsType" cascade="save-update" not-null="false"
+        column="delivery_terms_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id_1" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id_1" />
+        <component name="invoicedQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.InvoicedQuantityType">
+            <property name="internalId" type="long" column="invoiced_quantity_internal_id" />
+            <property name="version" type="integer" column="invoiced_quantity_version" />
+            <property name="value" type="big_decimal" column="invoiced_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="lineExtensionAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.LineExtensionAmountType">
+            <property name="value" type="big_decimal" column="line_extension_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="taxPointDate" update="true" insert="true" class="org.openebiz.core.common.cbc.TaxPointDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="tax_point_date_value" />
+        </component>
+        <list access="field" name="orderLineReference" cascade="save-update">
+            <key column="order_line_reference_fk" />
+            <list-index column="order_line_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.OrderLineReferenceType" />
+        </list>
+        <list access="field" name="despatchLineReference" cascade="save-update">
+            <key column="despatch_line_reference_fk" />
+            <list-index column="despatch_line_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineReferenceType" />
+        </list>
+        <list access="field" name="receiptLineReference" cascade="save-update">
+            <key column="receipt_line_reference_fk" />
+            <list-index column="receipt_line_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LineReferenceType" />
+        </list>
+        <list access="field" name="delivery" cascade="save-update">
+            <key column="delivery_fk" />
+            <list-index column="delivery_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DeliveryType" />
+        </list>
+        <list access="field" name="paymentTerms" cascade="save-update">
+            <key column="payment_terms_fk" />
+            <list-index column="payment_terms_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PaymentTermsType" />
+        </list>
+        <list access="field" name="allowanceCharge" cascade="save-update">
+            <key column="allowance_charge_fk" />
+            <list-index column="allowance_charge_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AllowanceChargeType" />
+        </list>
+        <list access="field" name="taxTotal" cascade="save-update">
+            <key column="tax_total_fk" />
+            <list-index column="tax_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxTotalType" />
+        </list>
+        <list access="field" name="itemInstance" cascade="save-update">
+            <key column="item_instance_fk" />
+            <list-index column="item_instance_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ItemInstanceType" />
+        </list>
+    </class>
+</hibernate-mapping>

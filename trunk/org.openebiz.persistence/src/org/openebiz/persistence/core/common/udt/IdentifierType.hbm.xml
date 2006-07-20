@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.common.udt">
+    <class name="IdentifierType" dynamic-update="true" dynamic-insert="true" table="identifier_type" discriminator-value="IdentifierType">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <discriminator column="class" type="string" not-null="true" />
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="value" type="string" column="value" />
+ <!--<property name="schemeAgencyID" type="string" column="scheme_agencyid" />
+        <property name="schemeAgencyName" type="string" column="scheme_agency_name" />
+        <property name="schemeDataURI" type="string" column="scheme_datauri" />
+        <property name="schemeID" type="string" column="schemeid" />
+        <property name="schemeName" type="string" column="scheme_name" />
+        <property name="schemeURI" type="string" column="schemeuri" />
+        <property name="schemeVersionID" type="string" column="scheme_versionid" /> -->        
+    </class>
+    <subclass name="org.openebiz.core.common.cbc.AccountIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AccountIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.AccountNumberIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AccountNumberIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.AdditionalAccountIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AdditionalAccountIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.AgencyIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AgencyIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.AircraftIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AircraftIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.AttributeIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="AttributeIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.CV2IDType" dynamic-update="true" dynamic-insert="true" discriminator-value="CV2IDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.CarrierAssignedIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="CarrierAssignedIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ChipApplicationIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ChipApplicationIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.CompanyIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="CompanyIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.CustomerAssignedAccountIDType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="CustomerAssignedAccountIDType" extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.CustomsIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="CustomsIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.DocumentIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="DocumentIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ExchangeMarketIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ExchangeMarketIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.GUIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="GUIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.GloballyUniqueGUIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="GloballyUniqueGUIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.HazardClassIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="HazardClassIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.IDType" dynamic-update="true" dynamic-insert="true" discriminator-value="IDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.InstructionIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="InstructionIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.IssueNumberIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="IssueNumberIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.IssuerIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="IssuerIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.JourneyIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="JourneyIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LanguageIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LanguageIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LicensePlateIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LicensePlateIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LineIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LineIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LocationIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LocationIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LogoReferenceIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LogoReferenceIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LotNumberIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="LotNumberIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.LowerOrangeHazardPlacardIDType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="LowerOrangeHazardPlacardIDType" extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.MarkingIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="MarkingIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.NationalityIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="NationalityIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.NetworkIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="NetworkIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.OrangeHazardPlacardIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="OrangeHazardPlacardIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.OrderingUnitMeasureIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="OrderingUnitMeasureIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.OriginalJobIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="OriginalJobIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ParentDocumentIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ParentDocumentIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.PreviousJobIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="PreviousJobIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.PreviousVersionIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="PreviousVersionIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.PrimaryAccountNumberIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="PrimaryAccountNumberIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ProductTraceIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ProductTraceIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.RailCarIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="RailCarIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ReferenceIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ReferenceIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.RegistrationIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="RegistrationIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.RegistrationNationalityIDType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="RegistrationNationalityIDType" extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.RequiredCustomsIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="RequiredCustomsIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SalesOrderIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="SalesOrderIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SalesOrderLineIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="SalesOrderLineIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SchemeURIType" dynamic-update="true" dynamic-insert="true" discriminator-value="SchemeURIType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SequenceNumberIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="SequenceNumberIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SerialIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="SerialIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ShippingOrderIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ShippingOrderIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.SupplierAssignedAccountIDType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="SupplierAssignedAccountIDType" extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.TraceIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="TraceIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.TrainIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="TrainIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.URIType" dynamic-update="true" dynamic-insert="true" discriminator-value="URIType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.UnitMeasureIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="UnitMeasureIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.UpperOrangeHazardPlacardIDType" dynamic-update="true" dynamic-insert="true"
+    discriminator-value="UpperOrangeHazardPlacardIDType" extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.ValidatorIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="ValidatorIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.VersionIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="VersionIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+    <subclass name="org.openebiz.core.common.cbc.VesselIDType" dynamic-update="true" dynamic-insert="true" discriminator-value="VesselIDType"
+    extends="org.openebiz.core.common.udt.IdentifierType" />
+</hibernate-mapping>

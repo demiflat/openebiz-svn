@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="AccountingDocumentReferenceType" dynamic-update="true" dynamic-insert="true" table="accounting_document_reference_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="documentCurrencyCode" entity-name="org.openebiz.core.common.cbc.DocumentCurrencyCodeType" cascade="save-update" not-null="false"
+        column="document_currency_code_type_internal_id" />
+        <many-to-one name="taxCurrencyCode" entity-name="org.openebiz.core.common.cbc.TaxCurrencyCodeType" cascade="save-update" not-null="false"
+        column="tax_currency_code_type_internal_id" />
+        <many-to-one name="paymentMeans" entity-name="org.openebiz.core.common.cac.PaymentMeansType" cascade="save-update" not-null="false"
+        column="payment_means_type_internal_id" />
+        <many-to-one name="accountingDocumentReferenceLine" entity-name="org.openebiz.core.common.cac.AccountingDocumentReferenceLineType" cascade="save-update"
+        not-null="false" column="accounting_document_reference_line_type_internal_id" />
+        <list access="field" name="additionalDocumentReference" cascade="save-update">
+            <key column="additional_document_reference_line_fk" />
+            <list-index column="additional_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="creditNoteDocumentReference" cascade="save-update">
+            <key column="credit_note_document_reference_line_fk" />
+            <list-index column="credit_note_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="debitNoteDocumentReference" cascade="save-update">
+            <key column="debit_note_document_reference_line_fk" />
+            <list-index column="debit_note_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="invoiceDocumentReference" cascade="save-update">
+            <key column="invoice_note_document_reference_line_fk" />
+            <list-index column="invoice_note_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="taxTotal" cascade="save-update">
+            <key column="tax_total_fk" />
+            <list-index column="tax_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxTotalType" />
+        </list>
+        <list access="field" name="legalTotal" cascade="save-update">
+            <key column="legal_total_fk" />
+            <list-index column="legal_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.LegalTotalType" />
+        </list>
+        <list access="field" name="paymentTerms" cascade="save-update">
+            <key column="payment_terms_fk" />
+            <list-index column="legal_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PaymentTermsType" />
+        </list>
+        <list access="field" name="remittanceDocumentReference" cascade="save-update">
+            <key column="remittance_document_reference_line_fk" />
+            <list-index column="remittance_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="selfBilledCreditNoteDocumentReference" cascade="save-update">
+            <key column="self_billed_credit_note_document_reference_line_fk" />
+            <list-index column="self_billed_credit_note_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="selfBilledInvoiceDocumentReference" cascade="save-update">
+            <key column="self_billed_credit_note_document_reference_line_fk" />
+            <list-index column="self_billed_invoice_note_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="statementDocumentReference" cascade="save-update">
+            <key column="statement_document_reference_line_fk" />
+            <list-index column="statement_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="WaybillType" dynamic-update="true" dynamic-insert="true" table="waybill_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="carrierAssignedID" entity-name="org.openebiz.core.common.cbc.CarrierAssignedIDType" cascade="save-update" not-null="false"
+        column="carrier_assignedidtype_internal_id" />
+        <many-to-one name="shippingOrderID" entity-name="org.openebiz.core.common.cbc.ShippingOrderIDType" cascade="save-update" not-null="false"
+        column="shipping_orderidtype_internal_id" />
+        <many-to-one name="consignorParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="consignor_party_type_internal_id" />
+        <many-to-one name="carrierParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="carrier_party_type_internal_id" />
+        <many-to-one name="freightForwarderParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="freightforwarder_party_type_internal_id" />
+        <many-to-one name="shipment" entity-name="org.openebiz.core.common.cac.ShipmentType" cascade="save-update" not-null="false" column="shipment_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="adValoremIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.AdValoremIndicatorType">
+            <property name="value" type="boolean" column="ad_valorem_indicator_value" />
+        </component>
+        <component name="declaredCarriageValueAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.DeclaredCarriageValueAmountType">
+            <property name="value" type="big_decimal" column="declared_carriage_value_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <list access="field" name="description" cascade="save-update">
+            <key column="description_fk" />
+            <list-index column="description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+        </list>
+        <list access="field" name="documentDistribution" cascade="save-update">
+            <key column="document_distribution_fk" />
+            <list-index column="document_distribution_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentDistributionType" />
+        </list>
+        <list access="field" name="documentReference" cascade="save-update">
+            <key column="document_reference_fk" />
+            <list-index column="document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="exchangeRate" cascade="save-update">
+            <key column="exchange_rate_fk" />
+            <list-index column="exchange_rate_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.ExchangeRateType" />
+        </list>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.NoteType" />
+        </list>
+        <list access="field" name="otherInstruction" cascade="save-update">
+            <key column="other_instruction_fk" />
+            <list-index column="other_instruction_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.OtherInstructionType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+    </class>
+</hibernate-mapping>

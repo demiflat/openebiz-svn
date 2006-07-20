@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="CertificateOfOriginApplicationType" dynamic-update="true" dynamic-insert="true" table="certificate_of_origin_application_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="referenceID" entity-name="org.openebiz.core.common.cbc.ReferenceIDType" cascade="save-update" not-null="false"
+        column="referenceidtype_internal_id" />
+        <many-to-one name="statusCode" entity-name="org.openebiz.core.common.cbc.StatusCodeType" cascade="save-update" not-null="false"
+        column="status_code_type_internal_id" />
+        <many-to-one name="originalJobID" entity-name="org.openebiz.core.common.cbc.OriginalJobIDType" cascade="save-update" not-null="false"
+        column="original_jobidtype_internal_id" />
+        <many-to-one name="previousJobID" entity-name="org.openebiz.core.common.cbc.PreviousJobIDType" cascade="save-update" not-null="false"
+        column="previous_jobidtype_internal_id" />
+        <many-to-one name="remarks" entity-name="org.openebiz.core.common.cbc.RemarksType" cascade="save-update" not-null="false" column="remarks_type_internal_id" />
+        <many-to-one name="shipment" entity-name="org.openebiz.core.common.cac.ShipmentType" cascade="save-update" not-null="false" column="shipment_type_internal_id" />
+        <many-to-one name="preparationParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id" />
+        <many-to-one name="issuerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id_1" />
+        <many-to-one name="issuingCountry" entity-name="org.openebiz.core.common.cac.CountryType" cascade="save-update" not-null="false"
+        column="country_type_internal_id" />
+        <component name="certificateType" update="true" insert="true" class="org.openebiz.core.common.cbc.CertificateTypeType">
+            <property name="value" type="string" column="certificate_type_value" />
+            <property name="languageID" type="string" column="certificate_type_languageid" />
+        </component>
+        <list access="field" name="endorserParty" cascade="save-update">
+            <key column="endorser_party_fk" />
+            <list-index column="endorser_party_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.EndorserPartyType" />
+        </list>
+        <list access="field" name="documentDistribution" cascade="save-update">
+            <key column="document_distribution_fk" />
+            <list-index column="document_distribution_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentDistributionType" />
+        </list>
+        <list access="field" name="supportingDocumentReference" cascade="save-update">
+            <key column="supporting_document_reference_fk" />
+            <list-index column="supporting_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="ResponseType" dynamic-update="true" dynamic-insert="true" table="response_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="referenceID" entity-name="org.openebiz.core.common.cbc.ReferenceIDType" cascade="save-update" not-null="false"
+        column="referenceidtype_internal_id" />
+        <many-to-one name="responseCode" entity-name="org.openebiz.core.common.cbc.ResponseCodeType" cascade="save-update" not-null="false"
+        column="response_code_type_internal_id" />
+        <many-to-one name="description" entity-name="org.openebiz.core.common.cbc.DescriptionType" cascade="save-update" not-null="false"
+        column="description_type_internal_id" />
+    </class>
+</hibernate-mapping>

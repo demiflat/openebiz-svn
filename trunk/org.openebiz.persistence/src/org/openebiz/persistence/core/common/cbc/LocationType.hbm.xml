@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cbc" auto-import="false">
+    <class name="LocationType" dynamic-update="true" dynamic-insert="true" table="location_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <property name="value" type="string" column="value" />
+        <property name="languageID" type="string" column="languageid" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="BasePriceType" dynamic-update="true" dynamic-insert="true" table="base_price_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="priceList" entity-name="org.openebiz.core.common.cac.PriceListType" cascade="save-update" not-null="false"
+        column="price_list_type_internal_id" />
+        <component name="priceAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.PriceAmountType">
+            <property name="value" type="big_decimal" column="price_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="baseQuantity" update="true" insert="true" class="org.openebiz.core.common.cbc.BaseQuantityType">
+            <property name="internalId" type="long" column="base_quantity_internal_id" />
+            <property name="version" type="integer" column="base_quantity_version" />
+            <property name="value" type="big_decimal" column="base_quantity_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="priceType" update="true" insert="true" class="org.openebiz.core.common.cbc.PriceTypeType">
+            <property name="value" type="string" column="price_type_value" />
+            <property name="languageID" type="string" column="price_type_languageid" />
+        </component>
+        <component name="orderableUnitFactorRate" update="true" insert="true" class="org.openebiz.core.common.cbc.OrderableUnitFactorRateType">
+            <property name="value" type="big_decimal" column="orderable_unit_factor_rate_value" />
+        </component>
+        <list access="field" name="allowanceCharge" cascade="save-update">
+            <key column="allowance_charge_fk" />
+            <list-index column="allowance_charge_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.AllowanceChargeType" />
+        </list>
+        <list access="field" name="priceChangeReason" cascade="save-update">
+            <key column="price_change_reason_fk" />
+            <list-index column="price_change_reason_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.PriceChangeReasonType" />
+        </list>
+        <list access="field" name="validityPeriod" cascade="save-update">
+            <key column="validity_period_fk" />
+            <list-index column="validity_period_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PeriodType" />
+        </list>
+    </class>
+</hibernate-mapping>

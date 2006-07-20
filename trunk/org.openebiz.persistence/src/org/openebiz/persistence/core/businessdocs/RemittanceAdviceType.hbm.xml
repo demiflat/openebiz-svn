@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="RemittanceAdviceType" dynamic-update="true" dynamic-insert="true" table="remittance_advice_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="documentCurrencyCode" entity-name="org.openebiz.core.common.cbc.DocumentCurrencyCodeType" cascade="save-update" not-null="false"
+        column="document_currency_code_type_internal_id" />
+        <many-to-one name="accountingDocumentReference" entity-name="org.openebiz.core.common.cac.AccountingDocumentReferenceType" cascade="save-update" not-null="false"
+        column="accounting_document_reference_type_internal_id" />
+        <many-to-one name="signature" entity-name="org.openebiz.core.common.cac.SignatureType" cascade="save-update" not-null="false"
+        column="signature_type_internal_id" />
+        <many-to-one name="debtorCustomerParty" entity-name="org.openebiz.core.common.cac.CustomerPartyType" cascade="save-update" not-null="false"
+        column="customer_party_type_internal_id" />
+        <many-to-one name="creditorSupplierParty" entity-name="org.openebiz.core.common.cac.SupplierPartyType" cascade="save-update" not-null="false"
+        column="supplier_party_type_internal_id" />
+        <many-to-one name="payeeParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false" column="party_type_internal_id" />
+        <many-to-one name="paymentMeans" entity-name="org.openebiz.core.common.cac.PaymentMeansType" cascade="save-update" not-null="false"
+        column="payment_means_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="copyIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.CopyIndicatorType">
+            <property name="value" type="boolean" column="copy_indicator_value" />
+        </component>
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="totalDebitAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalDebitAmountType">
+            <property name="value" type="big_decimal" column="total_debit_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="totalCreditAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalCreditAmountType">
+            <property name="value" type="big_decimal" column="total_credit_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="total_credit_currency_code_content_type_internal_id" />
+        </component>
+        <component name="totalPaymentAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.TotalPaymentAmountType">
+            <property name="value" type="big_decimal" column="total_payment_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="total_payment_currency_code_content_type_internal_id" />
+        </component>
+        <list access="field" name="additionalDocumentReference" cascade="save-update">
+            <key column="additional_document_reference_fk" />
+            <list-index column="additional_document_reference_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="invoicePeriod" cascade="save-update">
+            <key column="invoice_period_fk" />
+            <list-index column="invoice_period_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.PeriodType" />
+        </list>
+        <list access="field" name="remittanceAdviceLine" cascade="save-update">
+            <key column="remittance_advice_line_fk" />
+            <list-index column="remittance_advice_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.RemittanceAdviceLineType" />
+        </list>
+        <list access="field" name="taxTotal" cascade="save-update">
+            <key column="tax_total_fk" />
+            <list-index column="tax_total_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TaxTotalType" />
+        </list>
+    </class>
+</hibernate-mapping>

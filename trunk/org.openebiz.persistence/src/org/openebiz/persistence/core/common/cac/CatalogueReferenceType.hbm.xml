@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="CatalogueReferenceType" dynamic-update="true" dynamic-insert="true" table="catalogue_reference_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="versionID" entity-name="org.openebiz.core.common.cbc.VersionIDType" cascade="save-update" not-null="false" column="versionidtype_fk" />
+        <many-to-one name="previousVersionID" entity-name="org.openebiz.core.common.cbc.PreviousVersionIDType" cascade="save-update" not-null="false"
+        column="previous_versionidtype_fk" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_fk" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_fk" />
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="revisionDateTime" update="true" insert="true" class="org.openebiz.core.common.cbc.RevisionDateTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentDateTime" column="revision_date_time_value" />
+        </component>
+        <list access="field" name="note" cascade="save-update">
+            <key column="note_fk" />
+            <list-index column="note_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.NoteType" />
+        </list>
+        <list access="field" name="description" cascade="save-update">
+            <key column="description_fk" />
+            <list-index column="description_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cbc.DescriptionType" />
+        </list>
+    </class>
+</hibernate-mapping>

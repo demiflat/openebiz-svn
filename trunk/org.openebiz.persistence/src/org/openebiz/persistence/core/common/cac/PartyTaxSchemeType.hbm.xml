@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="PartyTaxSchemeType" dynamic-update="true" dynamic-insert="true" table="party_tax_scheme_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="companyID" entity-name="org.openebiz.core.common.cbc.CompanyIDType" cascade="save-update" not-null="false"
+        column="companyidtype_internal_id" />
+        <many-to-one name="taxLevelCode" entity-name="org.openebiz.core.common.cbc.TaxLevelCodeType" cascade="save-update" not-null="false"
+        column="tax_level_code_type_internal_id" />
+        <many-to-one name="registrationAddress" entity-name="org.openebiz.core.common.cac.AddressType" cascade="save-update" not-null="false"
+        column="address_type_internal_id" />
+        <many-to-one name="taxScheme" entity-name="org.openebiz.core.common.cac.TaxSchemeType" cascade="save-update" not-null="false"
+        column="tax_scheme_type_internal_id" />
+        <component name="registrationName" update="true" insert="true" class="org.openebiz.core.common.cbc.RegistrationNameType">
+            <property name="value" type="string" column="registration_name_value" />
+            <property name="languageID" type="string" column="registration_name_languageid" />
+        </component>
+        <component name="exemptionReason" update="true" insert="true" class="org.openebiz.core.common.cbc.ExemptionReasonType">
+            <property name="value" type="string" column="exemption_reason_value" />
+            <property name="languageID" type="string" column="exemption_reason_languageid" />
+        </component>
+    </class>
+</hibernate-mapping>

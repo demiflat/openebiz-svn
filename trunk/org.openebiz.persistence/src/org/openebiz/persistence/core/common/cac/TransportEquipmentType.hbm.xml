@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TransportEquipmentType" dynamic-update="true" dynamic-insert="true" table="transport_equipment_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="providerTypeCode" entity-name="org.openebiz.core.common.cbc.ProviderTypeCodeType" cascade="save-update" not-null="false"
+        column="provider_type_code_type_internal_id" />
+        <many-to-one name="ownerTypeCode" entity-name="org.openebiz.core.common.cbc.OwnerTypeCodeType" cascade="save-update" not-null="false"
+        column="owner_type_code_type_internal_id" />
+        <many-to-one name="sizeTypeCode" entity-name="org.openebiz.core.common.cbc.SizeTypeCodeType" cascade="save-update" not-null="false"
+        column="size_type_code_type_internal_id" />
+        <many-to-one name="dispositionCode" entity-name="org.openebiz.core.common.cbc.DispositionCodeType" cascade="save-update" not-null="false"
+        column="disposition_code_type_internal_id" />
+        <many-to-one name="fullnessIndicationCode" entity-name="org.openebiz.core.common.cbc.FullnessIndicationCodeType" cascade="save-update" not-null="false"
+        column="fullness_indication_code_type_internal_id" />
+        <many-to-one name="information" entity-name="org.openebiz.core.common.cbc.InformationType" cascade="save-update" not-null="false"
+        column="information_type_internal_id" />
+        <many-to-one name="minimumTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id" />
+        <many-to-one name="maximumTemperature" entity-name="org.openebiz.core.common.cac.TemperatureType" cascade="save-update" not-null="false"
+        column="temperature_type_internal_id_1" />
+        <many-to-one name="providerParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_1" />
+        <many-to-one name="loadingProofParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="party_type_internal_id_2" />
+        <many-to-one name="loadingLocation" entity-name="org.openebiz.core.common.cac.LocationType" cascade="save-update" not-null="false"
+        column="location_type_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="refrigerationOnIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.RefrigerationOnIndicatorType">
+            <property name="value" type="boolean" column="refrigeration_on_indicator_value" />
+        </component>
+        <component name="returnabilityIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.ReturnabilityIndicatorType">
+            <property name="value" type="boolean" column="returnability_indicator_value" />
+        </component>
+        <component name="legalStatusIndicator" update="true" insert="true" class="org.openebiz.core.common.cbc.LegalStatusIndicatorType">
+            <property name="value" type="boolean" column="legal_status_indicator_value" />
+        </component>
+        <list access="field" name="measurementDimension" cascade="save-update">
+            <key column="measurement_dimension_fk" />
+            <list-index column="measurement_dimension_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DimensionType" />
+        </list>
+        <list access="field" name="transportEquipmentSeal" cascade="save-update">
+            <key column="transport_equipment_seal_fk" />
+            <list-index column="transport_equipment_seal_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.TransportEquipmentSealType" />
+        </list>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field" package= "org.openebiz.core.common.cac">
+    <class name="TaxCategoryType" dynamic-update="true" dynamic-insert="true" table="tax_category_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="taxScheme" entity-name="org.openebiz.core.common.cac.TaxSchemeType" cascade="save-update" not-null="false" column="tax_categorty_fk" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="percent" update="true" insert="true" class="org.openebiz.core.common.cbc.PercentType">
+            <property name="value" type="big_decimal" column="percent_value" />
+        </component>
+        <component name="baseUnitMeasure" update="true" insert="true" class="org.openebiz.core.common.cbc.BaseUnitMeasureType">
+            <property name="value" type="big_decimal" column="base_unit_measure_value" />
+            <many-to-one name="unitCode" entity-name="org.openebiz.core.common.unit.UnitCodeContentType" cascade="save-update" not-null="false"
+            column="unit_code_content_type_internal_id" />
+        </component>
+        <component name="perUnitAmount" update="true" insert="true" class="org.openebiz.core.common.cbc.PerUnitAmountType">
+            <property name="value" type="big_decimal" column="per_unit_amount_value" />
+            <many-to-one name="currencyID" entity-name="org.openebiz.core.common.currency.CurrencyCodeContentType" cascade="save-update" not-null="false"
+            column="currency_code_content_type_internal_id" />
+        </component>
+        <component name="tierRange" update="true" insert="true" class="org.openebiz.core.common.cbc.TierRangeType">
+            <property name="value" type="string" column="tier_range_value" />
+            <property name="languageID" type="string" column="tier_range_languageid" />
+        </component>
+        <component name="tierRatePercent" update="true" insert="true" class="org.openebiz.core.common.cbc.TierRatePercentType">
+            <property name="value" type="big_decimal" column="tier_rate_percent_value" />
+        </component>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.openebiz.core.businessdocs" default-access="field">
+    <class name="PackingListType" dynamic-update="true" dynamic-insert="true" table="packing_list_type">
+        <id name="internalId" type="long" unsaved-value="null" column="internal_id">
+            <generator class="native" />
+        </id>
+        <version name="version" unsaved-value="null" column="version" />
+        <many-to-one name="description" entity-name="org.openebiz.core.common.cbc.DescriptionType" cascade="save-update" not-null="false"
+        column="description_type_internal_id" />
+        <many-to-one name="note" entity-name="org.openebiz.core.common.cbc.NoteType" cascade="save-update" not-null="false" column="note_type_internal_id" />
+        <many-to-one name="versionID" entity-name="org.openebiz.core.common.cbc.VersionIDType" cascade="save-update" not-null="false"
+        column="versionidtype_internal_id" />
+        <many-to-one name="consignorParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="consignor_party_type_internal_id" />
+        <many-to-one name="carrierParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="carrier_party_type_internal_id" />
+        <many-to-one name="freightForwarderParty" entity-name="org.openebiz.core.common.cac.PartyType" cascade="save-update" not-null="false"
+        column="freightforwarder_party_type_internal_id" />
+        <many-to-one name="shipment" entity-name="org.openebiz.core.common.cac.ShipmentType" cascade="save-update" not-null="false" column="shipment_type_internal_id" />
+        <many-to-one name="gUID" entity-name="org.openebiz.core.common.cbc.GUIDType" cascade="save-update" not-null="false" column="guidtype_internal_id" />
+        <many-to-one name="iD" entity-name="org.openebiz.core.common.cbc.IDType" cascade="save-update" not-null="false" column="idtype_internal_id" />
+        <component name="issueDate" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueDateType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentYearMonthDay" column="issue_date_value" />
+        </component>
+        <component name="issueTime" update="true" insert="true" class="org.openebiz.core.common.cbc.IssueTimeType">
+            <property name="value" type="org.joda.time.contrib.hibernate.PersistentTimeOfDay" column="issue_time_value" />
+        </component>
+        <component name="name" update="true" insert="true" class="org.openebiz.core.common.cbc.NameType">
+            <property name="value" type="string" column="name_value" />
+            <property name="languageID" type="string" column="name_languageid" />
+        </component>
+        <component name="otherInstruction" update="true" insert="true" class="org.openebiz.core.common.cbc.OtherInstructionType">
+            <property name="value" type="string" column="other_instruction_value" />
+            <property name="languageID" type="string" column="other_instruction_languageid" />
+        </component>
+        <list access="field" name="documentDistribution" cascade="save-update">
+            <key column="document_distribution_fk" />
+            <list-index column="document_distribution_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentDistributionType" />
+        </list>
+        <list access="field" name="documentReference" cascade="save-update">
+            <key column="document_reference_fk" />
+            <list-index column="address_line_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.DocumentReferenceType" />
+        </list>
+        <list access="field" name="signature" cascade="save-update">
+            <key column="signature_fk" />
+            <list-index column="signature_idx" />
+            <one-to-many entity-name="org.openebiz.core.common.cac.SignatureType" />
+        </list>
+    </class>
+</hibernate-mapping>
