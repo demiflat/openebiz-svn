@@ -6,7 +6,7 @@
 </font>
 </c:if>
 
-<form action="<c:url value='/_switch_user.bossart'/>" method="POST">
+<form action="<c:url value='/_switch_user.openebiz'/>" method="POST">
 <table>
 	<tr>
 		<td>User:</td>

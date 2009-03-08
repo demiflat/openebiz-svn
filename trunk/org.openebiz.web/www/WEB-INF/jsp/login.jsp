@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/jsp/forms/formHeader.jsp" %>
-<form action="<c:url value='_security_check.bossart'/>" method="POST">
+<form action="<c:url value='_security_check.openebiz'/>" method="POST">
 	<fieldset>
 		<legend><fmt:message key="ui.login" /></legend>
 
